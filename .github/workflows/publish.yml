@@ -1,0 +1,34 @@
+name: Luminedge Publish
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, '#Skip')"
+    steps:
+      - uses: actions/checkout@v3
+
+  publish:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, '#Publish')"
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
