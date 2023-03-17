@@ -1,3 +1,28 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+/* 全局样式 */
+@import "../css/common/fix.css";
+@import "../css/common/global.css";
+
+/* 组件 */
+@import "../css/components/alert.css";
+@import "../css/components/avatar.css";
+@import "../css/components/button.css";
+@import "../css/components/calendar.css";
+@import "../css/components/card.css";
+@import "../css/components/checkbox.css";
+@import "../css/components/date.css";
+@import "../css/components/form.css";
+@import "../css/components/input.css";
+@import "../css/components/message.css";
+@import "../css/components/modal.css";
+@import "../css/components/progress.css";
+@import "../css/components/step.css";
+@import "../css/components/timeline.css";
+
+/* 样式 */
+@import "../css/styles/background.css";
+@import "../css/styles/effect.css";
+@import "../css/styles/page.css";

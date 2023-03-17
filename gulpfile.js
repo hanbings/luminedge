@@ -18,9 +18,9 @@ gulp.task('css', done => {
     gulp.src('css/*.css')
         .pipe(postcss(
             [
-                tailwindcss,
+                postcssimport,
                 autoprefixer,
-                postcssimport
+                tailwindcss
             ]
         ))
         .pipe(clean())

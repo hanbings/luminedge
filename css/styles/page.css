@@ -1,0 +1,14 @@
+/* 占满屏幕的宽度和高度 */
+.full-page {
+    @apply h-full w-full;
+}
+
+/* 使用 flex 布局将元素布局中屏幕正中央 */
+.flex-center {
+    @apply flex items-center justify-center;
+}
+
+/* 占满屏幕的宽度和高度并且使用 flex 布局将元素布局中屏幕正中央 */
+.full-page-center {
+    @apply full-page flex-center;
+}

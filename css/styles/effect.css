@@ -1,0 +1,16 @@
+/* 玻璃拟态效果 */
+.glass-morphism {
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 12px rgba(255, 255, 255, .3);
+    background: rgba(255, 255, 255, .5);
+}
+
+/* 完全透明 */
+.transparent {
+    background-color: transparent;
+}
+
+/* 引入 tailwindcss 的阴影效果 */
+.import-shadow-effect {
+    @apply shadow-md shadow-lg shadow-xl shadow-2xl;
+}

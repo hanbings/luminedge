@@ -1,0 +1,10 @@
+/* 修复背景图片偏移和焦点不在图片中心的问题 需要在背景图片同层 css 使用 */
+.bg-position-fix {
+    @apply bg-fixed bg-cover bg-center;
+}
+
+/* 背景模糊化 */
+.bg-blur {
+    /* 不知道为什么 tailwindcss 的变量没办法自动导入*/
+    backdrop-filter: blur(8px);
+}
