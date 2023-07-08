@@ -1,0 +1,51 @@
+html * {
+    font-family: 'Source Han Serif', 'Microsoft YaHei', 'PingFang SC',serif !important;
+    /* 默认 */
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+h5 {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+h6 {
+    font-size: 10px;
+    font-weight: normal;
+}
+
+a, link {
+    text-decoration: none;
+    color: var(--color-link);
+}
+
+a:hover, link:hover {
+    text-decoration: underline;
+    /* 颜色 */
+    color: var(--color-link-padding);
+    /* 下划线产生一些距离 */
+    padding-bottom: 1px;
+}

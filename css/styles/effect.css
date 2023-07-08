@@ -9,8 +9,3 @@
 .transparent {
     background-color: transparent;
 }
-
-/* 引入 tailwindcss 的阴影效果 */
-.import-shadow-effect {
-    @apply shadow-md shadow-lg shadow-xl shadow-2xl;
-}

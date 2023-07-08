@@ -3,8 +3,9 @@
 @import "tailwindcss/utilities";
 
 /* 全局样式 */
+@import "../css/common/color.css";
 @import "../css/common/fix.css";
-@import "../css/common/global.css";
+@import "../css/common/typography.css";
 
 /* 组件 */
 @import "../css/components/alert.css";
@@ -13,7 +14,6 @@
 @import "../css/components/calendar.css";
 @import "../css/components/card.css";
 @import "../css/components/checkbox.css";
-@import "../css/components/date.css";
 @import "../css/components/form.css";
 @import "../css/components/input.css";
 @import "../css/components/message.css";
