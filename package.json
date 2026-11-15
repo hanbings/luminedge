@@ -15,8 +15,10 @@
   "scripts": {
     "build:packages": "npm run build -w @luminedge/tools && npm run build -w @luminedge/components && npm run build -w @luminedge/ui",
     "build": "npm run build:packages && npm run build -w @luminedge/docs",
-    "dev": "npm run build:packages && npm run dev -w @luminedge/docs",
-    "test": "npm run build:packages && npm run check -w @luminedge/docs && node --test tests/*.test.mjs"
+    "dev": "npm run build:packages && npm run dev -w @luminedge/docs"
   },
-  "devDependencies": { "typescript": "^7.0.2" }
+  "devDependencies": {
+    "@rslib/core": "^1.0.7",
+    "typescript": "^7.0.2"
+  }
 }

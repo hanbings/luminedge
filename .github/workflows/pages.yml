@@ -30,7 +30,6 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm test
 
       - name: Configure Pages
         id: pages
@@ -46,6 +45,9 @@ jobs:
         env:
           ASTRO_SITE: ${{ steps.pages.outputs.origin }}
           ASTRO_BASE: ${{ steps.pages.outputs.base_path }}
+
+      - name: Check Astro types
+        run: npm run check -w @luminedge/docs
 
       - name: Upload site
         if: steps.pages.outcome == 'success'

@@ -16,7 +16,7 @@ Luminedge 是一套自然、友好、优雅的界面设计语言。仓库将设�
 | `packages/ui` | 汇总样式和组件的入口 |
 | `apps/docs` | 使用 Astro 构建的设计与组件展示站 |
 
-目前包名为开发时约定，发布名称与 npm 命名空间尚未确定。
+TypeScript 包使用基于 Rsbuild 的 Rslib 构建，输出 ESM 和类型声明；样式包提供独立 CSS，展示站由 Astro 构建。目前包名为开发时约定，发布名称与 npm 命名空间尚未确定。
 
 ## 开发
 
@@ -30,8 +30,8 @@ npm run dev
 `npm run dev` 先构建各个包，再启动 Astro 开发服务器。修改交互包源码后，需要重新运行 `npm run build:packages`；样式包的改动会由展示站直接读取。
 
 ```sh
-npm test       # 检查包入口及基础交互
-npm run build  # 构建各包与 Astro 展示站
+npm run build                       # 构建各包与 Astro 展示站
+npm run check -w @luminedge/docs    # 检查 Astro 类型
 ```
 
 Astro 的检查工具目前要求 TypeScript 5 或 6，因此展示站单独使用兼容的 TypeScript 6；其他包使用最新版 TypeScript 7。

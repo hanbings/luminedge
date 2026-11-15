@@ -11,5 +11,5 @@
   "dependencies": { "@luminedge/tools": "0.1.0" },
   "peerDependencies": { "@luminedge/styles": "^0.1.0" },
   "peerDependenciesMeta": { "@luminedge/styles": { "optional": true } },
-  "scripts": { "build": "tsc -p tsconfig.json" }
+  "scripts": { "build": "rslib build --config ../../rslib.config.mjs" }
 }

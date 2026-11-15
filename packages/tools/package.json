@@ -8,5 +8,5 @@
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
   },
-  "scripts": { "build": "tsc -p tsconfig.json" }
+  "scripts": { "build": "rslib build --config ../../rslib.config.mjs" }
 }
