@@ -118,6 +118,15 @@ const svg = document.querySelector('svg');
 svg.append(rough.svg(svg).rectangle(10, 10, 120, 60));
 ```
 
+## 许可与署名
+
+- 项目原创代码、样式和代码示例采用 [MIT 许可](LICENSE)。
+- 项目原创文档和非 Logo 素材采用 [CC BY 4.0](LICENSES/CC-BY-4.0.txt)，允许商业使用和修改，使用时请署名、链接许可并注明修改。署名：hanbings / Luminedge（<hanbings@hanbings.io>）。
+- Logo 和吉祥物图像保留所有权利；二次开发、分发或部署时请移除该图像及展示它的引用，详见 [Logo 使用约定](BRANDING.md)。
+- 手绘功能包含 [Rough.js](https://github.com/rough-stuff/rough) 和 [slidevjs/rough-notation](https://github.com/slidevjs/rough-notation) 的源码改编，保留 Preet Shihn 和上游贡献者的署名及 MIT 许可；完整来源见 [第三方声明](THIRD_PARTY_NOTICES.md)。
+
+许可适用范围和历史版本说明见[许可说明](LICENSES/README.md)。
+
 ## 项目状态
 
 当前已打通设计变量、按钮、卡片、头像、原生弹窗和手绘标注的示例；其他组件仍需逐步设计和实现。原有原型可以在 Git 历史中查看。npm 包的发布方式将在包名确定后配置。

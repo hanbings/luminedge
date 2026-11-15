@@ -2,7 +2,7 @@
   "name": "@luminedge/tools",
   "version": "0.1.0",
   "description": "Shared utilities for Luminedge packages.",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist",

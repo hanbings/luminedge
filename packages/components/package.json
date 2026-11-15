@@ -2,7 +2,7 @@
   "name": "@luminedge/components",
   "version": "0.1.0",
   "description": "Framework-independent interactive Luminedge components.",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "type": "module",
   "files": ["dist", "third_party", "THIRD_PARTY_NOTICES.md"],
   "exports": {

@@ -2,7 +2,7 @@
   "name": "@luminedge/styles",
   "version": "0.1.0",
   "description": "Framework-independent Luminedge design tokens and CSS.",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "files": ["src"],
   "sideEffects": ["**/*.css"],
   "exports": {
