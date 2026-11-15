@@ -1,0 +1,94 @@
+<section class="section landing-content" id="components" data-index-section aria-labelledby="components-title" tabindex="-1">
+  <div class="section-content">
+    <div class="section-heading">
+      <h2 id="components-title">从细节开始</h2>
+    </div>
+    <div class="component-grid">
+      <article class="showcase showcase-buttons">
+        <div class="showcase-heading"><span>01</span><h3>按钮</h3><span>BUTTON</span></div>
+        <div class="showcase-body button-row">
+          <button class="le-button" type="button" data-demo-action="主要操作">主要操作</button>
+          <button class="le-button le-button--secondary" type="button" data-demo-action="次要操作">次要操作</button>
+          <button class="le-button" type="button" disabled>不可用</button>
+        </div>
+        <p>用 Tab 切换焦点，按 Enter 或空格触发。</p>
+        <output class="demo-feedback" data-demo-feedback aria-live="polite" aria-atomic="true"></output>
+      </article>
+      <article class="showcase showcase-card">
+        <div class="showcase-heading"><span>02</span><h3>卡片与头像</h3><span>CARD / AVATAR</span></div>
+        <div class="showcase-body">
+          <div class="le-card sample-card">
+            <div class="le-avatar" aria-hidden="true">L</div>
+            <div><strong>今天也有好灵感</strong><p>记录每一个值得留意的瞬间。</p></div>
+            <span class="sample-arrow" aria-hidden="true">↗</span>
+          </div>
+        </div>
+      </article>
+      <article class="showcase showcase-dialog">
+        <div class="showcase-heading"><span>03</span><h3>弹窗</h3><span>DIALOG</span></div>
+        <div class="showcase-body dialog-demo">
+          <div><strong>需要用户做出选择时</strong><p>在清晰、专注的空间里继续。</p></div>
+          <button class="le-button le-button--secondary" type="button" data-dialog-open>打开弹窗 ↗</button>
+        </div>
+        <p>弹窗使用浏览器原生交互，可按 Esc 关闭。</p>
+      </article>
+      <article class="showcase showcase-annotation" data-annotation-demo>
+        <div class="showcase-heading"><span>04</span><h3>手绘标注</h3><span>ANNOTATION</span></div>
+        <div class="showcase-body annotation-demo">
+          <strong data-annotation-target>留住每个好灵感</strong>
+          <button class="le-button le-button--secondary" type="button" data-annotation-replay>重播 ↻</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<dialog class="le-dialog" id="example-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+  <div class="dialog-icon" aria-hidden="true">✳</div>
+  <h2 id="dialog-title">给灵感一点空间</h2>
+  <p id="dialog-description">这个弹窗组合了样式包与交互封装，并使用浏览器原生的对话框行为。</p>
+  <div class="dialog-actions">
+    <button class="le-button le-button--secondary" type="button" data-dialog-close>关闭</button>
+    <button class="le-button" type="button" data-dialog-close autofocus>明白了</button>
+  </div>
+</dialog>
+<script>
+  import { annotate, createDialog } from '@luminedge/ui';
+
+  const demoFeedback = document.querySelector<HTMLOutputElement>('[data-demo-feedback]');
+  document.querySelectorAll<HTMLButtonElement>('[data-demo-action]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (demoFeedback) demoFeedback.textContent = `已触发${button.dataset.demoAction}。`;
+    });
+  });
+
+  const dialog = document.querySelector('#example-dialog');
+  if (dialog instanceof HTMLDialogElement) {
+    createDialog(dialog, {
+      openTriggers: document.querySelectorAll<HTMLElement>('[data-dialog-open]'),
+      closeTriggers: document.querySelectorAll<HTMLElement>('[data-dialog-close]'),
+    });
+  }
+
+  const demo = document.querySelector<HTMLElement>('[data-annotation-demo]');
+  const target = document.querySelector<HTMLElement>('[data-annotation-target]');
+  const replay = document.querySelector<HTMLButtonElement>('[data-annotation-replay]');
+  if (demo && target && replay) {
+    const annotation = annotate(target, { type: 'underline', color: 'var(--le-color-primary-strong)', padding: 3 });
+    const play = () => {
+      annotation.hide();
+      void annotation.show();
+    };
+    replay.addEventListener('click', play);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          play();
+          observer.disconnect();
+        }
+      }, { threshold: 0.4 });
+      observer.observe(demo);
+    } else {
+      play();
+    }
+  }
+</script>

@@ -1,0 +1,87 @@
+---
+import '@luminedge/styles/index.css';
+import '../styles/site.css';
+
+type Page = 'colors' | 'typography' | 'layout' | 'spacing' | 'radius' | 'shadows' | 'components' | 'usage';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+const navigation: { page: Page; label: string; path: string }[] = [
+  { page: 'colors', label: '色彩', path: '#colors' },
+  { page: 'typography', label: '字体', path: '#typography' },
+  { page: 'layout', label: '布局', path: '#layout' },
+  { page: 'spacing', label: '间距', path: '#spacing' },
+  { page: 'radius', label: '圆角', path: '#radius' },
+  { page: 'shadows', label: '阴影', path: '#shadows' },
+  { page: 'components', label: '组件', path: '#components' },
+  { page: 'usage', label: '使用方式', path: '#usage' },
+];
+const indexStep = 60;
+const indexDuration = 280;
+---
+
+<!doctype html>
+<html lang="zh-CN" data-page="landing">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Luminedge 设计变量与组件展示。" />
+    <title>{title} — Luminedge</title>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        let scheduled = false;
+        let activeSection = '';
+
+        const updateIndex = () => {
+          root.classList.toggle('index-visible', window.scrollY > 24);
+          const center = window.innerHeight / 2;
+          const section = Array.from(document.querySelectorAll('[data-index-section]')).find((element) => {
+            const bounds = element.getBoundingClientRect();
+            return bounds.top <= center && bounds.bottom > center;
+          });
+          if (!section || section.id === activeSection) return;
+          activeSection = section.id;
+          document.querySelectorAll('[data-index-target]').forEach((link) => {
+            if (link.getAttribute('data-index-target') === activeSection) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        };
+
+        const scheduleUpdate = () => {
+          if (scheduled) return;
+          scheduled = true;
+          requestAnimationFrame(() => {
+            scheduled = false;
+            updateIndex();
+          });
+        };
+
+        root.classList.add('has-js');
+        window.addEventListener('scroll', scheduleUpdate, { passive: true });
+        window.addEventListener('resize', scheduleUpdate, { passive: true });
+        window.addEventListener('pageshow', scheduleUpdate);
+        document.addEventListener('DOMContentLoaded', updateIndex, { once: true });
+        updateIndex();
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#colors">跳到主要内容</a>
+    <header class="site-header" style={`--index-fade-duration: ${indexDuration}ms; --index-hide-delay: ${(navigation.length - 1) * indexStep + indexDuration}ms`}>
+      <nav aria-label="页面导航">
+        {navigation.map(({ page, label, path }, index) => (
+          <a href={`${base}${path}`} data-index-target={page} style={`--index-delay: ${index * indexStep}ms; --index-exit-delay: ${(navigation.length - 1 - index) * indexStep}ms`}>{label}</a>
+        ))}
+      </nav>
+    </header>
+
+    <main id="top" class="landing-main" tabindex="-1">
+      <slot />
+    </main>
+  </body>
+</html>

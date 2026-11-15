@@ -1,0 +1,51 @@
+---
+import { tokenValue } from '../token-values';
+
+const sizes = [
+  { name: '大标题', token: '--le-font-size-xl' },
+  { name: '标题', token: '--le-font-size-lg' },
+  { name: '正文', token: '--le-font-size-base' },
+  { name: '次要文字', token: '--le-font-size-sm' },
+  { name: '辅助文字', token: '--le-font-size-xs' },
+];
+const families = [
+  { name: '正文', token: '--le-font-sans' },
+  { name: '代码', token: '--le-font-mono' },
+];
+const lineHeights = [
+  { name: '紧凑', token: '--le-line-height-tight' },
+  { name: '正文', token: '--le-line-height-normal' },
+  { name: '宽松', token: '--le-line-height-relaxed' },
+];
+---
+
+<section class="section landing-content" id="typography" data-index-section aria-labelledby="typography-title" tabindex="-1">
+  <div class="section-content">
+    <div class="section-heading">
+      <h2 id="typography-title">字体</h2>
+    </div>
+
+    <div class="foundation-rows">
+      {sizes.map(({ name, token }) => (
+        <div class="foundation-row">
+          <div class="foundation-label"><strong>{name}</strong><code>{token}</code></div>
+          <span class="foundation-sample type-sample" style={`font-size: var(${token})`}>自然、友好、优雅</span>
+          <code class="token-value">{tokenValue(token)}</code>
+        </div>
+      ))}
+    </div>
+
+    <div class="foundation-details">
+      <h3>字体族</h3>
+      {families.map(({ name, token }) => (
+        <p><strong>{name}</strong> <code>{token}</code> <span>{tokenValue(token)}</span></p>
+      ))}
+      <h3>行高</h3>
+      <div class="inline-tokens">
+        {lineHeights.map(({ name, token }) => (
+          <span><strong>{name}</strong> <code>{token}</code> {tokenValue(token)}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

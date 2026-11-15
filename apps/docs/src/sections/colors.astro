@@ -1,0 +1,27 @@
+---
+import { tokenValue } from '../token-values';
+
+const colors = [
+  { name: '主色', token: '--le-color-primary' },
+  { name: '辅色', token: '--le-color-secondary' },
+  { name: '成功', token: '--le-color-success' },
+  { name: '警告', token: '--le-color-warning' },
+  { name: '危险', token: '--le-color-danger' },
+  { name: '文字', token: '--le-color-text' },
+];
+---
+
+<section class="section landing-content" id="colors" data-index-section aria-labelledby="colors-title" tabindex="-1">
+  <div class="palette-content">
+    <div class="section-heading"><h2 id="colors-title">色彩</h2></div>
+    <div class="palette">
+      {colors.map(({ name, token }) => (
+        <article class="swatch">
+          <div class="swatch-color" style={`background: var(${token})`}></div>
+          <div class="swatch-info"><strong>{name}</strong><span>{tokenValue(token).toUpperCase()}</span></div>
+          <code>{token}</code>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

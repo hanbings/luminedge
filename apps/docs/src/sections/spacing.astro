@@ -1,0 +1,24 @@
+---
+import { tokenValue } from '../token-values';
+
+const spaces = [1, 2, 3, 4, 6, 8, 12, 16].map((step) => `--le-space-${step}`);
+---
+
+<section class="section landing-content" id="spacing" data-index-section aria-labelledby="spacing-title" tabindex="-1">
+  <div class="section-content">
+    <div class="section-heading">
+      <h2 id="spacing-title">间距</h2>
+    </div>
+
+    <div class="foundation-rows">
+      {spaces.map((token) => (
+        <div class="foundation-row">
+          <div class="foundation-label"><code>{token}</code></div>
+          <div class="foundation-sample"><span class="space-sample" style={`width: var(${token})`}></span></div>
+          <code class="token-value">{tokenValue(token)}</code>
+        </div>
+      ))}
+    </div>
+    <p class="foundation-note"><code>--le-space-0</code> 表示没有间距。数值使用 rem，会随根字号调整。</p>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+import { tokenValue } from '../token-values';
+
+const dimensions = [
+  { name: '标准容器最大宽度', token: '--le-layout-max-width' },
+  { name: '阅读容器最大宽度', token: '--le-layout-reading-width' },
+  { name: '响应式两侧边距', token: '--le-layout-gutter' },
+];
+---
+
+<section class="section landing-content" id="layout" data-index-section aria-labelledby="layout-title" tabindex="-1">
+  <div class="section-content">
+    <div class="section-heading">
+      <h2 id="layout-title">页面布局</h2>
+    </div>
+
+    <div class="layout-example" aria-label="内容容器示例">
+      <div class="le-container layout-example-content">
+        <strong>内容区域</strong>
+        <span>两侧留白随屏幕宽度调整</span>
+      </div>
+    </div>
+
+    <div class="foundation-rows layout-tokens">
+      {dimensions.map(({ name, token }) => (
+        <div class="foundation-row foundation-row--definition">
+          <div class="foundation-label"><strong>{name}</strong><code>{token}</code></div>
+          <code class="token-value">{tokenValue(token)}</code>
+        </div>
+      ))}
+    </div>
+
+    <p class="foundation-note">使用 <code>le-container</code> 创建居中容器；添加 <code>le-container--reading</code> 可以限制阅读宽度。</p>
+  </div>
+</section>

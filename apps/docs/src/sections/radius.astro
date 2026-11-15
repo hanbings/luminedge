@@ -1,0 +1,29 @@
+---
+import { tokenValue } from '../token-values';
+
+const radii = [
+  { name: '小', token: '--le-radius-sm' },
+  { name: '中', token: '--le-radius-md' },
+  { name: '大', token: '--le-radius-lg' },
+  { name: '圆形', token: '--le-radius-full' },
+];
+---
+
+<section class="section landing-content" id="radius" data-index-section aria-labelledby="radius-title" tabindex="-1">
+  <div class="section-content">
+    <div class="section-heading">
+      <h2 id="radius-title">圆角</h2>
+    </div>
+
+    <div class="foundation-grid">
+      {radii.map(({ name, token }) => (
+        <div class="foundation-tile">
+          <div class="radius-sample" style={`border-radius: var(${token})`}></div>
+          <strong>{name}</strong>
+          <code>{token}</code>
+          <span>{tokenValue(token)}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

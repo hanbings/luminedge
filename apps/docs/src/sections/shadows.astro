@@ -1,0 +1,29 @@
+---
+import { tokenValue } from '../token-values';
+
+const shadows = [
+  { name: '无', token: '--le-shadow-none' },
+  { name: '轻', token: '--le-shadow-sm' },
+  { name: '中', token: '--le-shadow-md' },
+  { name: '浮层', token: '--le-shadow-lg' },
+];
+---
+
+<section class="section landing-content" id="shadows" data-index-section aria-labelledby="shadows-title" tabindex="-1">
+  <div class="section-content">
+    <div class="section-heading">
+      <h2 id="shadows-title">阴影</h2>
+    </div>
+
+    <div class="foundation-grid">
+      {shadows.map(({ name, token }) => (
+        <div class="foundation-tile">
+          <div class="shadow-stage"><div class="shadow-sample" style={`box-shadow: var(${token})`}></div></div>
+          <strong>{name}</strong>
+          <code>{token}</code>
+          <span>{tokenValue(token)}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

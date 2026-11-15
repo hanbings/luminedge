@@ -54,6 +54,16 @@ import '@luminedge/styles/index.css';
 <button class="le-button" type="button">确认</button>
 ```
 
+样式包提供色彩、字体、布局、间距、圆角和阴影变量，例如 `--le-font-size-base`、`--le-space-4` 和 `--le-radius-md`。这些变量可以通过普通 CSS 按页面或组件覆盖。布局容器也是可选的：
+
+```html
+<main class="le-container le-container--reading">
+  页面内容
+</main>
+```
+
+`le-container` 会居中并保留自适应的两侧边距；叠加 `le-container--reading` 可使用较窄的阅读宽度。
+
 也可以使用统一入口，引入 CSS 并按需使用交互封装：
 
 ```html
@@ -83,6 +93,31 @@ const controller = createDialog(dialog, {
 
 弹窗应使用原生 `<dialog>`，并提供可访问的标题和关闭方式。样式不会自动注入页面，以便应用控制引入位置和覆盖顺序。
 
+手绘标注可以用于强调页面上的元素，使用完毕后可移除标注及其监听器：
+
+```js
+import { annotate } from '@luminedge/ui';
+
+const note = annotate(document.querySelector('#example'), {
+  type: 'underline',
+  color: '#7a95bd',
+});
+
+await note.show();
+// 不再需要时：note.remove();
+```
+
+标注支持下划线、方框、圆圈、高亮、删除线、交叉和括号，并遵循系统的减少动态效果设置。可使用 `annotationGroup` 将多个标注按顺序播放；标注实例也提供 `hide()`、`isShowing()` 和颜色、线宽等配置。
+
+底层绘图工具也可单独使用：
+
+```js
+import rough from '@luminedge/tools/rough';
+
+const svg = document.querySelector('svg');
+svg.append(rough.svg(svg).rectangle(10, 10, 120, 60));
+```
+
 ## 项目状态
 
-当前已打通设计变量、按钮、卡片、头像和原生弹窗的最小示例；其他组件仍需逐步设计和实现。原有原型可以在 Git 历史中查看。npm 包的发布方式将在包名确定后配置。
+当前已打通设计变量、按钮、卡片、头像、原生弹窗和手绘标注的示例；其他组件仍需逐步设计和实现。原有原型可以在 Git 历史中查看。npm 包的发布方式将在包名确定后配置。
