@@ -8,6 +8,7 @@
   "exports": {
     "./index.css": "./src/index.css",
     "./tokens.css": "./src/tokens.css",
+    "./layout.css": "./src/layout.css",
     "./components.css": "./src/components.css"
   }
 }
