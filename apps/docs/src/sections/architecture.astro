@@ -1,0 +1,25 @@
+---
+const layers = [
+  { name: '工具', packageName: '@luminedge/tools', description: '通用工具与手绘图形' },
+  { name: '样式', packageName: '@luminedge/styles', description: '设计变量与组件 CSS' },
+  { name: '组件', packageName: '@luminedge/components', description: '交互封装，使用工具，样式可选' },
+  { name: '总包', packageName: '@luminedge/ui', description: '汇总样式与组件，提供统一入口' },
+  { name: '展示站', packageName: 'apps/docs', description: '使用 Astro 展示设计与组件' },
+];
+---
+
+<section class="section landing-content" id="architecture" data-index-section aria-labelledby="architecture-title" tabindex="-1">
+  <div class="section-content">
+    <div class="section-heading">
+      <h2 id="architecture-title">架构</h2>
+    </div>
+    <dl class="architecture-layers">
+      {layers.map(({ name, packageName, description }) => (
+        <div class="architecture-layer">
+          <dt><strong>{name}</strong><code>{packageName}</code></dt>
+          <dd>{description}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

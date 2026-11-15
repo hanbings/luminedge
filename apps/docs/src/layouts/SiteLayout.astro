@@ -2,7 +2,7 @@
 import '@luminedge/styles/index.css';
 import '../styles/site.css';
 
-type Page = 'colors' | 'typography' | 'layout' | 'spacing' | 'radius' | 'shadows' | 'components' | 'usage';
+type Page = 'colors' | 'typography' | 'spacing' | 'radius' | 'shadows' | 'layout' | 'components' | 'architecture' | 'usage';
 
 interface Props {
   title: string;
@@ -13,12 +13,13 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
 const navigation: { page: Page; label: string; path: string }[] = [
   { page: 'colors', label: '色彩', path: '#colors' },
   { page: 'typography', label: '字体', path: '#typography' },
-  { page: 'layout', label: '布局', path: '#layout' },
   { page: 'spacing', label: '间距', path: '#spacing' },
   { page: 'radius', label: '圆角', path: '#radius' },
   { page: 'shadows', label: '阴影', path: '#shadows' },
+  { page: 'layout', label: '布局', path: '#layout' },
   { page: 'components', label: '组件', path: '#components' },
-  { page: 'usage', label: '使用方式', path: '#usage' },
+  { page: 'architecture', label: '架构', path: '#architecture' },
+  { page: 'usage', label: '使用', path: '#usage' },
 ];
 const indexStep = 60;
 const indexDuration = 280;

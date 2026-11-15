@@ -143,6 +143,11 @@ code, pre { font-family: var(--le-font-mono); }
 .dialog-demo, .annotation-demo { justify-content: space-between; gap: 1rem; }
 .annotation-demo strong { font-size: 0.8125rem; }
 
+.architecture-layers { display: grid; gap: 1.25rem; margin: 0; }
+.architecture-layer { display: grid; grid-template-columns: minmax(13rem, 18rem) minmax(0, 1fr); align-items: center; gap: 1rem; }
+.architecture-layer dt { display: grid; gap: 0.15rem; font-size: 0.8125rem; }
+.architecture-layer code { color: var(--le-color-text-muted); font-size: 0.7rem; overflow-wrap: anywhere; }
+.architecture-layer dd { margin: 0; color: var(--le-color-text-muted); font-size: 0.8125rem; }
 
 .usage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; align-items: center; }
 .usage h2 { margin-bottom: 0.7rem; }
@@ -191,6 +196,7 @@ pre { overflow-x: auto; margin: 1rem 0 0; font-size: 0.75rem; line-height: 1.7; 
   .foundation-row--definition .token-value { grid-column: 1; grid-row: 2; text-align: left; }
   .foundation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .font-recommendations { grid-template-columns: minmax(0, 1fr); }
+  .architecture-layer { grid-template-columns: minmax(0, 1fr); gap: 0.35rem; }
   .usage { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
 }
 @media (max-width: 520px) {

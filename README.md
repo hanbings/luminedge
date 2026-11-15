@@ -42,7 +42,7 @@ Astro 的检查工具目前要求 TypeScript 5 或 6，因此展示站单独使�
 
 私有仓库的 Pages 需要 GitHub Pro、Team 或 Enterprise 等支持该功能的方案；个人仓库发布的站点可以被互联网上的任何人访问。[GitHub Pages 文档](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 
-## 使用方式
+## 使用
 
 只使用 CSS 时，引入样式包并使用对应的类名：
 
