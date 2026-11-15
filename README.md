@@ -1,4 +1,8 @@
-# Luminedge
+<p align="center">
+  <img src="https://picture.hanbings.com/2022/08/01/9b6cb90a8d591.png" alt="Luminedge 吉祥物与品牌标志" width="880">
+</p>
+
+<h1 align="center">🍀 Luminedge</h1>
 
 Luminedge 是一套自然、友好、优雅的界面设计语言。仓库将设计变量与样式、交互组件和展示站组织在同一个工作区。
 

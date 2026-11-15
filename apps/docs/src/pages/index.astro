@@ -2,6 +2,8 @@
 import '@luminedge/styles/index.css';
 import '../styles/site.css';
 
+const mascotLogo = 'https://picture.hanbings.com/2022/08/01/9b6cb90a8d591.png';
+
 const colors = [
   { name: '主色', token: '--le-color-primary', color: '#3386ff' },
   { name: '辅色', token: '--le-color-secondary', color: '#faa201' },
@@ -23,7 +25,7 @@ const colors = [
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Luminedge 首页">
-        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span class="brand-mark" aria-hidden="true"><img src={mascotLogo} alt="" /></span>
         <span>Luminedge</span>
       </a>
       <nav aria-label="页面导航">
@@ -45,12 +47,8 @@ const colors = [
             <a class="hero-link" href="#colors">查看设计变量 <span aria-hidden="true">→</span></a>
           </div>
         </div>
-        <div class="hero-visual" aria-hidden="true">
-          <div class="visual-orbit orbit-one"></div>
-          <div class="visual-orbit orbit-two"></div>
-          <div class="visual-core"><span>✳</span></div>
-          <span class="visual-caption">DESIGNED FOR<br />EVERYDAY MOMENTS</span>
-          <span class="visual-index">01 — 04</span>
+        <div class="hero-visual">
+          <img src={mascotLogo} alt="Luminedge 吉祥物与品牌标志" width="1920" height="1080" />
         </div>
       </section>
 
@@ -121,7 +119,10 @@ import &#123; createDialog &#125; from '@luminedge/ui';</code></pre>
       </section>
     </main>
 
-    <footer class="site-footer"><strong>✳ &nbsp; Luminedge</strong><span>Natural, friendly, elegant.</span></footer>
+    <footer class="site-footer">
+      <strong class="footer-brand"><span class="brand-mark" aria-hidden="true"><img src={mascotLogo} alt="" /></span> Luminedge</strong>
+      <span>Natural, friendly, elegant.</span>
+    </footer>
 
     <dialog class="le-dialog" id="example-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
       <div class="dialog-icon" aria-hidden="true">✳</div>
