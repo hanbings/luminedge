@@ -54,7 +54,7 @@ import '@luminedge/styles/index.css';
 <button class="le-button" type="button">确认</button>
 ```
 
-样式包提供色彩、字体、布局、间距、圆角和阴影变量，例如 `--le-font-size-base`、`--le-space-4` 和 `--le-radius-md`。这些变量可以通过普通 CSS 按页面或组件覆盖。布局容器也是可选的：
+样式包提供色彩、字体、布局、间距、圆角和阴影变量，例如 `--le-font-size-base`、`--le-font-weight-semibold`、`--le-space-4` 和 `--le-radius-md`。这些变量可以通过普通 CSS 按页面或组件覆盖。布局容器也是可选的：
 
 ```html
 <main class="le-container le-container--reading">

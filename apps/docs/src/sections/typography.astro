@@ -2,50 +2,151 @@
 import { tokenValue } from '../token-values';
 
 const sizes = [
-  { name: '大标题', token: '--le-font-size-xl' },
-  { name: '标题', token: '--le-font-size-lg' },
-  { name: '正文', token: '--le-font-size-base' },
-  { name: '次要文字', token: '--le-font-size-sm' },
-  { name: '辅助文字', token: '--le-font-size-xs' },
+  { name: '大标题', token: '--le-font-size-xl', weight: '--le-font-weight-bold', sample: '让灵感发光' },
+  { name: '标题', token: '--le-font-size-lg', weight: '--le-font-weight-semibold', sample: '自然地生长' },
+  { name: '正文', token: '--le-font-size-base', weight: '--le-font-weight-regular', sample: '自然、友好、优雅。' },
+  { name: '次要文字', token: '--le-font-size-sm', weight: '--le-font-weight-regular', sample: '记录每个值得留意的瞬间。' },
+  { name: '辅助文字', token: '--le-font-size-xs', weight: '--le-font-weight-regular', sample: '留一点空间给灵感' },
 ];
-const families = [
-  { name: '正文', token: '--le-font-sans' },
-  { name: '代码', token: '--le-font-mono' },
+const textFonts = [
+  { name: '霞鹜文楷', detail: 'LXGW WenKai', href: 'https://github.com/lxgw/LxgwWenkai' },
+  { name: '悠哉字体', detail: 'Yozai', href: 'https://github.com/lxgw/yozai-font' },
+  { name: '小赖字体', detail: 'Xiaolai · 原小濑', href: 'https://github.com/lxgw/kose-font' },
+  { name: '缝合像素字体', detail: 'Fusion Pixel', href: 'https://github.com/TakWolf/fusion-pixel-font' },
+  { name: '方舟像素字体', detail: 'Ark Pixel', href: 'https://github.com/TakWolf/ark-pixel-font' },
+];
+const codeFonts = [
+  { name: 'Radon', detail: '手写风格' },
+  { name: 'Neon', detail: '无衬线' },
+  { name: 'Argon', detail: '人文无衬线' },
+  { name: 'Xenon', detail: '板衬线' },
 ];
 const lineHeights = [
   { name: '紧凑', token: '--le-line-height-tight' },
   { name: '正文', token: '--le-line-height-normal' },
   { name: '宽松', token: '--le-line-height-relaxed' },
 ];
+const textAnnotations = [
+  { name: '下划线', text: '值得留意', type: 'underline' },
+  { name: '方框', text: '一点想法', type: 'box' },
+  { name: '圆圈', text: '好灵感', type: 'circle' },
+  { name: '高亮', text: '轻轻标记', type: 'highlight' },
+  { name: '删除线', text: '旧的想法', type: 'strike-through' },
+  { name: '交叉', text: '再想一想', type: 'crossed-off' },
+  { name: '括号', text: '一小段文字', type: 'bracket' },
+];
 ---
 
 <section class="section landing-content" id="typography" data-index-section aria-labelledby="typography-title" tabindex="-1">
-  <div class="section-content">
-    <div class="section-heading">
+  <div class="typography-layout">
+    <div class="section-heading typography-heading">
       <h2 id="typography-title">字体</h2>
     </div>
 
-    <div class="foundation-rows">
-      {sizes.map(({ name, token }) => (
-        <div class="foundation-row">
-          <div class="foundation-label"><strong>{name}</strong><code>{token}</code></div>
-          <span class="foundation-sample type-sample" style={`font-size: var(${token})`}>自然、友好、优雅</span>
-          <code class="token-value">{tokenValue(token)}</code>
+    <div class="section-content typography-main">
+      <div class="typography-group">
+        <h3>字号与字重</h3>
+        <div class="foundation-rows type-scale">
+          {sizes.map(({ name, token, weight, sample }) => (
+            <div class="foundation-row">
+              <div class="foundation-label"><strong>{name}</strong><code>{token}</code></div>
+              <span class="foundation-sample type-sample" style={`font-size: var(${token}); font-weight: var(${weight})`}>{sample}</span>
+              <code class="token-value">{tokenValue(token)} · {tokenValue(weight)}</code>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
 
-    <div class="foundation-details">
-      <h3>字体族</h3>
-      {families.map(({ name, token }) => (
-        <p><strong>{name}</strong> <code>{token}</code> <span>{tokenValue(token)}</span></p>
-      ))}
-      <h3>行高</h3>
-      <div class="inline-tokens">
-        {lineHeights.map(({ name, token }) => (
-          <span><strong>{name}</strong> <code>{token}</code> {tokenValue(token)}</span>
-        ))}
+      <div class="typography-details">
+        <div class="typography-group">
+          <h3>行高</h3>
+          <ul class="line-height-list">
+            {lineHeights.map(({ name, token }) => (
+              <li><strong>{name}</strong> <code>{token}</code> <span>{tokenValue(token)}</span></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="typography-group">
+          <h3>字体族</h3>
+          <div class="font-recommendations">
+            <div class="font-family">
+              <h4>正文</h4>
+              <p class="font-stack"><code>--le-font-sans</code><span>{tokenValue('--le-font-sans')}</span></p>
+              <p class="font-list-label">推荐字体</p>
+              <ul class="font-list">
+                {textFonts.map(({ name, detail, href }) => (
+                  <li><a href={href}><strong>{name}</strong><span>{detail}</span><span aria-hidden="true">↗</span></a></li>
+                ))}
+              </ul>
+            </div>
+            <div class="font-family">
+              <h4>代码</h4>
+              <p class="font-stack"><code>--le-font-mono</code><span>{tokenValue('--le-font-mono')}</span></p>
+              <p class="font-list-label">Monaspace</p>
+              <ul class="font-list">
+                {codeFonts.map(({ name, detail }) => (
+                  <li><a href="https://monaspace.githubnext.com/"><strong>{name}</strong><span>{detail}</span><span aria-hidden="true">↗</span></a></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <aside class="text-annotations" data-text-annotations aria-labelledby="text-annotations-title">
+      <div class="text-annotations-heading">
+        <h3 id="text-annotations-title">文字标记</h3>
+        <button class="text-annotations-replay" type="button" data-text-annotations-replay aria-label="重播文字标记动画" hidden>重播 ↻</button>
+      </div>
+      <ul class="text-annotations-list">
+        {textAnnotations.map(({ name, text, type }) => (
+          <li class="text-annotation-row">
+            <span class="text-annotation-label">{name}</span>
+            <span class="text-annotation-sample" data-text-annotation={type}>{text}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
   </div>
 </section>
+
+<script>
+  import { annotate, annotationGroup, type RoughAnnotationType } from '@luminedge/ui';
+
+  const demo = document.querySelector<HTMLElement>('[data-text-annotations]');
+  const replay = document.querySelector<HTMLButtonElement>('[data-text-annotations-replay]');
+  if (demo && replay) {
+    const annotations = Array.from(demo.querySelectorAll<HTMLElement>('[data-text-annotation]'), (element) => {
+      const type = element.dataset.textAnnotation as RoughAnnotationType;
+      return annotate(element, {
+        type,
+        color: type === 'highlight' ? 'var(--le-color-primary)' : 'var(--le-color-primary-strong)',
+        opacity: type === 'highlight' ? 0.5 : 1,
+        brackets: ['left', 'right'],
+        padding: 3,
+        animationDuration: 350,
+      });
+    });
+    const group = annotationGroup(annotations);
+    const play = () => {
+      group.hide();
+      void group.show();
+    };
+
+    replay.hidden = false;
+    replay.addEventListener('click', play);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          play();
+          observer.disconnect();
+        }
+      }, { threshold: 0.25 });
+      observer.observe(demo);
+    } else {
+      play();
+    }
+  }
+</script>
