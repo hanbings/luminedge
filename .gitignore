@@ -107,6 +107,9 @@ dist
 # Docusaurus cache and generated files
 .docusaurus
 
+# Astro generated types and cache
+.astro/
+
 # Serverless directories
 .serverless/
 
@@ -131,8 +134,3 @@ dist
 
 # Jetbrains IDE dir
 .idea/
-
-# target file
-index.html
-luminedge.min.css
-luminedge.min.js

@@ -1,0 +1,72 @@
+@layer luminedge {
+  .le-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid transparent;
+    border-radius: var(--le-radius-sm);
+    background: var(--le-color-primary-strong);
+    color: #fff;
+    font: 600 0.9375rem/1.3 var(--le-font-sans);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .le-button:hover { background: #10498f; }
+  .le-button:focus-visible { outline: 3px solid var(--le-color-focus); outline-offset: 3px; }
+  .le-button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .le-button--secondary {
+    border-color: var(--le-color-border);
+    background: var(--le-color-surface);
+    color: var(--le-color-primary-strong);
+  }
+
+  .le-button--secondary:hover { background: var(--le-color-primary-soft); }
+
+  .le-card {
+    padding: 1.5rem;
+    border: 1px solid var(--le-color-border);
+    border-radius: var(--le-radius-lg);
+    background: var(--le-color-surface);
+    box-shadow: var(--le-shadow-card);
+    color: var(--le-color-text);
+  }
+
+  .le-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--le-color-primary-soft);
+    color: var(--le-color-primary-strong);
+    font: 700 0.875rem/1 var(--le-font-sans);
+  }
+
+  .le-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  .le-dialog {
+    box-sizing: border-box;
+    width: min(32rem, calc(100% - 2rem));
+    padding: 1.75rem;
+    border: 1px solid var(--le-color-border);
+    border-radius: var(--le-radius-lg);
+    background: var(--le-color-surface);
+    box-shadow: 0 24px 80px rgb(25 45 70 / 0.25);
+    color: var(--le-color-text);
+    font-family: var(--le-font-sans);
+  }
+
+  .le-dialog::backdrop { background: rgb(22 33 48 / 0.45); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .le-button { transition: none; }
+  }
+}

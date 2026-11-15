@@ -1,4 +1,0 @@
-/* 画出圆形的头像 */
-.avatar-circle > img {
-    @apply rounded-full;
-}

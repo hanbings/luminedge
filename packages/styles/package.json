@@ -1,0 +1,13 @@
+{
+  "name": "@luminedge/styles",
+  "version": "0.1.0",
+  "description": "Framework-independent Luminedge design tokens and CSS.",
+  "license": "Apache-2.0",
+  "files": ["src"],
+  "sideEffects": ["**/*.css"],
+  "exports": {
+    "./index.css": "./src/index.css",
+    "./tokens.css": "./src/tokens.css",
+    "./components.css": "./src/components.css"
+  }
+}

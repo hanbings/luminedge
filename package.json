@@ -1,34 +1,22 @@
 {
-  "name": "luminedge",
+  "name": "luminedge-workspace",
   "version": "0.1.0",
-  "description": "A library of natural, friendly and elegant UI components.",
-  "main": "index.js",
-  "scripts": {
-    "build": "gulp build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hanbings/luminedge.git"
-  },
-  "keywords": [
-    "luminedge"
-  ],
-  "author": "hanbings",
+  "private": true,
+  "description": "The Luminedge design system and component library workspace.",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/hanbings/luminedge/issues"
+  "engines": { "node": "^24.0.0 || ^26.0.0" },
+  "workspaces": [
+    "packages/tools",
+    "packages/styles",
+    "packages/components",
+    "packages/ui",
+    "apps/docs"
+  ],
+  "scripts": {
+    "build:packages": "npm run build -w @luminedge/tools && npm run build -w @luminedge/components && npm run build -w @luminedge/ui",
+    "build": "npm run build:packages && npm run build -w @luminedge/docs",
+    "dev": "npm run build:packages && npm run dev -w @luminedge/docs",
+    "test": "npm run build:packages && npm run check -w @luminedge/docs && node --test tests/*.test.mjs"
   },
-  "homepage": "https://luminedge.design",
-  "devDependencies": {
-    "autoprefixer": "^10.4.13",
-    "gulp": "^4.0.2",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-postcss": "^9.0.1",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "gulp-uglify": "^3.0.2",
-    "postcss": "^8.4.21",
-    "postcss-import": "^15.1.0",
-    "tailwindcss": "^3.2.7"
-  }
+  "devDependencies": { "typescript": "^7.0.2" }
 }

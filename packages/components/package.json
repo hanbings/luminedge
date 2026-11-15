@@ -1,0 +1,15 @@
+{
+  "name": "@luminedge/components",
+  "version": "0.1.0",
+  "description": "Framework-independent interactive Luminedge components.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "files": ["dist"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+  },
+  "dependencies": { "@luminedge/tools": "0.1.0" },
+  "peerDependencies": { "@luminedge/styles": "^0.1.0" },
+  "peerDependenciesMeta": { "@luminedge/styles": { "optional": true } },
+  "scripts": { "build": "tsc -p tsconfig.json" }
+}
