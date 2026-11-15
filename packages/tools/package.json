@@ -4,9 +4,28 @@
   "description": "Shared utilities for Luminedge packages.",
   "license": "Apache-2.0",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "third_party",
+    "THIRD_PARTY_NOTICES.md"
+  ],
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./rough": {
+      "types": "./dist/rough/index.d.ts",
+      "import": "./dist/rough/index.js"
+    }
   },
-  "scripts": { "build": "rslib build --config ../../rslib.config.mjs" }
+  "scripts": {
+    "build": "rslib build --config ../../rslib.config.mjs"
+  },
+  "dependencies": {
+    "hachure-fill": "^0.5.2",
+    "path-data-parser": "^0.1.0",
+    "points-on-curve": "^1.0.1",
+    "points-on-path": "^0.2.1"
+  }
 }

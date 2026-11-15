@@ -4,7 +4,7 @@
   "description": "The complete Luminedge styles and components package.",
   "license": "Apache-2.0",
   "type": "module",
-  "files": ["dist"],
+  "files": ["dist", "THIRD_PARTY_NOTICES.md"],
   "sideEffects": ["**/*.css"],
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
