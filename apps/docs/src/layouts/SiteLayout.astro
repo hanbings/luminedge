@@ -39,17 +39,28 @@ const indexDuration = 280;
 
         const updateIndex = () => {
           root.classList.toggle('index-visible', window.scrollY > 24);
+          const cue = document.querySelector('[data-mobile-scroll-cue]');
+          if (cue) cue.hidden = window.scrollY + window.innerHeight >= root.scrollHeight - 1;
+
           const center = window.innerHeight / 2;
           const section = Array.from(document.querySelectorAll('[data-index-section]')).find((element) => {
             const bounds = element.getBoundingClientRect();
             return bounds.top <= center && bounds.bottom > center;
           });
-          if (!section || section.id === activeSection) return;
-          activeSection = section.id;
+          const currentSection = section?.id || '';
+          if (currentSection === activeSection) return;
+          activeSection = currentSection;
+          let label = 'Luminedge';
           document.querySelectorAll('[data-index-target]').forEach((link) => {
-            if (link.getAttribute('data-index-target') === activeSection) link.setAttribute('aria-current', 'location');
-            else link.removeAttribute('aria-current');
+            if (activeSection && link.getAttribute('data-index-target') === activeSection) {
+              link.setAttribute('aria-current', 'location');
+              label = link.textContent?.trim() || label;
+            } else {
+              link.removeAttribute('aria-current');
+            }
           });
+          const currentLabel = document.querySelector('[data-current-section]');
+          if (currentLabel) currentLabel.textContent = label;
         };
 
         const scheduleUpdate = () => {
@@ -65,7 +76,13 @@ const indexDuration = 280;
         window.addEventListener('scroll', scheduleUpdate, { passive: true });
         window.addEventListener('resize', scheduleUpdate, { passive: true });
         window.addEventListener('pageshow', scheduleUpdate);
-        document.addEventListener('DOMContentLoaded', updateIndex, { once: true });
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelector('[data-mobile-scroll-cue]')?.addEventListener('click', () => {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollBy({ top: window.innerHeight * 0.8, behavior: reduceMotion ? 'auto' : 'smooth' });
+          });
+          updateIndex();
+        }, { once: true });
         updateIndex();
       })();
     </script>
@@ -73,6 +90,7 @@ const indexDuration = 280;
   <body>
     <a class="skip-link" href="#colors">跳到主要内容</a>
     <header class="site-header" style={`--index-fade-duration: ${indexDuration}ms; --index-hide-delay: ${(navigation.length - 1) * indexStep + indexDuration}ms`}>
+      <span class="mobile-section-label" data-current-section>Luminedge</span>
       <nav aria-label="页面导航">
         {navigation.map(({ page, label, path }, index) => (
           <a href={`${base}${path}`} data-index-target={page} style={`--index-delay: ${index * indexStep}ms; --index-exit-delay: ${(navigation.length - 1 - index) * indexStep}ms`}>{label}</a>
@@ -83,5 +101,6 @@ const indexDuration = 280;
     <main id="top" class="landing-main" tabindex="-1">
       <slot />
     </main>
+    <button class="mobile-scroll-cue" type="button" data-mobile-scroll-cue aria-label="向下滚动" hidden><span aria-hidden="true">↓</span></button>
   </body>
 </html>
