@@ -10,7 +10,7 @@
     border-radius: var(--le-radius-sm);
     background: var(--le-color-control);
     color: var(--le-color-control-text);
-    font: 600 var(--le-font-size-sm)/var(--le-line-height-tight) var(--le-font-sans);
+    font: var(--le-font-weight-regular) var(--le-font-size-sm)/var(--le-line-height-tight) var(--le-font-sans);
     text-decoration: none;
     cursor: pointer;
     transition: background-color 160ms ease, box-shadow 160ms ease;
@@ -31,7 +31,7 @@
     padding: var(--le-space-4);
     border: 0;
     border-radius: var(--le-radius-lg);
-    background: var(--le-color-surface-subtle);
+    background: var(--le-color-primary-soft);
     color: var(--le-color-text);
   }
 
@@ -53,7 +53,7 @@
   .le-dialog {
     box-sizing: border-box;
     width: min(28rem, calc(100% - 2rem));
-    padding: var(--le-space-6);
+    padding: 0.85rem;
     border: 0;
     border-radius: var(--le-radius-lg);
     background: var(--le-color-surface);

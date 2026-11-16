@@ -1,24 +1,125 @@
 :root {
-  /* A light palette with deeper colors for readable text and interaction. */
-  --le-color-primary: #87baff;
-  --le-color-primary-hover: #75aae9;
-  --le-color-primary-strong: #3b70a9;
-  --le-color-primary-soft: #f1f7ff;
-  --le-color-primary-soft-hover: #e9f3ff;
-  --le-color-primary-contrast: #1d3954;
-  --le-color-control: #edf3f9;
-  --le-color-control-hover: #e0ecf6;
-  --le-color-control-text: #32649c;
-  --le-color-secondary: #ffc68b;
-  --le-color-success: #91dcb0;
-  --le-color-warning: #ffdc91;
-  --le-color-danger: #dc6671;
-  --le-color-text: #334b61;
-  --le-color-text-muted: #5d7083;
+  /* Color scales run from light (50) to dark (900). */
+  --le-color-primary-50: #f1f7ff;
+  --le-color-primary-100: #e9f3ff;
+  --le-color-primary-200: #d4e8ff;
+  --le-color-primary-300: #bcdcff;
+  --le-color-primary-400: #a3caff;
+  --le-color-primary-500: #87baff;
+  --le-color-primary-600: #75aae9;
+  --le-color-primary-700: #3b70a9;
+  --le-color-primary-800: #32649c;
+  --le-color-primary-900: #1d3954;
+
+  --le-color-secondary-50: #fff8f1;
+  --le-color-secondary-100: #ffeedf;
+  --le-color-secondary-200: #ffdfbf;
+  --le-color-secondary-300: #ffd7ad;
+  --le-color-secondary-400: #ffcf9c;
+  --le-color-secondary-500: #ffc68b;
+  --le-color-secondary-600: #e5a56c;
+  --le-color-secondary-700: #b9753f;
+  --le-color-secondary-800: #895127;
+  --le-color-secondary-900: #5a3218;
+
+  --le-color-success-50: #f2fcf5;
+  --le-color-success-100: #e3f7eb;
+  --le-color-success-200: #cbf0d7;
+  --le-color-success-300: #b6e9c9;
+  --le-color-success-400: #a3e2bb;
+  --le-color-success-500: #91dcb0;
+  --le-color-success-600: #67bd91;
+  --le-color-success-700: #39865c;
+  --le-color-success-800: #286b48;
+  --le-color-success-900: #184632;
+
+  --le-color-warning-50: #fffaf0;
+  --le-color-warning-100: #fff3d9;
+  --le-color-warning-200: #ffe9be;
+  --le-color-warning-300: #ffe3a8;
+  --le-color-warning-400: #ffdf9c;
+  --le-color-warning-500: #ffdc91;
+  --le-color-warning-600: #dcae55;
+  --le-color-warning-700: #9b6d1d;
+  --le-color-warning-800: #77500f;
+  --le-color-warning-900: #50350b;
+
+  --le-color-danger-50: #fff5f5;
+  --le-color-danger-100: #ffe8e8;
+  --le-color-danger-200: #ffd2d2;
+  --le-color-danger-300: #ffb9b9;
+  --le-color-danger-400: #ff9797;
+  --le-color-danger-500: #ff7070;
+  --le-color-danger-600: #ed5f5f;
+  --le-color-danger-700: #b53434;
+  --le-color-danger-800: #8d2424;
+  --le-color-danger-900: #451414;
+
+  --le-color-neutral-50: #f3f8fe;
+  --le-color-neutral-100: #edf3f9;
+  --le-color-neutral-200: #e4edf7;
+  --le-color-neutral-300: #e0ecf6;
+  --le-color-neutral-400: #b9cbdc;
+  --le-color-neutral-500: #96aabd;
+  --le-color-neutral-600: #7b8fa2;
+  --le-color-neutral-700: #5d7083;
+  --le-color-neutral-800: #334b61;
+  --le-color-neutral-900: #1f3243;
+
+  /* Semantic colors can be overridden independently for a theme or component. */
+  --le-color-primary: var(--le-color-primary-500);
+  --le-color-primary-hover: var(--le-color-primary-600);
+  --le-color-primary-strong: var(--le-color-primary-700);
+  --le-color-primary-soft: var(--le-color-primary-50);
+  --le-color-primary-soft-hover: var(--le-color-primary-100);
+  --le-color-primary-border: var(--le-color-primary-300);
+  --le-color-primary-text: var(--le-color-primary-800);
+  --le-color-primary-contrast: var(--le-color-primary-900);
+  --le-color-on-primary: var(--le-color-primary-900);
+
+  --le-color-secondary: var(--le-color-secondary-500);
+  --le-color-secondary-hover: var(--le-color-secondary-600);
+  --le-color-secondary-soft: var(--le-color-secondary-50);
+  --le-color-secondary-border: var(--le-color-secondary-300);
+  --le-color-secondary-text: var(--le-color-secondary-800);
+  --le-color-on-secondary: var(--le-color-secondary-900);
+  --le-color-link: var(--le-color-secondary-text);
+  --le-color-link-hover: var(--le-color-secondary-900);
+
+  --le-color-success: var(--le-color-success-500);
+  --le-color-success-hover: var(--le-color-success-600);
+  --le-color-success-soft: var(--le-color-success-50);
+  --le-color-success-border: var(--le-color-success-300);
+  --le-color-success-text: var(--le-color-success-800);
+  --le-color-on-success: var(--le-color-success-900);
+
+  --le-color-warning: var(--le-color-warning-500);
+  --le-color-warning-hover: var(--le-color-warning-600);
+  --le-color-warning-soft: var(--le-color-warning-50);
+  --le-color-warning-border: var(--le-color-warning-300);
+  --le-color-warning-text: var(--le-color-warning-800);
+  --le-color-on-warning: var(--le-color-warning-900);
+
+  --le-color-danger: var(--le-color-danger-500);
+  --le-color-danger-hover: var(--le-color-danger-600);
+  --le-color-danger-soft: var(--le-color-danger-50);
+  --le-color-danger-border: var(--le-color-danger-300);
+  --le-color-danger-text: var(--le-color-danger-800);
+  --le-color-on-danger: var(--le-color-danger-900);
+
+  --le-color-control: var(--le-color-neutral-100);
+  --le-color-control-hover: var(--le-color-neutral-300);
+  --le-color-control-text: var(--le-color-primary-800);
+  --le-color-text: #303030;
+  --le-color-text-muted: #686868;
+  --le-color-text-inverse: #ffffff;
   --le-color-surface: #fff;
-  --le-color-surface-subtle: #f3f8fe;
-  --le-color-border: #e4edf7;
-  --le-color-focus: #3b70a9;
+  --le-color-on-surface: var(--le-color-text);
+  --le-color-surface-subtle: var(--le-color-neutral-50);
+  --le-color-surface-inverse: var(--le-color-neutral-900);
+  --le-color-border: var(--le-color-neutral-200);
+  --le-color-border-strong: var(--le-color-neutral-600);
+  --le-color-focus: var(--le-color-primary-700);
 
   --le-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --le-font-mono: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
@@ -28,6 +129,7 @@
   --le-font-size-lg: 1.5rem;
   --le-font-size-xl: 2rem;
   --le-font-weight-regular: 400;
+  --le-font-weight-medium: 500;
   --le-font-weight-semibold: 600;
   --le-font-weight-bold: 700;
   --le-line-height-tight: 1.25;

@@ -2,8 +2,8 @@
 import { tokenValue } from '../token-values';
 
 const sizes = [
-  { name: '大标题', token: '--le-font-size-xl', weight: '--le-font-weight-bold', sample: '让灵感发光' },
-  { name: '标题', token: '--le-font-size-lg', weight: '--le-font-weight-semibold', sample: '自然地生长' },
+  { name: '大标题', token: '--le-font-size-xl', weight: '--le-font-weight-semibold', sample: '让灵感发光' },
+  { name: '标题', token: '--le-font-size-lg', weight: '--le-font-weight-medium', sample: '自然地生长' },
   { name: '正文', token: '--le-font-size-base', weight: '--le-font-weight-regular', sample: '自然、友好、优雅。' },
   { name: '次要文字', token: '--le-font-size-sm', weight: '--le-font-weight-regular', sample: '记录每个值得留意的瞬间。' },
   { name: '辅助文字', token: '--le-font-size-xs', weight: '--le-font-weight-regular', sample: '留一点空间给灵感' },
@@ -122,7 +122,7 @@ const textAnnotations = [
       const type = element.dataset.textAnnotation as RoughAnnotationType;
       return annotate(element, {
         type,
-        color: type === 'highlight' ? 'var(--le-color-primary)' : 'var(--le-color-primary-strong)',
+        color: 'var(--le-color-primary)',
         opacity: type === 'highlight' ? 0.5 : 1,
         brackets: ['left', 'right'],
         padding: 3,

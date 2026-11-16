@@ -5,7 +5,15 @@ const tokens = new Map(
 );
 
 export function tokenValue(name: string): string {
-  const value = tokens.get(name);
-  if (value === undefined) throw new Error(`Unknown design token: ${name}`);
-  return value;
+  const seen = new Set<string>();
+  let current = name;
+  while (true) {
+    if (seen.has(current)) throw new Error(`Circular design token: ${current}`);
+    seen.add(current);
+    const value = tokens.get(current);
+    if (value === undefined) throw new Error(`Unknown design token: ${current}`);
+    const alias = /^var\(\s*(--[\w-]+)\s*\)$/.exec(value);
+    if (!alias) return value;
+    current = alias[1];
+  }
 }

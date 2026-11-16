@@ -54,7 +54,20 @@ import '@luminedge/styles/index.css';
 <button class="le-button" type="button">确认</button>
 ```
 
-样式包提供色彩、字体、布局、间距、圆角和阴影变量，例如 `--le-font-size-base`、`--le-font-weight-semibold`、`--le-space-4` 和 `--le-radius-md`。这些变量可以通过普通 CSS 按页面或组件覆盖。布局容器也是可选的：
+样式包提供色彩、字体、布局、间距、圆角和阴影变量，例如 `--le-font-size-base`、`--le-font-weight-semibold`、`--le-space-4` 和 `--le-radius-md`。这些变量可以通过普通 CSS 按页面或组件覆盖。字体字重提供 regular（400）、medium（500）、semibold（600）和 bold（700）。
+
+主色、辅色、成功、警告、危险和中性色各有从 `50`（浅）到 `900`（深）的色阶，例如 `--le-color-primary-50`、`--le-color-primary-500` 和 `--le-color-primary-900`。组件也可以使用按用途命名的语义变量，例如 `--le-color-primary-soft`、`--le-color-primary-text`、`--le-color-danger` 和 `--le-color-on-danger`。链接文字可使用辅色系的 `--le-color-link` 和 `--le-color-link-hover`；深色背景可搭配 `--le-color-surface-inverse` 和白色的 `--le-color-text-inverse`。覆盖对应语义变量即可单独调整组件用色。
+
+```css
+.notice {
+  background: var(--le-color-primary-soft);
+  color: var(--le-color-primary-text);
+}
+```
+
+色阶与语义色的组织参考了 [Material 3 色彩系统](https://developer.android.com/develop/ui/compose/designsystems/material3#color-scheme)和 [Apple 色彩指南](https://developer.apple.com/design/human-interface-guidelines/color)。
+
+布局容器也是可选的：
 
 ```html
 <main class="le-container le-container--reading">
@@ -100,7 +113,7 @@ import { annotate } from '@luminedge/ui';
 
 const note = annotate(document.querySelector('#example'), {
   type: 'underline',
-  color: '#7a95bd',
+  color: 'var(--le-color-primary)',
 });
 
 await note.show();

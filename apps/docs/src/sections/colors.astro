@@ -8,20 +8,141 @@ const colors = [
   { name: '警告', token: '--le-color-warning' },
   { name: '危险', token: '--le-color-danger' },
   { name: '文字', token: '--le-color-text' },
+  { name: '反色文字', token: '--le-color-text-inverse' },
+];
+const scales = [
+  { name: '主色', key: 'primary' },
+  { name: '辅色', key: 'secondary' },
+  { name: '成功', key: 'success' },
+  { name: '警告', key: 'warning' },
+  { name: '危险', key: 'danger' },
+  { name: '中性', key: 'neutral' },
+];
+const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+const featuredSteps = new Set([50, 300, 500, 700, 900]);
+const roles = [
+  { name: '柔和', background: '--le-color-primary-soft', foreground: '--le-color-primary-text' },
+  { name: '悬停', background: '--le-color-primary-soft-hover', foreground: '--le-color-primary-text' },
+  { name: '主色', background: '--le-color-primary', foreground: '--le-color-on-primary' },
+  { name: '辅色', background: '--le-color-secondary', foreground: '--le-color-on-secondary' },
+  { name: '反色文字', background: '--le-color-surface-inverse', foreground: '--le-color-text-inverse' },
 ];
 ---
 
 <section class="section landing-content" id="colors" data-index-section aria-labelledby="colors-title" tabindex="-1">
-  <div class="palette-content">
+  <div class="color-content">
     <div class="section-heading"><h2 id="colors-title">色彩</h2></div>
-    <div class="palette">
-      {colors.map(({ name, token }) => (
-        <article class="swatch">
-          <div class="swatch-color" style={`background: var(${token})`}></div>
-          <div class="swatch-info"><strong>{name}</strong><span>{tokenValue(token).toUpperCase()}</span></div>
-          <code>{token}</code>
-        </article>
-      ))}
+    <div class="color-layout">
+      <div class="palette-content">
+        <h3>主要颜色</h3>
+        <div class="palette">
+          {colors.map(({ name, token }) => (
+            <article class="swatch">
+              <div class:list={['swatch-color', { 'swatch-color--outlined': token === '--le-color-text-inverse' }]} style={`background: var(${token})`}></div>
+              <div class="swatch-info"><strong>{name}</strong><span>{tokenValue(token).toUpperCase()}</span></div>
+              <code>{token}</code>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="color-roles">
+        <h3>语义用色</h3>
+        <div class="color-role-grid">
+          {roles.map(({ name, background, foreground }) => (
+            <figure class="color-role">
+              <div class="color-role-sample" style={`background: var(${background}); color: var(${foreground})`}>{name}</div>
+              <figcaption><code>{background}</code><code>{foreground}</code></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <div class="color-scales">
+        <div class="color-scale-area">
+          <h3>色阶</h3>
+          <details class="color-scale-toggle" data-color-scale-toggle>
+            <summary aria-controls="color-scale-list"><span class="color-scale-more">全部色阶</span><span class="color-scale-less">收起</span></summary>
+          </details>
+          <p id="color-scale-keyboard-hint" class="visually-hidden">使用上下方向键切换深浅，左右方向键切换色系。</p>
+          <div class="color-scale-list" id="color-scale-list">
+            {scales.map(({ name, key }) => (
+              <div class="color-scale-group">
+                <div class="color-scale-heading"><strong>{name}</strong></div>
+                <ol class="color-scale" aria-label={`${name}色阶`} data-color-scale>
+                  {steps.map((step) => {
+                    const token = `--le-color-${key}-${step}`;
+                    const value = tokenValue(token).toUpperCase();
+                    return (
+                      <li class="color-step" data-secondary-step={featuredSteps.has(step) ? undefined : 'true'}>
+                        <button class="color-step-swatch" type="button" style={`background: var(${token})`} aria-label={`${name} ${step}，${value}，${token}`} data-color-step={step}></button>
+                        <span class="color-step-tooltip" aria-hidden="true"><strong>{step}</strong><code>{value}</code></span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<script>
+  const toggle = document.querySelector<HTMLDetailsElement>('[data-color-scale-toggle]');
+  const groups = Array.from(document.querySelectorAll<HTMLOListElement>('[data-color-scale]'), (group) =>
+    Array.from(group.querySelectorAll<HTMLButtonElement>('[data-color-step]')),
+  );
+  const visibleIndices = (group: HTMLButtonElement[]) => group.flatMap((button, index) =>
+    toggle?.open || !button.closest('[data-secondary-step]') ? [index] : [],
+  );
+
+  const focusStep = (groupIndex: number, stepIndex: number) => {
+    const group = groups[groupIndex];
+    const target = group?.[stepIndex];
+    if (!target) return;
+    group.forEach((button) => { button.tabIndex = button === target ? 0 : -1; });
+    target.focus();
+  };
+
+  groups.forEach((group, groupIndex) => {
+    group.forEach((button, stepIndex) => {
+      button.tabIndex = stepIndex === 0 ? 0 : -1;
+      if (stepIndex === 0) button.setAttribute('aria-describedby', 'color-scale-keyboard-hint');
+      button.addEventListener('click', () => focusStep(groupIndex, stepIndex));
+      button.addEventListener('keydown', (event) => {
+        let nextGroup = groupIndex;
+        let nextStep = stepIndex;
+        const visible = visibleIndices(group);
+        const position = visible.indexOf(stepIndex);
+        switch (event.key) {
+          case 'ArrowUp': nextStep = visible[Math.max(0, position - 1)]; break;
+          case 'ArrowDown': nextStep = visible[Math.min(visible.length - 1, position + 1)]; break;
+          case 'ArrowLeft': nextGroup = Math.max(0, groupIndex - 1); break;
+          case 'ArrowRight': nextGroup = Math.min(groups.length - 1, groupIndex + 1); break;
+          case 'Home': nextStep = visible[0]; break;
+          case 'End': nextStep = visible[visible.length - 1]; break;
+          default: return;
+        }
+        event.preventDefault();
+        focusStep(nextGroup, nextStep);
+      });
+    });
+  });
+
+  toggle?.addEventListener('toggle', () => {
+    groups.forEach((group) => {
+      const current = group.find((button) => button.tabIndex === 0);
+      const visible = visibleIndices(group).map((index) => group[index]);
+      if (!current || visible.includes(current)) return;
+      const value = Number(current.dataset.colorStep);
+      const nearest = visible.reduce((best, button) =>
+        Math.abs(Number(button.dataset.colorStep) - value) < Math.abs(Number(best.dataset.colorStep) - value) ? button : best,
+      );
+      group.forEach((button) => { button.tabIndex = button === nearest ? 0 : -1; });
+    });
+  });
+</script>
