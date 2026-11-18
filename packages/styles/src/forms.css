@@ -1,127 +1,214 @@
+@reference './tailwind.css';
+
 @layer luminedge {
-  .le-field { display: grid; gap: var(--le-space-2); min-width: 0; }
-  .le-label, .le-field legend { color: var(--le-color-text); font-size: var(--le-font-size-sm); }
-  .le-field-hint, .le-field-error { margin: 0; font-size: var(--le-font-size-xs); line-height: var(--le-line-height-normal); }
-  .le-field-hint { color: var(--le-color-text-muted); }
-  .le-field-error { color: var(--le-color-danger-text); }
+  .le-field { @apply grid gap-le-2; min-width: 0; }
+  .le-label, .le-field legend { @apply text-le-text text-le-sm; }
+  .le-field-hint, .le-field-error { margin: 0; @apply text-le-xs; line-height: var(--le-line-height-normal); }
+  .le-field-hint { @apply text-le-text-muted; }
+  .le-field-error { @apply text-le-danger-text; }
 
   .le-input, .le-textarea, .le-select, .le-token-editor {
-    box-sizing: border-box;
-    width: 100%;
+    @apply box-border w-full;
     min-height: 2.25rem;
     padding: 0.5rem 0.75rem;
     border: 1px solid var(--le-color-border-strong);
-    border-radius: var(--le-radius-sm);
+    @apply rounded-le-sm;
     background: var(--le-color-surface);
-    color: var(--le-color-text);
+    @apply text-le-text;
     font: var(--le-font-weight-regular) var(--le-font-size-sm)/var(--le-line-height-normal) var(--le-font-sans);
   }
 
   .le-textarea { min-height: 5rem; resize: vertical; }
   .le-select:not([multiple]):not([size]) {
-    appearance: none;
+    @apply appearance-none;
     padding-inline-end: 2.25rem;
     background-image: linear-gradient(45deg, transparent 50%, var(--le-color-secondary-indicator) 50%), linear-gradient(135deg, var(--le-color-secondary-indicator) 50%, transparent 50%);
     background-position: calc(100% - 1.05rem) 50%, calc(100% - 0.75rem) 50%;
     background-size: 0.3rem 0.3rem;
-    background-repeat: no-repeat;
-    cursor: pointer;
+    @apply bg-no-repeat cursor-pointer;
   }
 
   /* Keep the native form control; enhance the picker when the browser exposes its parts. */
   @supports (appearance: base-select) and selector(::picker(select)) {
     .le-select:not([multiple]):not([size]), .le-select:not([multiple]):not([size])::picker(select) { appearance: base-select; }
-    .le-select:not([multiple]):not([size]) { padding-inline-end: 0.75rem; background-image: none; }
-    .le-select:not([multiple]):not([size])::picker-icon { color: var(--le-color-secondary-indicator); }
+    .le-select:not([multiple]):not([size]) { padding-inline-end: 0.75rem; @apply bg-none; }
+    .le-select:not([multiple]):not([size])::picker-icon { @apply text-le-secondary-indicator; }
     .le-select:not([multiple]):not([size])::picker(select) {
       margin-block-start: var(--le-space-1);
-      padding: var(--le-space-1);
+      @apply p-le-1;
       border: 1px solid var(--le-color-neutral-700);
-      border-radius: var(--le-radius-sm);
+      @apply rounded-le-sm;
       background: var(--le-color-surface);
       box-shadow: var(--le-shadow-sm);
     }
-    .le-select:not([multiple]):not([size]) option { padding: var(--le-space-2) var(--le-space-3); border-radius: max(0px, calc(var(--le-radius-sm) - var(--le-space-1) - 1px)); color: var(--le-color-text); }
+    .le-select:not([multiple]):not([size]) option {
+      padding: var(--le-space-2) var(--le-space-3);
+      border-radius: max(0px, calc(var(--le-radius-sm) - var(--le-space-1) - 1px));
+      @apply text-le-text;
+    }
     .le-select:not([multiple]):not([size]) option:hover, .le-select:not([multiple]):not([size]) option:focus { background: var(--le-color-primary-soft); }
     .le-select:not([multiple]):not([size]) option:checked { background: var(--le-color-secondary-soft); }
     .le-select:not([multiple]):not([size]) option:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: -2px; }
-    .le-select:not([multiple]):not([size]) option::checkmark { color: var(--le-color-secondary-indicator); }
+    .le-select:not([multiple]):not([size]) option::checkmark { @apply text-le-secondary-indicator; }
   }
-  .le-input::placeholder, .le-textarea::placeholder, .le-token-editor::placeholder { color: var(--le-color-text-muted); opacity: 1; }
-  .le-input:focus-visible, .le-textarea:focus-visible, .le-select:focus-visible, .le-token-editor:focus-visible {
-    border-color: var(--le-color-focus);
-    outline: 2px solid var(--le-color-focus);
-    outline-offset: -2px;
+  .le-input::placeholder, .le-textarea::placeholder, .le-token-editor::placeholder { @apply text-le-text-muted opacity-100; }
+  :is(.le-input, .le-textarea, .le-select, .le-token-editor):focus-visible,
+  .le-input-group:focus-within {
+    @apply border-le-input-focus;
+    outline: 2px solid var(--le-color-primary-soft-hover);
+  }
+  @media (prefers-contrast: more) {
+    :is(.le-input, .le-textarea, .le-select, .le-token-editor):focus-visible,
+    .le-input-group:focus-within { @apply outline-le-focus; }
   }
   .le-choice input:focus-visible, .le-switch:focus-visible {
     outline: 2px solid var(--le-color-focus);
     outline-offset: 2px;
   }
-  .le-input[aria-invalid='true'], .le-textarea[aria-invalid='true'], .le-select[aria-invalid='true'], .le-token-editor[aria-invalid='true'] { border-color: var(--le-color-danger-text); }
-  .le-input[aria-invalid='true']:focus-visible, .le-textarea[aria-invalid='true']:focus-visible, .le-select[aria-invalid='true']:focus-visible, .le-token-editor[aria-invalid='true']:focus-visible { outline-color: var(--le-color-danger-text); }
-  .le-input:disabled, .le-textarea:disabled, .le-select:disabled, .le-token-editor:disabled { opacity: 0.6; cursor: not-allowed; }
-
-  .le-input-group {
-    display: flex;
-    align-items: center;
-    min-width: 0;
-    border: 1px solid var(--le-color-border-strong);
-    border-radius: var(--le-radius-sm);
-    background: var(--le-color-surface);
-  }
-  .le-input-group:focus-within {
-    border-color: var(--le-color-focus);
-    outline: 2px solid var(--le-color-focus);
+  .le-input[aria-invalid='true'], .le-textarea[aria-invalid='true'], .le-select[aria-invalid='true'], .le-token-editor[aria-invalid='true'] { @apply border-le-danger-text; }
+  :is(.le-input, .le-textarea, .le-select, .le-token-editor)[aria-invalid='true']:focus-visible {
+    @apply outline-le-danger-text;
     outline-offset: -2px;
   }
-  .le-input-group:has(> .le-input[aria-invalid='true']:focus-visible) {
-    border-color: var(--le-color-danger-text);
-    outline-color: var(--le-color-danger-text);
+  .le-input:disabled, .le-textarea:disabled, .le-select:disabled, .le-token-editor:disabled { @apply opacity-60 cursor-not-allowed; }
+
+  .le-input-group {
+    @apply flex items-center;
+    min-width: 0;
+    border: 1px solid var(--le-color-border-strong);
+    border-radius: var(--le-input-group-radius, var(--le-radius-sm));
+    background: var(--le-color-surface);
   }
-  .le-input-group .le-input { flex: 1 1 auto; min-width: 0; width: auto; border: 0; background: transparent; outline: 0; }
-  .le-input-affix { flex: 0 0 auto; padding-inline: var(--le-space-3); color: var(--le-color-text-muted); font-size: var(--le-font-size-xs); }
-  .le-input-group > .le-button { flex: 0 0 auto; min-height: 0; margin-inline-end: var(--le-space-1); padding: calc(var(--le-space-1) + 1px) var(--le-space-2); border-radius: max(0px, calc(var(--le-radius-sm) - var(--le-space-1) - 1px)); }
+  .le-input-group:has(> .le-input[aria-invalid='true']:focus-visible) {
+    @apply border-le-danger-text outline-le-danger-text;
+    outline-offset: -2px;
+  }
+  .le-input-group .le-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    @apply w-auto;
+    border: 0;
+    background: transparent;
+    outline: 0;
+  }
+  .le-input-affix { flex: 0 0 auto; @apply px-le-3 text-le-text-muted text-le-xs; }
+  .le-input-group > .le-button {
+    flex: 0 0 auto;
+    min-height: 0;
+    @apply me-le-1;
+    padding: calc(var(--le-space-1) + 1px) var(--le-space-2);
+    border-radius: max(0px, calc(var(--le-input-group-radius, var(--le-radius-sm)) - var(--le-space-1) - 1px));
+  }
   .le-input-group > .le-button:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: -2px; }
-  .le-password-toggle[hidden] { display: none; }
+  .le-input-group:has(> .le-password-toggle) { --le-input-group-radius: var(--le-radius-md); }
+  .le-input-group > .le-password-toggle {
+    @apply self-stretch px-le-2;
+    margin-block: var(--le-space-1);
+    padding-block: 0;
+  }
+  .le-password-toggle[hidden] { @apply hidden; }
+
+  .le-number-input:has(> .le-number-controls:not([hidden])) > input[type='number'] {
+    appearance: textfield;
+  }
+  .le-number-input:has(> .le-number-controls:not([hidden])) > input[type='number']::-webkit-inner-spin-button {
+    @apply hidden;
+  }
+  .le-number-controls { @apply grid me-le-1; }
+  .le-number-controls[hidden] { @apply hidden; }
+  .le-number-controls > .le-number-step {
+    @apply grid place-items-center;
+    inline-size: 1.5rem;
+    block-size: 1rem;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+  }
+  .le-number-step::before {
+    inline-size: 0.38rem;
+    block-size: 0.38rem;
+    border: solid currentColor;
+    border-width: 1.25px 1.25px 0 0;
+    content: '';
+    transform: translateY(1px) rotate(-45deg);
+  }
+  .le-number-step[data-le-number-decrement]::before {
+    transform: translateY(-1px) rotate(135deg);
+  }
+  .le-number-controls > .le-number-step:focus-visible {
+    outline: 2px solid var(--le-color-input-focus);
+    outline-offset: -2px;
+  }
+
+  @media (forced-colors: none) {
+    .le-input[type='time']::-webkit-calendar-picker-indicator {
+      @apply bg-none bg-le-text-muted cursor-pointer;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='1.2' stroke-linecap='round'%3E%3Ccircle cx='8' cy='8' r='5.75'/%3E%3Cpath d='M8 4.8v3.4l2.2 1.4'/%3E%3C/svg%3E") center / 1rem no-repeat;
+    }
+  }
+
+  .le-otp-slots { @apply flex flex-wrap gap-le-1; }
+  .le-otp-cell.le-input {
+    @apply font-le-mono text-center px-le-1;
+    inline-size: var(--le-otp-cell-size, 2.125rem);
+  }
 
   .le-token-input {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    gap: var(--le-space-2);
+    @apply flex flex-wrap items-stretch gap-le-2;
     min-width: 0;
   }
-  .le-token-list { display: flex; flex-wrap: wrap; gap: var(--le-space-1); min-width: 0; max-width: 100%; margin: 0; padding: 0; list-style: none; }
-  .le-token-list:empty { display: none; }
-  .le-token { box-sizing: border-box; display: inline-flex; align-items: center; gap: var(--le-space-1); min-width: 0; max-width: 100%; padding: 0.1rem 0.4rem; border: 1px solid var(--le-color-secondary-border); border-radius: var(--le-radius-full); background: var(--le-color-secondary-soft); color: var(--le-color-secondary-text); font-size: var(--le-font-size-xs); overflow-wrap: anywhere; }
-  .le-token > span { min-width: 0; overflow-wrap: anywhere; }
-  .le-token-remove { flex: 0 0 auto; padding: 0 0.1rem; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+  .le-token-list {
+    @apply flex flex-wrap gap-le-1;
+    min-width: 0;
+    @apply max-w-full;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .le-token-list:empty { @apply hidden; }
+  .le-token {
+    @apply box-border inline-flex items-center gap-le-1;
+    min-width: 0;
+    @apply max-w-full;
+    padding: 0.1rem 0.4rem;
+    border: 1px solid var(--le-color-secondary-border);
+    @apply rounded-le-full;
+    background: var(--le-color-secondary-soft);
+    @apply text-le-secondary-text text-le-xs wrap-anywhere;
+  }
+  .le-token > span { min-width: 0; @apply wrap-anywhere; }
+  .le-token-remove {
+    flex: 0 0 auto;
+    padding: 0 0.1rem;
+    border: 0;
+    background: transparent;
+    @apply text-inherit;
+    font: inherit;
+    @apply cursor-pointer;
+  }
   .le-token-remove:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 1px; }
-  .le-token-remove:disabled { opacity: 0.55; cursor: not-allowed; }
-  .le-token-editor { flex: 1 1 7rem; min-width: 0; width: auto; }
+  .le-token-remove:disabled { @apply opacity-55 cursor-not-allowed; }
+  .le-token-editor { flex: 1 1 7rem; min-width: 0; @apply w-auto; }
   .le-token-add { flex: 0 0 auto; }
-  .le-token-add[hidden] { display: none; }
+  .le-token-add[hidden] { @apply hidden; }
 
   .le-slider {
-    appearance: none;
-    display: block;
-    width: 100%;
+    @apply appearance-none block w-full;
     height: 1.5rem;
     margin: 0;
     background: transparent;
-    cursor: pointer;
+    @apply cursor-pointer;
   }
   .le-slider:dir(rtl) { --le-slider-direction: to left; }
   .le-slider::-webkit-slider-runnable-track {
-    box-sizing: border-box;
+    @apply box-border;
     height: var(--le-track-height);
     border: 1px solid var(--le-color-track-border);
-    border-radius: var(--le-radius-full);
+    @apply rounded-le-full;
     background: linear-gradient(var(--le-slider-direction, to right), var(--le-color-track-fill) var(--le-slider-progress, 0%), var(--le-color-track) var(--le-slider-progress, 0%));
   }
   .le-slider::-webkit-slider-thumb {
-    appearance: none;
-    box-sizing: border-box;
+    @apply appearance-none box-border;
     width: 1rem;
     height: 1rem;
     margin-top: calc((var(--le-track-height) - 1rem - 2px) / 2);
@@ -130,52 +217,54 @@
     background: var(--le-color-surface);
   }
   .le-slider::-moz-range-track {
-    box-sizing: border-box;
+    @apply box-border;
     height: var(--le-track-height);
     border: 1px solid var(--le-color-track-border);
-    border-radius: var(--le-radius-full);
+    @apply rounded-le-full;
     background: var(--le-color-track);
   }
   .le-slider::-moz-range-progress {
     height: calc(var(--le-track-height) - 2px);
-    border-radius: var(--le-radius-full);
+    @apply rounded-le-full;
     background: var(--le-color-track-fill);
   }
   .le-slider::-moz-range-thumb {
-    box-sizing: border-box;
+    @apply box-border;
     width: 1rem;
     height: 1rem;
     border: 1px solid var(--le-color-neutral-700);
     border-radius: 50%;
     background: var(--le-color-surface);
   }
-  .le-file { display: block; min-width: 0; width: 100%; color: var(--le-color-text-muted); font: inherit; }
+  .le-file {
+    @apply block;
+    min-width: 0;
+    @apply w-full text-le-text-muted;
+    font: inherit;
+  }
   .le-file::file-selector-button {
-    margin-inline-end: var(--le-space-2);
+    @apply me-le-2;
     padding: var(--le-space-2) var(--le-space-3);
     border: 1px solid var(--le-color-border-strong);
-    border-radius: var(--le-radius-sm);
+    @apply rounded-le-sm;
     background: var(--le-color-control);
-    color: var(--le-color-control-text);
+    @apply text-le-control-text;
     font: inherit;
-    cursor: pointer;
+    @apply cursor-pointer;
   }
   .le-file:hover:not(:disabled)::file-selector-button { background: var(--le-color-control-hover); }
-  .le-slider:disabled, .le-file:disabled, .le-file:disabled::file-selector-button { opacity: 0.6; cursor: not-allowed; }
+  .le-slider:disabled, .le-file:disabled, .le-file:disabled::file-selector-button { @apply opacity-60 cursor-not-allowed; }
   .le-slider:focus-visible, .le-file:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 2px; }
 
-  .le-combobox { position: relative; min-width: 0; }
+  .le-combobox { @apply relative; min-width: 0; }
   .le-combobox-popup {
-    box-sizing: border-box;
-    position: absolute;
-    z-index: 5;
+    @apply box-border absolute z-5;
     inset-inline: 0;
     top: calc(100% + var(--le-space-1));
     max-height: 14rem;
-    overflow: auto;
-    padding: var(--le-space-1);
+    @apply overflow-auto p-le-1;
     border: 1px solid var(--le-color-border-strong);
-    border-radius: var(--le-radius-sm);
+    @apply rounded-le-sm;
     background: var(--le-color-surface);
     box-shadow: var(--le-shadow-md);
   }
@@ -183,26 +272,27 @@
   .le-combobox-option {
     padding: var(--le-space-2) var(--le-space-3);
     border-radius: max(0px, calc(var(--le-radius-sm) - var(--le-space-1) - 1px));
-    color: var(--le-color-text);
-    overflow-wrap: anywhere;
-    cursor: pointer;
+    @apply text-le-text wrap-anywhere cursor-pointer;
   }
-  .le-combobox-option[aria-disabled='true'] { color: var(--le-color-text-muted); cursor: not-allowed; }
+  .le-combobox-option[aria-disabled='true'] { @apply text-le-text-muted cursor-not-allowed; }
   .le-combobox-option:not([aria-disabled='true']):hover, .le-combobox-option[aria-selected='true'] {
     background: var(--le-color-primary-soft-hover);
-    color: var(--le-color-primary-text);
+    @apply text-le-primary-text;
   }
   .le-combobox-option[aria-selected='true'] { outline: 1px solid var(--le-color-focus); outline-offset: -1px; }
-  .le-combobox-empty { padding: var(--le-space-2) var(--le-space-3); margin: 0; color: var(--le-color-text-muted); }
+  .le-combobox-empty { padding: var(--le-space-2) var(--le-space-3); margin: 0; @apply text-le-text-muted; }
 
-  .le-fieldset { display: grid; gap: var(--le-space-2); min-width: 0; padding: 0; margin: 0; border: 0; }
-  .le-fieldset legend { padding: 0; margin-bottom: var(--le-space-2); color: var(--le-color-text); font-size: var(--le-font-size-sm); }
-  .le-choice { display: inline-flex; align-items: center; gap: var(--le-space-2); width: fit-content; color: var(--le-color-text); font-size: var(--le-font-size-sm); cursor: pointer; }
+  .le-fieldset {
+    @apply grid gap-le-2;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  .le-fieldset legend { padding: 0; @apply mb-le-2 text-le-text text-le-sm; }
+  .le-choice { @apply inline-flex items-center gap-le-2 w-fit text-le-text text-le-sm cursor-pointer; }
   .le-choice input:is([type='checkbox'], [type='radio']):not(.le-switch) {
-    appearance: none;
-    box-sizing: border-box;
-    display: grid;
-    place-content: center;
+    @apply appearance-none box-border grid place-content-center;
     flex: 0 0 1rem;
     width: 1rem;
     height: 1rem;
@@ -210,16 +300,16 @@
     border: 1px solid var(--le-color-neutral-700);
     border-radius: 0.25rem;
     background: var(--le-color-surface);
-    cursor: pointer;
+    @apply cursor-pointer;
   }
   .le-choice input[type='radio']:not(.le-switch) { border-radius: 50%; }
   .le-choice input:is([type='checkbox'], [type='radio']):not(.le-switch):checked,
   .le-choice input[type='checkbox']:not(.le-switch):indeterminate {
-    border-color: var(--le-color-secondary-indicator);
+    @apply border-le-secondary-indicator;
     background: var(--le-color-secondary-soft);
   }
   .le-choice input[type='checkbox']:not(.le-switch)::before {
-    box-sizing: border-box;
+    @apply box-border;
     width: 0.3rem;
     height: 0.55rem;
     margin-top: -0.1rem;
@@ -236,35 +326,39 @@
     border-width: 2px 0 0;
     transform: none;
   }
-  .le-choice input[type='radio']:not(.le-switch)::before {
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 50%;
-    background: var(--le-color-secondary-indicator);
-    content: '';
-    transform: scale(0);
+  .le-choice input[type='radio']:not(.le-switch):checked {
+    background-image: radial-gradient(circle closest-side at center, var(--le-color-secondary-indicator) 47%, transparent 54%);
   }
-  .le-choice input[type='radio']:not(.le-switch):checked::before { transform: scale(1); }
-  .le-choice input:disabled { cursor: not-allowed; }
-  .le-choice:has(input:disabled) { opacity: 0.6; cursor: not-allowed; }
+  .le-choice input:disabled { @apply cursor-not-allowed; }
+  .le-choice:has(input:disabled) { @apply opacity-60 cursor-not-allowed; }
 
   .le-switch {
-    appearance: none;
-    position: relative;
+    @apply appearance-none relative;
     flex: 0 0 auto;
     width: 2.5rem;
     height: 1.5rem;
     margin: 0;
     border: 1px solid var(--le-color-neutral-700);
-    border-radius: var(--le-radius-full);
+    @apply rounded-le-full;
     background: var(--le-color-neutral-600);
-    cursor: pointer;
+    @apply cursor-pointer;
     transition: background-color 160ms ease;
   }
-  .le-switch::before { box-sizing: border-box; position: absolute; top: 0.125rem; left: 0.125rem; width: 1.125rem; height: 1.125rem; border: 1px solid var(--le-color-neutral-700); border-radius: 50%; background: var(--le-color-surface); content: ''; transition: transform 160ms ease; }
-  .le-switch:checked { border-color: var(--le-color-neutral-700); background: var(--le-color-primary-indicator); }
+  .le-switch::before {
+    @apply box-border absolute;
+    top: 0.125rem;
+    left: 0.125rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 1px solid var(--le-color-neutral-700);
+    border-radius: 50%;
+    background: var(--le-color-surface);
+    content: '';
+    transition: transform 160ms ease;
+  }
+  .le-switch:checked { @apply border-le-neutral-700; background: var(--le-color-primary-indicator); }
   .le-switch:checked::before { transform: translateX(1rem); }
-  .le-switch:disabled { cursor: not-allowed; }
+  .le-switch:disabled { @apply cursor-not-allowed; }
 
   @media (prefers-reduced-motion: reduce) {
     .le-switch, .le-switch::before { transition: none; }
@@ -274,17 +368,18 @@
     :is(.le-input, .le-textarea, .le-select, .le-token-editor)[aria-invalid='true']:focus-visible,
     .le-input-group:focus-within,
     .le-input-group:has(> .le-input[aria-invalid='true']:focus-visible) { border-color: Highlight; outline-color: Highlight; }
-    .le-slider { appearance: auto; accent-color: Highlight; }
+    .le-slider { @apply appearance-auto; accent-color: Highlight; }
     .le-slider::-webkit-slider-runnable-track { border-color: ButtonText; background: Canvas; }
     .le-slider::-webkit-slider-thumb { border-color: ButtonText; background: ButtonText; }
     .le-slider::-moz-range-track { border-color: ButtonText; background: Canvas; }
     .le-slider::-moz-range-progress { background: Highlight; }
     .le-slider::-moz-range-thumb { border-color: ButtonText; background: ButtonText; }
-    .le-choice input:is([type='checkbox'], [type='radio']):not(.le-switch) { appearance: auto; }
+    .le-choice input:is([type='checkbox'], [type='radio']):not(.le-switch) { @apply appearance-auto bg-none; }
     .le-choice input:is([type='checkbox'], [type='radio']):not(.le-switch)::before { content: none; }
-    .le-select:not([multiple]):not([size]) { appearance: auto; background-image: none; }
+    .le-number-controls > .le-number-step:focus-visible { outline-color: Highlight; }
+    .le-select:not([multiple]):not([size]) { @apply appearance-auto bg-none; }
     @supports (appearance: base-select) and selector(::picker(select)) {
-      .le-select:not([multiple]):not([size])::picker(select) { appearance: auto; }
+      .le-select:not([multiple]):not([size])::picker(select) { @apply appearance-auto; }
     }
     .le-switch { border-color: ButtonText; }
     .le-switch::before { background: ButtonText; }

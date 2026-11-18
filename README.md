@@ -57,7 +57,7 @@ import '@luminedge/styles/index.css';
 
 ### Tailwind CSS
 
-布局和按钮源码使用 `@apply` 复用 Luminedge 的设计变量。样式包构建时展开这些规则，生成可直接引入的 CSS。
+样式包和 Astro 展示站通过 `@apply` 复用布局、间距、圆角、文字和状态色工具类。`tokens.css` 定义设计变量，`tailwind.css` 将变量映射为工具类。浏览器控件的伪元素、渐变、动画和动态尺寸仍直接用 CSS 表达。样式包构建时展开 `@apply`，生成可直接引入的 CSS。
 
 Astro 展示站使用 Tailwind CSS 4。使用 Tailwind 的项目可以在样式入口引入 Luminedge 主题，把设计变量用于工具类。
 
@@ -177,6 +177,8 @@ const controller = createDialog(dialog, {
 | `createDataTable(table, { filter, empty })` | 增强原生表格第一个 `tbody` 的现有行。简单列标题用 `data-le-sort="text"` 或 `"number"`，内含标有 `data-le-sort-button` 的按钮。排序可读取单元格的 `data-le-sort-value`。筛选可连接输入框，零结果时显示 `empty`。 |
 | `createCopyButton(button, source)` | 复制源元素的文字，触发 `le:copy`，用 `detail.copied` 和 `detail.selected` 告知结果。剪贴板不可写时，保留选中文本以便手动复制。 |
 | `createSlider(input)` | 同步原生范围输入框的轨道填充；在代码中更改数值或范围后调用 `refresh()`。 |
+| `createNumberInput(root)` | 用原生数字输入的步进规则驱动上下按钮。输入框用 `data-le-number-value`，两个 `type="button"` 按钮放进初始隐藏的 `data-le-number-controls` 容器，分别标记 `data-le-number-increment` 和 `data-le-number-decrement`。 |
+| `createOtpInput(root)` | 每个 `data-le-otp-cell` 文本输入框接收一位数字，格数由标记决定。支持自动前进、粘贴和在空白格按退格时回到前一格。可用带 `data-le-otp-value` 和 `name` 的隐藏输入提交完整验证码。变化时触发 `le:otpchange`，包含 `detail.value` 和 `detail.complete`。 |
 | `createPasswordInput(input, toggle, options)` | 切换原生密码输入的可见状态；可通过 `toggleLabel`、`showText` 和 `hideText` 设置显示文案。 |
 | `createTokenInput(root, options)` | 为文本输入添加和移除简单标签，按 Enter 或点击按钮添加；`values` 设置初始标签，`name` 为每个标签生成表单值。变化时触发 `le:tokenschange`，包含 `detail.values`。 |
 

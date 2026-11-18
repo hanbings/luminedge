@@ -1,11 +1,19 @@
 ---
 import Demo from './Demo.astro';
+
+const otpLength = 6;
 ---
 
 <Demo id="number" title="数字输入">
   <div class="le-field">
     <label class="le-label" for="demo-item-count">件数</label>
-    <input class="le-input" id="demo-item-count" type="number" min="1" max="20" step="1" value="3" />
+    <div class="le-input-group le-number-input" data-number-demo>
+      <input class="le-input" id="demo-item-count" type="number" min="1" max="20" step="1" value="3" data-le-number-value />
+      <div class="le-number-controls" data-le-number-controls hidden>
+        <button class="le-button le-button--secondary le-number-step" type="button" data-le-number-increment aria-label="增加件数" aria-controls="demo-item-count"></button>
+        <button class="le-button le-button--secondary le-number-step" type="button" data-le-number-decrement aria-label="减少件数" aria-controls="demo-item-count"></button>
+      </div>
+    </div>
   </div>
 </Demo>
 
@@ -27,9 +35,28 @@ import Demo from './Demo.astro';
 </Demo>
 
 <Demo id="otp" title="验证码输入">
-  <div class="le-field">
-    <label class="le-label" for="demo-otp">六位验证码</label>
-    <input class="le-input le-otp" id="demo-otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" />
+  <div class="component-demo-stack">
+    <div class="le-field">
+      <label class="le-label" for="demo-otp">单框</label>
+      <input class="le-input le-otp" id="demo-otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength={otpLength} pattern={`[0-9]{${otpLength}}`} />
+    </div>
+    <div class="le-field" data-otp-demo>
+      <span class="le-label" id="demo-otp-label">分格</span>
+      <div class="le-otp-slots" role="group" aria-labelledby="demo-otp-label" dir="ltr">
+        {Array.from({ length: otpLength }, (_, index) => (
+          <input
+            class="le-input le-otp-cell"
+            type="text"
+            inputmode="numeric"
+            autocomplete={index === 0 ? 'one-time-code' : 'off'}
+            maxlength={index === 0 ? undefined : 1}
+            pattern="[0-9]"
+            aria-label={`验证码第 ${index + 1} 位`}
+            data-le-otp-cell
+          />
+        ))}
+      </div>
+    </div>
   </div>
 </Demo>
 
@@ -148,12 +175,14 @@ import Demo from './Demo.astro';
 </Demo>
 
 <script>
-  import { createCascader, createMentions, createPasswordInput, createSelect, createToggleButton, createTokenInput, createTransfer, createTreeSelect, createUpload } from '@luminedge/ui';
+  import { createCascader, createMentions, createNumberInput, createOtpInput, createPasswordInput, createSelect, createToggleButton, createTokenInput, createTransfer, createTreeSelect, createUpload } from '@luminedge/ui';
   const color = document.querySelector<HTMLInputElement>('#demo-color-picker');
   const colorOutput = document.querySelector<HTMLOutputElement>('[data-color-picker-output]');
   color?.addEventListener('input', () => { if (colorOutput) colorOutput.value = color.value.toUpperCase(); });
 
   document.querySelectorAll<HTMLButtonElement>('[data-toggle-demo]').forEach(createToggleButton);
+  const number = document.querySelector<HTMLElement>('[data-number-demo]');
+  const otp = document.querySelector<HTMLElement>('[data-otp-demo]');
   const mentions = document.querySelector<HTMLElement>('[data-mentions-demo]');
   const cascade = document.querySelector<HTMLElement>('[data-cascader-demo]');
   const treeSelect = document.querySelector<HTMLDetailsElement>('[data-tree-select-demo]');
@@ -163,6 +192,8 @@ import Demo from './Demo.astro';
   const password = document.querySelector<HTMLInputElement>('#demo-password');
   const passwordToggle = document.querySelector<HTMLButtonElement>('[data-password-toggle]');
   const tokenInput = document.querySelector<HTMLElement>('[data-token-input-demo]');
+  if (number) createNumberInput(number);
+  if (otp) createOtpInput(otp);
   if (mentions) createMentions(mentions);
   if (cascade) createCascader(cascade, [
     { value: 'design', label: '设计', children: [{ value: 'palette', label: '配色' }, { value: 'type', label: '排版' }] },

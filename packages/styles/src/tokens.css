@@ -122,6 +122,7 @@
   --le-color-border: var(--le-color-neutral-200);
   --le-color-border-strong: var(--le-color-neutral-600);
   --le-color-focus: var(--le-color-primary-700);
+  --le-color-input-focus: var(--le-color-primary-500);
   --le-color-track: var(--le-color-primary-100);
   --le-color-track-fill: var(--le-color-secondary);
   --le-color-track-border: var(--le-color-border-strong);

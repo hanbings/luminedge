@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createPasswordInput, createTokenInput } from '@luminedge/ui';
+import { createOtpInput, createPasswordInput, createTokenInput } from '@luminedge/ui';
 import { FakeDocument, element, fire } from './fixtures/dom.mjs';
 
 test('password toggle reports visibility, respects disabled inputs, and restores its original state', () => {
@@ -86,4 +86,54 @@ test('token input adds and removes text, prevents duplicates, submits values, an
   assert.equal(button.hidden, true);
   assert.equal(list.children[0].children[1].disabled, true);
   assert.equal(control.add('阅读'), false);
+});
+
+test('OTP fields advance, erase backwards and submit a pasted code of the configured length', async () => {
+  const doc = new FakeDocument();
+  const form = element(doc, 'form');
+  const root = element(doc, 'div');
+  const cells = Array.from({ length: 4 }, () => {
+    const cell = element(doc, 'input', { 'data-le-otp-cell': '' });
+    cell.type = 'text';
+    cell.value = '';
+    cell.form = form;
+    return cell;
+  });
+  const output = element(doc, 'input', { 'data-le-otp-value': '' });
+  output.type = 'hidden';
+  output.name = 'code';
+  root.append(...cells, output);
+  form.append(root);
+  doc.body.append(form);
+  const changes = [];
+  root.addEventListener('le:otpchange', (event) => changes.push(event.detail));
+  const controller = createOtpInput(root);
+
+  fire(cells[0], 'input', { data: '0' });
+  assert.equal(doc.activeElement, cells[1]);
+  assert.equal(controller.getValue(), '0');
+  assert.equal(output.value, '');
+  assert.equal(fire(cells[1], 'keydown', { key: 'Backspace' }).defaultPrevented, true);
+  assert.equal(doc.activeElement, cells[0]);
+  assert.equal(cells[0].value, '');
+
+  const paste = fire(cells[2], 'paste', { clipboardData: { getData: () => '０1-２3' } });
+  assert.equal(paste.defaultPrevented, true);
+  assert.deepEqual(cells.map((cell) => cell.value), ['0', '1', '2', '3']);
+  assert.equal(output.value, '0123');
+  assert.deepEqual(changes.at(-1), { value: '0123', complete: true });
+
+  fire(form, 'reset', { defaultPrevented: true });
+  await Promise.resolve();
+  assert.equal(output.value, '0123');
+
+  fire(form, 'reset');
+  cells.forEach((cell) => { cell.value = ''; });
+  await Promise.resolve();
+  assert.equal(output.value, '');
+  assert.deepEqual(changes.at(-1), { value: '', complete: false });
+
+  controller.destroy();
+  fire(cells[0], 'input', { data: '7' });
+  assert.equal(controller.getValue(), '');
 });

@@ -1,24 +1,20 @@
+@reference './tailwind.css';
+
 @layer luminedge {
   .le-empty {
-    display: grid;
-    justify-items: start;
-    gap: var(--le-space-1);
-    padding-block: var(--le-space-3);
-    padding-inline-start: var(--le-space-3);
+    @apply grid justify-items-start gap-le-1 py-le-3 ps-le-3;
     border-inline-start: 1px solid var(--le-color-border-strong);
-    color: var(--le-color-text-muted);
-    font-size: var(--le-font-size-sm);
+    @apply text-le-text-muted text-le-sm;
   }
-  .le-empty[hidden] { display: none; }
-  .le-empty-title { color: var(--le-color-text); font-weight: var(--le-font-weight-medium); }
+  .le-empty[hidden] { @apply hidden; }
+  .le-empty-title { @apply text-le-text; font-weight: var(--le-font-weight-medium); }
   .le-empty p { margin: 0; }
   .le-skeleton {
-    box-sizing: border-box;
-    display: block;
+    @apply box-border block;
     width: min(100%, var(--le-skeleton-width, 100%));
     height: var(--le-skeleton-height, 1em);
     border: 1px solid var(--le-color-neutral-400);
-    border-radius: var(--le-radius-sm);
+    @apply rounded-le-sm;
     background: var(--le-color-control);
   }
   @media (forced-colors: active) {
@@ -28,58 +24,161 @@
   .le-alert {
     padding: var(--le-space-3) var(--le-space-4);
     border: 1px solid var(--le-color-border-strong);
-    border-radius: var(--le-radius-sm);
+    @apply rounded-le-sm;
     background: var(--le-color-primary-soft);
-    color: var(--le-color-primary-text);
-    font-size: var(--le-font-size-sm);
+    @apply text-le-primary-text text-le-sm;
     line-height: var(--le-line-height-normal);
   }
-  .le-alert--success { border-color: var(--le-color-success-border); background: var(--le-color-success-soft); color: var(--le-color-success-text); }
-  .le-alert--secondary { border-color: var(--le-color-secondary-border); background: var(--le-color-secondary-soft); color: var(--le-color-secondary-text); }
-  .le-alert--warning { border-color: var(--le-color-warning-border); background: var(--le-color-warning-soft); color: var(--le-color-warning-text); }
-  .le-alert--danger { border-color: var(--le-color-danger-border); background: var(--le-color-danger-soft); color: var(--le-color-danger-text); }
+  .le-alert--success {
+    @apply border-le-success-border;
+    background: var(--le-color-success-soft);
+    @apply text-le-success-text;
+  }
+  .le-alert--secondary {
+    @apply border-le-secondary-border;
+    background: var(--le-color-secondary-soft);
+    @apply text-le-secondary-text;
+  }
+  .le-alert--warning {
+    @apply border-le-warning-border;
+    background: var(--le-color-warning-soft);
+    @apply text-le-warning-text;
+  }
+  .le-alert--danger {
+    @apply border-le-danger-border;
+    background: var(--le-color-danger-soft);
+    @apply text-le-danger-text;
+  }
 
-  .le-tag, .le-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 1.5rem; padding: 0.15rem 0.55rem; border: 1px solid var(--le-color-border-strong); border-radius: var(--le-radius-full); background: var(--le-color-primary-soft); color: var(--le-color-primary-text); font-size: var(--le-font-size-xs); line-height: 1.5; }
+  .le-tag, .le-badge {
+    @apply inline-flex items-center justify-center;
+    min-width: 1.5rem;
+    padding: 0.15rem 0.55rem;
+    border: 1px solid var(--le-color-border-strong);
+    @apply rounded-le-full;
+    background: var(--le-color-primary-soft);
+    @apply text-le-primary-text text-le-xs;
+    line-height: 1.5;
+  }
   .le-badge { padding-inline: 0.4rem; background: var(--le-color-primary-200); }
-  .le-tag--secondary, .le-badge--secondary { border-color: var(--le-color-secondary-border); background: var(--le-color-secondary-soft); color: var(--le-color-secondary-text); }
-  .le-tag--success, .le-badge--success { border-color: var(--le-color-success-border); background: var(--le-color-success-soft); color: var(--le-color-success-text); }
-  .le-tag--warning, .le-badge--warning { border-color: var(--le-color-warning-border); background: var(--le-color-warning-soft); color: var(--le-color-warning-text); }
-  .le-tag--danger, .le-badge--danger { border-color: var(--le-color-danger-border); background: var(--le-color-danger-soft); color: var(--le-color-danger-text); }
+  .le-tag--secondary, .le-badge--secondary {
+    @apply border-le-secondary-border;
+    background: var(--le-color-secondary-soft);
+    @apply text-le-secondary-text;
+  }
+  .le-tag--success, .le-badge--success {
+    @apply border-le-success-border;
+    background: var(--le-color-success-soft);
+    @apply text-le-success-text;
+  }
+  .le-tag--warning, .le-badge--warning {
+    @apply border-le-warning-border;
+    background: var(--le-color-warning-soft);
+    @apply text-le-warning-text;
+  }
+  .le-tag--danger, .le-badge--danger {
+    @apply border-le-danger-border;
+    background: var(--le-color-danger-soft);
+    @apply text-le-danger-text;
+  }
 
-  .le-toast-region { display: grid; gap: var(--le-space-2); }
-  .le-toast { box-sizing: border-box; display: flex; align-items: center; gap: var(--le-space-3); width: fit-content; max-width: 100%; padding: var(--le-space-3) var(--le-space-4); border: 1px solid var(--le-color-border-strong); border-radius: var(--le-radius-md); background: var(--le-color-surface); color: var(--le-color-text); box-shadow: var(--le-shadow-sm); font-size: var(--le-font-size-sm); }
-  .le-toast--success { border-color: var(--le-color-success-border); background: var(--le-color-success-soft); color: var(--le-color-success-text); }
-  .le-toast--warning { border-color: var(--le-color-warning-border); background: var(--le-color-warning-soft); color: var(--le-color-warning-text); }
-  .le-toast--danger { border-color: var(--le-color-danger-border); background: var(--le-color-danger-soft); color: var(--le-color-danger-text); }
-  .le-toast-close { flex: 0 0 auto; padding: 0.15rem 0.3rem; margin-left: auto; border: 0; border-radius: var(--le-radius-sm); background: transparent; color: inherit; font: inherit; cursor: pointer; }
+  .le-toast-region { @apply grid gap-le-2; }
+  .le-toast {
+    @apply box-border flex items-center gap-le-3 w-fit max-w-full;
+    padding: var(--le-space-3) var(--le-space-4);
+    border: 1px solid var(--le-color-border-strong);
+    @apply rounded-le-md;
+    background: var(--le-color-surface);
+    @apply text-le-text;
+    box-shadow: var(--le-shadow-sm);
+    @apply text-le-sm;
+  }
+  .le-toast--success {
+    @apply border-le-success-border;
+    background: var(--le-color-success-soft);
+    @apply text-le-success-text;
+  }
+  .le-toast--warning {
+    @apply border-le-warning-border;
+    background: var(--le-color-warning-soft);
+    @apply text-le-warning-text;
+  }
+  .le-toast--danger {
+    @apply border-le-danger-border;
+    background: var(--le-color-danger-soft);
+    @apply text-le-danger-text;
+  }
+  .le-toast-close {
+    flex: 0 0 auto;
+    padding: 0.15rem 0.3rem;
+    @apply ml-auto;
+    border: 0;
+    @apply rounded-le-sm;
+    background: transparent;
+    @apply text-inherit;
+    font: inherit;
+    @apply cursor-pointer;
+  }
   .le-toast-close:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 2px; }
 
-  .le-progress, .le-meter { box-sizing: border-box; appearance: none; display: block; width: 100%; height: var(--le-track-height); overflow: hidden; border: 1px solid var(--le-color-track-border); border-radius: var(--le-radius-full); background: var(--le-color-track); accent-color: var(--le-color-track-fill); }
-  .le-progress::-webkit-progress-bar { overflow: hidden; border-radius: var(--le-radius-full); background: var(--le-color-track); }
-  .le-progress::-webkit-progress-value { border-radius: var(--le-radius-full); background: var(--le-color-track-fill); }
-  .le-progress::-moz-progress-bar { border-radius: var(--le-radius-full); background: var(--le-color-track-fill); }
+  .le-progress, .le-meter {
+    @apply box-border appearance-none block w-full;
+    height: var(--le-track-height);
+    @apply overflow-hidden;
+    border: 1px solid var(--le-color-track-border);
+    @apply rounded-le-full;
+    background: var(--le-color-track);
+    @apply accent-le-track-fill;
+  }
+  .le-progress::-webkit-progress-bar { @apply overflow-hidden rounded-le-full; background: var(--le-color-track); }
+  .le-progress::-webkit-progress-value { @apply rounded-le-full; background: var(--le-color-track-fill); }
+  .le-progress::-moz-progress-bar { @apply rounded-le-full; background: var(--le-color-track-fill); }
   .le-progress:not([value]) { background-image: linear-gradient(90deg, var(--le-color-track) 0% 35%, var(--le-color-track-fill) 35% 65%, var(--le-color-track) 65% 100%); background-size: 200% 100%; animation: le-progress-indeterminate 1.5s linear infinite; }
   .le-progress:not([value])::-webkit-progress-bar, .le-progress:not([value])::-webkit-progress-value { background: transparent; }
   .le-progress:not([value])::-moz-progress-bar { background: transparent; }
   /* Remove the native meter's centered inner track so its fill matches progress. */
-  .le-meter::-webkit-meter-inner-element { display: block; height: 100%; }
-  .le-meter::-webkit-meter-bar { box-sizing: border-box; position: static; height: 100%; border: 0; border-radius: var(--le-radius-full); background: var(--le-color-track); }
-  .le-meter::-webkit-meter-optimum-value, .le-meter::-webkit-meter-suboptimum-value, .le-meter::-webkit-meter-even-less-good-value { box-sizing: border-box; height: 100%; border: 0; border-radius: var(--le-radius-full); background: var(--le-color-track-fill); }
-  .le-meter::-moz-meter-bar { border-radius: var(--le-radius-full); background: var(--le-color-track-fill); }
-  .le-spinner { box-sizing: border-box; display: inline-block; width: 1.25rem; height: 1.25rem; border: 2px solid var(--le-color-primary-border); border-top-color: var(--le-color-secondary-indicator); border-radius: 50%; vertical-align: middle; animation: le-spin 800ms linear infinite; }
+  .le-meter::-webkit-meter-inner-element { @apply block h-full; }
+  .le-meter::-webkit-meter-bar {
+    @apply box-border static h-full;
+    border: 0;
+    @apply rounded-le-full;
+    background: var(--le-color-track);
+  }
+  .le-meter::-webkit-meter-optimum-value, .le-meter::-webkit-meter-suboptimum-value, .le-meter::-webkit-meter-even-less-good-value {
+    @apply box-border h-full;
+    border: 0;
+    @apply rounded-le-full;
+    background: var(--le-color-track-fill);
+  }
+  .le-meter::-moz-meter-bar { @apply rounded-le-full; background: var(--le-color-track-fill); }
+  .le-spinner {
+    @apply box-border inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid var(--le-color-primary-border);
+    @apply border-t-le-secondary-indicator;
+    border-radius: 50%;
+    @apply align-middle;
+    animation: le-spin 800ms linear infinite;
+  }
   @keyframes le-progress-indeterminate { to { background-position: -200% 0; } }
   @keyframes le-spin { to { transform: rotate(1turn); } }
-  @media (prefers-reduced-motion: reduce) { .le-spinner, .le-progress:not([value]) { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .le-spinner, .le-progress:not([value]) { @apply animate-none; } }
   @media (forced-colors: active) {
-    .le-meter { appearance: auto; border: 1px solid CanvasText; background: Canvas; }
+    .le-meter { @apply appearance-auto; border: 1px solid CanvasText; background: Canvas; }
     .le-meter::-webkit-meter-bar { background: Canvas; }
     .le-meter::-webkit-meter-optimum-value, .le-meter::-webkit-meter-suboptimum-value, .le-meter::-webkit-meter-even-less-good-value { background: Highlight; }
     .le-meter::-moz-meter-bar, .le-meter:-moz-meter-sub-optimum::-moz-meter-bar, .le-meter:-moz-meter-sub-sub-optimum::-moz-meter-bar { background: Highlight; }
-    .le-progress { box-sizing: border-box; appearance: auto; border: 1px solid CanvasText; background: Canvas; accent-color: Highlight; }
+    .le-progress {
+      @apply box-border appearance-auto;
+      border: 1px solid CanvasText;
+      background: Canvas;
+      accent-color: Highlight;
+    }
     .le-progress::-webkit-progress-bar, .le-progress:not([value])::-webkit-progress-bar { background: Canvas; }
     .le-progress::-webkit-progress-value, .le-progress:not([value])::-webkit-progress-value { background: Highlight; }
     .le-progress::-moz-progress-bar, .le-progress:not([value])::-moz-progress-bar { background: Highlight; }
-    .le-progress:not([value]) { animation: none; background: Canvas; }
+    .le-progress:not([value]) { @apply animate-none; background: Canvas; }
     .le-progress:not([value])::-webkit-progress-value { width: 35% !important; }
     .le-progress:not([value])::-moz-progress-bar { width: 35% !important; }
   }

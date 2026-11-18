@@ -1,17 +1,32 @@
 @theme inline {
   --color-le-primary: var(--le-color-primary);
+  --color-le-primary-strong: var(--le-color-primary-strong);
   --color-le-primary-soft: var(--le-color-primary-soft);
   --color-le-primary-soft-hover: var(--le-color-primary-soft-hover);
+  --color-le-primary-indicator: var(--le-color-primary-indicator);
   --color-le-primary-text: var(--le-color-primary-text);
   --color-le-on-primary: var(--le-color-on-primary);
   --color-le-secondary: var(--le-color-secondary);
+  --color-le-secondary-border: var(--le-color-secondary-border);
+  --color-le-secondary-indicator: var(--le-color-secondary-indicator);
+  --color-le-secondary-text: var(--le-color-secondary-text);
   --color-le-on-secondary: var(--le-color-on-secondary);
+  --color-le-link: var(--le-color-link);
+  --color-le-link-hover: var(--le-color-link-hover);
+
   --color-le-success: var(--le-color-success);
+  --color-le-success-border: var(--le-color-success-border);
+  --color-le-success-text: var(--le-color-success-text);
   --color-le-on-success: var(--le-color-on-success);
   --color-le-warning: var(--le-color-warning);
+  --color-le-warning-border: var(--le-color-warning-border);
+  --color-le-warning-text: var(--le-color-warning-text);
   --color-le-on-warning: var(--le-color-on-warning);
   --color-le-danger: var(--le-color-danger);
+  --color-le-danger-border: var(--le-color-danger-border);
+  --color-le-danger-text: var(--le-color-danger-text);
   --color-le-on-danger: var(--le-color-on-danger);
+
   --color-le-control: var(--le-color-control);
   --color-le-control-hover: var(--le-color-control-hover);
   --color-le-control-text: var(--le-color-control-text);
@@ -19,8 +34,13 @@
   --color-le-surface-subtle: var(--le-color-surface-subtle);
   --color-le-text: var(--le-color-text);
   --color-le-text-muted: var(--le-color-text-muted);
+  --color-le-text-inverse: var(--le-color-text-inverse);
   --color-le-border: var(--le-color-border);
+  --color-le-border-strong: var(--le-color-border-strong);
+  --color-le-neutral-700: var(--le-color-neutral-700);
   --color-le-focus: var(--le-color-focus);
+  --color-le-input-focus: var(--le-color-input-focus);
+  --color-le-track-fill: var(--le-color-track-fill);
 
   --font-le-sans: var(--le-font-sans);
   --font-le-mono: var(--le-font-mono);
