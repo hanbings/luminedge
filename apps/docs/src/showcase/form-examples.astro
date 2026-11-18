@@ -1,0 +1,136 @@
+<article id="component-example-input" class="showcase">
+  <h4 class="showcase-heading">输入框与表单项</h4>
+  <form class="component-demo-stack" data-form-demo novalidate>
+    <div class="le-field">
+      <label class="le-label" for="demo-name">名称</label>
+      <input class="le-input" id="demo-name" name="name" required autocomplete="off" placeholder="给灵感起个名字" aria-describedby="demo-name-hint" />
+      <p class="le-field-hint" id="demo-name-hint">填写一个容易辨认的名称。</p>
+      <p class="le-field-error" id="demo-name-error" hidden>请填写名称。</p>
+    </div>
+    <div class="le-field">
+      <label class="le-label" for="demo-note">备注</label>
+      <textarea class="le-textarea" id="demo-note" name="note" rows="2" placeholder="记录一点想法"></textarea>
+    </div>
+    <div class="component-demo-inline"><button class="le-button" type="submit">保存</button><output class="component-demo-output" data-form-output aria-live="polite"></output></div>
+  </form>
+</article>
+
+<article id="component-example-choices" class="showcase">
+  <h4 class="showcase-heading">复选框与单选框</h4>
+  <div class="component-demo-stack">
+    <fieldset class="le-fieldset">
+      <legend>关注的内容</legend>
+      <label class="le-choice"><input type="checkbox" name="demo-topics" value="design" checked /> 设计</label>
+      <label class="le-choice"><input type="checkbox" name="demo-topics" value="notes" /> 笔记</label>
+      <label class="le-choice"><input type="checkbox" name="demo-topics" value="archived" disabled /> 已归档</label>
+    </fieldset>
+    <fieldset class="le-fieldset">
+      <legend>提醒频率</legend>
+      <label class="le-choice"><input type="radio" name="demo-frequency" value="daily" checked /> 每天</label>
+      <label class="le-choice"><input type="radio" name="demo-frequency" value="weekly" /> 每周</label>
+    </fieldset>
+  </div>
+</article>
+
+<article id="component-example-native-select" class="showcase">
+  <h4 class="showcase-heading">选择框</h4>
+  <div class="le-field">
+    <label class="le-label" for="demo-select">展示方式</label>
+    <select class="le-select" id="demo-select">
+      <option>按最近更新</option><option>按创建时间</option><option>按名称</option>
+    </select>
+    <p class="le-field-hint">使用浏览器原生选择交互。</p>
+  </div>
+</article>
+
+<article id="component-example-switch" class="showcase">
+  <h4 class="showcase-heading">开关</h4>
+  <label class="le-choice"><input class="le-switch" type="checkbox" role="switch" checked /> 接收更新提醒</label>
+</article>
+
+<article id="component-example-input-group" class="showcase">
+  <h4 class="showcase-heading">输入框组合</h4>
+  <div class="le-field">
+    <label class="le-label" for="demo-path">页面路径</label>
+    <div class="le-input-group">
+      <span class="le-input-affix" aria-hidden="true">/notes/</span>
+      <input class="le-input" id="demo-path" value="design" />
+    </div>
+  </div>
+</article>
+
+<article id="component-example-combobox" class="showcase">
+  <h4 class="showcase-heading">可搜索选择</h4>
+  <div class="le-field le-combobox" data-combobox-demo>
+    <label class="le-label" for="demo-color-search">标签</label>
+    <input class="le-input" id="demo-color-search" type="text" inputmode="search" autocomplete="off" placeholder="搜索标签" data-le-combobox-input />
+    <div class="le-combobox-popup" data-le-combobox-popup hidden>
+      <ul class="le-combobox-list" id="demo-color-options" aria-label="标签建议" data-le-combobox-list>
+        <li class="le-combobox-option" data-le-option="design" data-le-keywords="design ui">设计</li>
+        <li class="le-combobox-option" data-le-option="reading" data-le-keywords="reading books">阅读</li>
+        <li class="le-combobox-option" data-le-option="idea" data-le-keywords="idea notes">灵感</li>
+      </ul>
+      <p class="le-combobox-empty" role="status" data-le-combobox-empty hidden>没有匹配的标签</p>
+    </div>
+  </div>
+</article>
+
+<article id="component-example-slider" class="showcase">
+  <h4 class="showcase-heading">滑块</h4>
+  <div class="le-field">
+    <label class="le-label" for="demo-slider">预览亮度</label>
+    <input class="le-slider" id="demo-slider" type="range" min="0" max="100" value="40" />
+    <output class="component-demo-output" for="demo-slider" data-slider-value>40%</output>
+  </div>
+</article>
+
+<article id="component-example-file" class="showcase">
+  <h4 class="showcase-heading">文件选择</h4>
+  <div class="le-field">
+    <label class="le-label" for="demo-files">图片或 PDF</label>
+    <input class="le-file" id="demo-files" type="file" accept="image/*,.pdf" multiple aria-describedby="demo-files-hint" />
+    <p class="le-field-hint" id="demo-files-hint">演示只在本机选择文件。</p>
+  </div>
+</article>
+
+<script>
+  import { createCombobox, createSlider } from '@luminedge/ui';
+
+  const combobox = document.querySelector<HTMLElement>('[data-combobox-demo]');
+  if (combobox) createCombobox(combobox);
+
+  const slider = document.querySelector<HTMLInputElement>('#demo-slider');
+  const sliderValue = document.querySelector<HTMLOutputElement>('[data-slider-value]');
+  if (slider && sliderValue) {
+    createSlider(slider);
+    const updateSlider = () => { sliderValue.value = `${slider.value}%`; };
+    slider.addEventListener('input', updateSlider);
+    updateSlider();
+  }
+
+  const form = document.querySelector<HTMLFormElement>('[data-form-demo]');
+  const name = document.querySelector<HTMLInputElement>('#demo-name');
+  const error = document.querySelector<HTMLElement>('#demo-name-error');
+  const output = document.querySelector<HTMLOutputElement>('[data-form-output]');
+  if (form && name && error && output) {
+    const clearError = () => {
+      name.removeAttribute('aria-invalid');
+      name.setAttribute('aria-describedby', 'demo-name-hint');
+      error.hidden = true;
+    };
+    name.addEventListener('input', () => { if (name.value.trim()) clearError(); });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      output.textContent = '';
+      if (!name.value.trim()) {
+        name.setAttribute('aria-invalid', 'true');
+        name.setAttribute('aria-describedby', 'demo-name-hint demo-name-error');
+        error.hidden = false;
+        name.focus();
+        return;
+      }
+      clearError();
+      output.textContent = '已保存示例。';
+    });
+  }
+</script>

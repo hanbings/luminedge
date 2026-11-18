@@ -1,0 +1,104 @@
+<article id="component-example-table" class="showcase showcase--wide">
+  <h4 class="showcase-heading">数据表格</h4>
+  <div class="component-demo-stack">
+    <div data-table-controls hidden>
+      <div class="le-field">
+        <label class="le-label" for="demo-table-filter">筛选记录</label>
+        <input class="le-input" id="demo-table-filter" type="search" placeholder="名称、状态或日期" aria-controls="demo-data-table" />
+      </div>
+    </div>
+    <div class="le-table-wrap">
+      <table class="le-table" id="demo-data-table">
+        <caption>最近的灵感</caption>
+        <thead>
+          <tr>
+            <th scope="col" data-le-sort="text"><button class="le-table-sort" data-le-sort-button type="button" disabled>名称<span class="le-sort-indicator" aria-hidden="true"></span></button></th>
+            <th scope="col">状态</th>
+            <th scope="col" data-le-sort="number"><button class="le-table-sort" data-le-sort-button type="button" disabled>更新日期<span class="le-sort-indicator" aria-hidden="true"></span></button></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>界面草图</td><td><span class="le-tag">进行中</span></td><td data-le-sort-value="20260112"><time datetime="2026-01-12">2026-01-12</time></td></tr>
+          <tr><td>阅读笔记</td><td><span class="le-tag le-tag--success">已完成</span></td><td data-le-sort-value="20260110"><time datetime="2026-01-10">2026-01-10</time></td></tr>
+          <tr><td>字体样本</td><td><span class="le-tag">进行中</span></td><td data-le-sort-value="20260125"><time datetime="2026-01-25">2026-01-25</time></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="le-empty" role="status" data-table-empty hidden>
+      <strong class="le-empty-title">没有匹配的记录</strong>
+    </div>
+  </div>
+</article>
+
+<article id="component-example-steps" class="showcase">
+  <h4 class="showcase-heading">步骤条</h4>
+  <ol class="le-steps" aria-label="创建流程">
+    <li class="le-step"><span class="le-step-indicator" aria-hidden="true">1</span>准备</li>
+    <li class="le-step" aria-current="step"><span class="le-step-indicator" aria-hidden="true">2</span>编辑</li>
+    <li class="le-step"><span class="le-step-indicator" aria-hidden="true">3</span>完成</li>
+  </ol>
+</article>
+
+<article id="component-example-timeline" class="showcase">
+  <h4 class="showcase-heading">时间线</h4>
+  <ol class="le-timeline">
+    <li class="le-timeline-item"><time datetime="2026-01-10">1 月 10 日</time>记录了一个想法</li>
+    <li class="le-timeline-item"><time datetime="2026-01-12">1 月 12 日</time>完成了第一版</li>
+  </ol>
+</article>
+
+<article id="component-example-calendar" class="showcase showcase--wide">
+  <h4 class="showcase-heading">日期选择与日历</h4>
+  <div class="component-date-layout">
+    <div class="le-field">
+      <label class="le-label" for="demo-date">日期</label>
+      <input class="le-input" id="demo-date" type="date" />
+      <p class="le-field-hint">也可以使用浏览器原生日期选择器。</p>
+    </div>
+    <div class="le-calendar" data-calendar-demo hidden>
+      <div class="le-calendar-header">
+        <button class="le-calendar-nav" type="button" data-calendar-previous aria-label="上个月">‹</button>
+        <span class="le-calendar-label" data-calendar-label aria-live="polite"></span>
+        <button class="le-calendar-nav" type="button" data-calendar-next aria-label="下个月">›</button>
+      </div>
+      <p class="visually-hidden" id="demo-calendar-help">使用方向键移动日期，Page Up 和 Page Down 切换月份。</p>
+      <table class="le-calendar-grid" role="grid" data-calendar-grid aria-describedby="demo-calendar-help">
+        <thead><tr data-calendar-weekdays></tr></thead>
+        <tbody data-calendar-body></tbody>
+      </table>
+    </div>
+  </div>
+</article>
+
+<article id="component-example-descriptions" class="showcase">
+  <h4 class="showcase-heading">描述列表</h4>
+  <dl class="le-descriptions">
+    <dt>项目</dt><dd>Luminedge</dd>
+    <dt>样式入口</dt><dd><code>@luminedge/styles/index.css</code></dd>
+    <dt>交互入口</dt><dd><code>@luminedge/ui</code></dd>
+  </dl>
+</article>
+
+<script>
+  import { createCalendar, createDataTable } from '@luminedge/ui';
+
+  const table = document.querySelector<HTMLTableElement>('#demo-data-table');
+  const filter = document.querySelector<HTMLInputElement>('#demo-table-filter');
+  const controls = document.querySelector<HTMLElement>('[data-table-controls]');
+  const empty = document.querySelector<HTMLElement>('[data-table-empty]');
+  if (table && filter && controls && empty) {
+    createDataTable(table, { filter, empty });
+    controls.hidden = false;
+  }
+
+  const root = document.querySelector<HTMLElement>('[data-calendar-demo]');
+  const input = document.querySelector<HTMLInputElement>('#demo-date');
+  if (root && input) {
+    const calendar = createCalendar(root);
+    root.hidden = false;
+    root.addEventListener('le:datechange', (event) => {
+      input.value = (event as CustomEvent<{ value: string | null }>).detail.value ?? '';
+    });
+    input.addEventListener('change', () => { calendar.setDate(input.value || null); });
+  }
+</script>

@@ -1,0 +1,178 @@
+<article id="component-example-tabs" class="showcase">
+  <h4 class="showcase-heading">选项卡</h4>
+  <div data-tabs-demo>
+    <div class="le-tablist" role="tablist" aria-label="灵感分类">
+      <a class="le-tab" id="demo-tab-recent" role="tab" href="#demo-panel-recent" aria-controls="demo-panel-recent" aria-selected="true">最近</a>
+      <a class="le-tab" id="demo-tab-saved" role="tab" href="#demo-panel-saved" aria-controls="demo-panel-saved" aria-selected="false">收藏</a>
+    </div>
+    <div class="le-tab-panel" id="demo-panel-recent" role="tabpanel" aria-labelledby="demo-tab-recent" tabindex="0">最近记录的灵感会出现在这里。</div>
+    <div class="le-tab-panel" id="demo-panel-saved" role="tabpanel" aria-labelledby="demo-tab-saved" tabindex="0">收藏的内容会留在这里。</div>
+  </div>
+</article>
+
+<article id="component-example-dropdown" class="showcase">
+  <h4 class="showcase-heading">下拉菜单</h4>
+  <div class="component-demo-stack">
+    <details class="le-menu" data-menu-demo>
+      <summary class="le-button">更多操作 ▾</summary>
+      <div class="le-menu-panel">
+        <button class="le-menu-item" type="button" data-le-menu-close data-menu-action="收藏">收藏</button>
+        <button class="le-menu-item" type="button" data-le-menu-close data-menu-action="归档">归档</button>
+      </div>
+    </details>
+    <output class="component-demo-output" data-menu-output aria-live="polite"></output>
+  </div>
+</article>
+
+<article id="component-example-tooltip" class="showcase">
+  <h4 class="showcase-heading">工具提示与气泡</h4>
+  <div class="component-demo-inline">
+    <span class="le-tooltip" data-tooltip-demo>
+      <button class="le-button" type="button" data-tooltip-trigger aria-describedby="demo-tooltip">查看提示</button>
+      <span class="le-tooltip-content" id="demo-tooltip" role="tooltip" hidden>这是一条简短的说明。</span>
+    </span>
+    <button class="le-button" type="button" popovertarget="demo-popover" data-popover-open>更多说明</button>
+    <div class="le-popover" id="demo-popover" popover data-popover-panel>
+      <p>这里可以放置更完整的说明。</p>
+      <button class="le-button le-button--secondary" type="button" popovertarget="demo-popover" popovertargetaction="hide" data-popover-close>关闭</button>
+    </div>
+  </div>
+</article>
+
+<article id="component-example-pagination" class="showcase">
+  <h4 class="showcase-heading">分页</h4>
+  <div class="component-demo-stack">
+    <nav class="le-pagination" aria-label="示例分页" data-pagination-demo>
+      <button class="le-pagination-button" type="button" data-le-page="previous" disabled>上一页</button>
+      <button class="le-pagination-button" type="button" data-le-page="1" aria-label="第 1 页" aria-current="page">1</button>
+      <button class="le-pagination-button" type="button" data-le-page="2" aria-label="第 2 页">2</button>
+      <button class="le-pagination-button" type="button" data-le-page="3" aria-label="第 3 页">3</button>
+      <button class="le-pagination-button" type="button" data-le-page="next">下一页</button>
+    </nav>
+    <output class="component-demo-output" data-pagination-output aria-live="polite">第 1 页</output>
+  </div>
+</article>
+
+<article id="component-example-breadcrumb" class="showcase">
+  <h4 class="showcase-heading">面包屑</h4>
+  <nav aria-label="示例页面路径">
+    <ol class="le-breadcrumb">
+      <li><a class="le-breadcrumb-link" href="#top">Luminedge</a></li>
+      <li><span aria-hidden="true">/</span><span aria-current="location">组件</span></li>
+    </ol>
+  </nav>
+</article>
+
+<article id="component-example-accordion" class="showcase">
+  <h4 class="showcase-heading">折叠面板</h4>
+  <div class="le-accordion">
+    <details name="demo-accordion" open>
+      <summary>样式包</summary>
+      <div class="le-accordion-content">设计变量和框架无关的 CSS。</div>
+    </details>
+    <details name="demo-accordion">
+      <summary>交互包</summary>
+      <div class="le-accordion-content">在已有 HTML 上增加键盘和状态管理。</div>
+    </details>
+  </div>
+</article>
+
+<article id="component-example-drawer" class="showcase">
+  <h4 class="showcase-heading">抽屉</h4>
+  <button class="le-button" type="button" data-drawer-open disabled>预览记录</button>
+  <dialog class="le-dialog le-drawer" id="demo-drawer" aria-labelledby="demo-drawer-title">
+    <h2 id="demo-drawer-title">界面草图</h2>
+    <p>为项目页面记录第一批布局和导航想法。</p>
+    <dl class="le-descriptions">
+      <dt>状态</dt><dd>进行中</dd>
+      <dt>更新日期</dt><dd><time datetime="2026-01-12">2026-01-12</time></dd>
+    </dl>
+    <div class="dialog-actions">
+      <button class="le-button" type="button" data-drawer-close autofocus>关闭</button>
+    </div>
+  </dialog>
+</article>
+
+<article id="component-example-command" class="showcase">
+  <h4 class="showcase-heading">命令面板</h4>
+  <button class="le-button" type="button" data-command-open aria-keyshortcuts="Control+k Meta+k" disabled>
+    打开命令面板 <span aria-hidden="true"><kbd class="le-kbd">Ctrl</kbd> / <kbd class="le-kbd">⌘</kbd> <kbd class="le-kbd">K</kbd></span>
+  </button>
+  <dialog class="le-dialog" id="demo-command" aria-labelledby="demo-command-title">
+    <h2 id="demo-command-title">跳到章节</h2>
+    <div class="le-field le-combobox le-command-list" data-le-command-list>
+      <label class="le-label" for="demo-command-query">搜索章节</label>
+      <input class="le-input" id="demo-command-query" type="text" inputmode="search" autocomplete="off" data-le-combobox-input autofocus />
+      <div class="le-combobox-popup" data-le-combobox-popup hidden>
+        <ul class="le-combobox-list" id="demo-commands" aria-label="章节命令" data-le-combobox-list>
+          <li class="le-combobox-option" data-le-option="colors" data-le-keywords="colors">查看色彩</li>
+          <li class="le-combobox-option" data-le-option="typography" data-le-keywords="typography">查看字体</li>
+          <li class="le-combobox-option" data-le-option="usage" data-le-keywords="usage">查看使用说明</li>
+        </ul>
+        <p class="le-combobox-empty" role="status" data-le-combobox-empty hidden>没有匹配的章节</p>
+      </div>
+    </div>
+    <div class="dialog-actions">
+      <button class="le-button le-button--secondary" type="button" data-command-close>关闭</button>
+    </div>
+  </dialog>
+</article>
+
+<script>
+  import { createCommandPalette, createDialog, createMenu, createPagination, createTabs, createTooltip, type ComboboxSelection } from '@luminedge/ui';
+
+  const drawer = document.querySelector<HTMLDialogElement>('#demo-drawer');
+  const drawerOpen = document.querySelector<HTMLButtonElement>('[data-drawer-open]');
+  const drawerClose = drawer?.querySelector<HTMLButtonElement>('[data-drawer-close]');
+  if (drawer && drawerOpen && drawerClose) {
+    createDialog(drawer, { openTriggers: [drawerOpen], closeTriggers: [drawerClose] });
+    drawerOpen.disabled = false;
+  }
+
+  const command = document.querySelector<HTMLDialogElement>('#demo-command');
+  const commandOpen = document.querySelector<HTMLButtonElement>('[data-command-open]');
+  const commandClose = command?.querySelector<HTMLButtonElement>('[data-command-close]');
+  if (command && commandOpen && commandClose) {
+    createCommandPalette(command, { openTriggers: [commandOpen], closeTriggers: [commandClose], shortcut: 'k' });
+    commandOpen.disabled = false;
+    command.addEventListener('le:optionselect', (event) => {
+      window.location.hash = (event as CustomEvent<ComboboxSelection>).detail.value;
+    });
+  }
+
+  const tabs = document.querySelector<HTMLElement>('[data-tabs-demo]');
+  if (tabs) createTabs(tabs);
+
+  const menu = document.querySelector<HTMLDetailsElement>('[data-menu-demo]');
+  const menuOutput = document.querySelector<HTMLOutputElement>('[data-menu-output]');
+  if (menu && menuOutput) {
+    createMenu(menu);
+    menu.addEventListener('click', (event) => {
+      const button = (event.target as Element).closest<HTMLButtonElement>('[data-menu-action]');
+      if (button && menu.contains(button)) menuOutput.textContent = `已选择${button.dataset.menuAction}。`;
+    });
+  }
+
+  const tooltip = document.querySelector<HTMLElement>('#demo-tooltip');
+  const trigger = document.querySelector<HTMLElement>('[data-tooltip-trigger]');
+  if (trigger && tooltip) createTooltip(trigger, tooltip);
+
+  const popover = document.querySelector<HTMLElement>('[data-popover-panel]');
+  const popoverOpen = document.querySelector<HTMLButtonElement>('[data-popover-open]');
+  const popoverClose = document.querySelector<HTMLButtonElement>('[data-popover-close]');
+  if (popover && popoverOpen && popoverClose && !('showPopover' in HTMLElement.prototype)) {
+    popover.hidden = true;
+    popoverOpen.addEventListener('click', () => { popover.hidden = !popover.hidden; if (!popover.hidden) popoverClose.focus(); });
+    popoverClose.addEventListener('click', () => { popover.hidden = true; popoverOpen.focus(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !popover.hidden) { popover.hidden = true; popoverOpen.focus(); } });
+  }
+
+  const pagination = document.querySelector<HTMLElement>('[data-pagination-demo]');
+  const paginationOutput = document.querySelector<HTMLOutputElement>('[data-pagination-output]');
+  if (pagination && paginationOutput) {
+    createPagination(pagination);
+    pagination.addEventListener('le:pagechange', (event) => {
+      paginationOutput.textContent = `第 ${(event as CustomEvent<{ page: number }>).detail.page} 页`;
+    });
+  }
+</script>

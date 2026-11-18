@@ -1,47 +1,30 @@
+@import './forms.css';
+@import './feedback.css';
+@import './navigation.css';
+@import './data.css';
+@import './primitives.css';
+@import './collections.css';
+@import './components/button.css';
+
 @layer luminedge {
-  .le-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--le-space-2);
-    min-height: 2.25rem;
-    padding: 0.45rem 0.8rem;
-    border: 1px solid transparent;
-    border-radius: var(--le-radius-sm);
-    background: var(--le-color-control);
-    color: var(--le-color-control-text);
-    font: var(--le-font-weight-regular) var(--le-font-size-sm)/var(--le-line-height-tight) var(--le-font-sans);
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 160ms ease, box-shadow 160ms ease;
-  }
-
-  .le-button:hover:not(:disabled) { background: var(--le-color-control-hover); }
-  .le-button:focus-visible { outline: 3px solid var(--le-color-focus); outline-offset: 3px; }
-  .le-button:disabled { opacity: 0.55; cursor: not-allowed; }
-
-  .le-button--secondary {
-    background: transparent;
-    color: var(--le-color-text-muted);
-  }
-
-  .le-button--secondary:hover:not(:disabled) { background: var(--le-color-surface-subtle); }
-
   .le-card {
+    box-sizing: border-box;
     padding: var(--le-space-4);
-    border: 0;
+    border: 1px solid var(--le-color-border-strong);
     border-radius: var(--le-radius-lg);
     background: var(--le-color-primary-soft);
     color: var(--le-color-text);
   }
 
   .le-avatar {
+    box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 2.25rem;
     aspect-ratio: 1;
     overflow: hidden;
+    border: 1px solid var(--le-color-border-strong);
     border-radius: 50%;
     background: var(--le-color-primary-soft);
     color: var(--le-color-primary-strong);
@@ -53,8 +36,8 @@
   .le-dialog {
     box-sizing: border-box;
     width: min(28rem, calc(100% - 2rem));
-    padding: 0.85rem;
-    border: 0;
+    padding: var(--le-dialog-padding, 0.85rem);
+    border: 1px solid var(--le-color-border-strong);
     border-radius: var(--le-radius-lg);
     background: var(--le-color-surface);
     box-shadow: var(--le-shadow-lg);
@@ -64,7 +47,18 @@
 
   .le-dialog::backdrop { background: rgb(60 80 102 / 0.32); }
 
-  @media (prefers-reduced-motion: reduce) {
-    .le-button { transition: none; }
+  .le-dialog.le-drawer {
+    position: fixed;
+    inset: 0;
+    inline-size: min(24rem, 100%);
+    block-size: 100%;
+    max-inline-size: 100%;
+    max-block-size: 100%;
+    margin-block: 0;
+    margin-inline: auto 0;
+    padding: var(--le-space-6);
+    border-radius: 0;
+    overflow: auto;
   }
+  .le-dialog.le-drawer--start { margin-inline: 0 auto; }
 }

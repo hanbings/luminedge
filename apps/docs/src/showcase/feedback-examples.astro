@@ -1,0 +1,75 @@
+<article id="component-example-alert" class="showcase">
+  <h4 class="showcase-heading">提示信息</h4>
+  <div class="component-demo-stack">
+    <div class="le-alert">有一条新的提示。</div>
+    <div class="le-alert le-alert--secondary">发现一个值得留意的灵感。</div>
+    <div class="le-alert le-alert--success">内容已保存。</div>
+    <div class="le-alert le-alert--warning">还有一项内容需要留意。</div>
+    <div class="le-alert le-alert--danger">暂时无法完成操作。</div>
+  </div>
+</article>
+
+<article id="component-example-badge" class="showcase">
+  <h4 class="showcase-heading">标签与徽标</h4>
+  <div class="component-demo-inline">
+    <span class="le-tag">灵感</span>
+    <span class="le-tag le-tag--secondary">收藏</span>
+    <span class="le-tag le-tag--success">已完成</span>
+    <span class="le-tag le-tag--warning">待处理</span>
+    <span class="le-badge" aria-label="3 条未读消息">3</span>
+    <span class="le-badge le-badge--secondary" aria-label="2 条收藏">2</span>
+  </div>
+</article>
+
+<article id="component-example-toast" class="showcase">
+  <h4 class="showcase-heading">消息通知</h4>
+  <div class="component-demo-stack">
+    <button class="le-button component-demo-button" type="button" data-show-toast>显示通知</button>
+    <div class="le-toast-region" data-toast-region role="status" aria-live="polite" aria-atomic="false"></div>
+  </div>
+</article>
+
+<article id="component-example-progress" class="showcase">
+  <h4 class="showcase-heading">进度与加载</h4>
+  <div class="component-demo-stack">
+    <div class="le-field"><label class="le-label" for="demo-progress">整理进度 · 60%</label><progress class="le-progress" id="demo-progress" value="60" max="100">60%</progress></div>
+    <div class="component-demo-inline"><span class="le-spinner" aria-hidden="true"></span><span>正在加载</span></div>
+  </div>
+</article>
+
+<article id="component-example-meter" class="showcase">
+  <h4 class="showcase-heading">计量条</h4>
+  <div class="le-field">
+    <label class="le-label" for="demo-meter">空间占用 <span aria-hidden="true">· 6 / 10 GB</span></label>
+    <meter class="le-meter" id="demo-meter" min="0" max="10" value="6">6 / 10 GB</meter>
+  </div>
+</article>
+
+<article id="component-example-empty" class="showcase">
+  <h4 class="showcase-heading">空状态</h4>
+  <div class="le-empty">
+    <strong class="le-empty-title">还没有收藏</strong>
+    <p>收藏的记录会显示在这里。</p>
+  </div>
+</article>
+
+<article id="component-example-skeleton" class="showcase">
+  <h4 class="showcase-heading">骨架屏</h4>
+  <div class="component-demo-stack" role="group" aria-busy="true" aria-label="正在加载记录">
+    <span class="le-skeleton" aria-hidden="true" style="--le-skeleton-width: 9rem"></span>
+    <span class="le-skeleton" aria-hidden="true" style="--le-skeleton-width: 18rem"></span>
+    <span class="le-skeleton" aria-hidden="true" style="--le-skeleton-width: 13rem"></span>
+  </div>
+</article>
+
+<script>
+  import { showToast, type ToastController } from '@luminedge/ui';
+
+  const button = document.querySelector<HTMLButtonElement>('[data-show-toast]');
+  const region = document.querySelector<HTMLElement>('[data-toast-region]');
+  let current: ToastController | undefined;
+  if (button && region) button.addEventListener('click', () => {
+    current?.dismiss();
+    current = showToast(region, { message: '内容已保存。', variant: 'success' });
+  });
+</script>

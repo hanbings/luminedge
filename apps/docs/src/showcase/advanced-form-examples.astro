@@ -1,0 +1,182 @@
+---
+import Demo from './Demo.astro';
+---
+
+<Demo id="number" title="数字输入">
+  <div class="le-field">
+    <label class="le-label" for="demo-item-count">件数</label>
+    <input class="le-input" id="demo-item-count" type="number" min="1" max="20" step="1" value="3" />
+  </div>
+</Demo>
+
+<Demo id="time" title="时间选择">
+  <div class="le-field">
+    <label class="le-label" for="demo-time">提醒时间</label>
+    <input class="le-input" id="demo-time" type="time" value="09:30" />
+  </div>
+</Demo>
+
+<Demo id="color-picker" title="颜色选择">
+  <div class="le-field">
+    <label class="le-label" for="demo-color-picker">高亮色</label>
+    <div class="le-space">
+      <input class="le-color-input" id="demo-color-picker" type="color" value="#87baff" />
+      <output class="component-demo-output" for="demo-color-picker" data-color-picker-output>#87BAFF</output>
+    </div>
+  </div>
+</Demo>
+
+<Demo id="otp" title="验证码输入">
+  <div class="le-field">
+    <label class="le-label" for="demo-otp">六位验证码</label>
+    <input class="le-input le-otp" id="demo-otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" />
+  </div>
+</Demo>
+
+<Demo id="password" title="密码输入">
+  <div class="le-field">
+    <label class="le-label" for="demo-password">访问密码</label>
+    <div class="le-input-group">
+      <input class="le-input" id="demo-password" type="password" autocomplete="new-password" placeholder="输入密码" />
+      <button class="le-button le-button--secondary le-password-toggle" type="button" data-password-toggle hidden>显示</button>
+    </div>
+    <p class="le-field-hint">可以切换密码的显示状态。</p>
+  </div>
+</Demo>
+
+<Demo id="token-input" title="标签输入">
+  <div class="le-field" data-token-input-demo>
+    <label class="le-label" for="demo-token-input">兴趣标签</label>
+    <ul class="le-token-list" aria-label="已添加的标签" data-le-token-list></ul>
+    <div class="le-token-input">
+      <input class="le-token-editor" id="demo-token-input" type="text" autocomplete="off" placeholder="输入标签" data-le-token-editor />
+      <button class="le-button le-token-add" type="button" data-le-token-add hidden>添加</button>
+    </div>
+    <p class="le-field-hint">输入后按 Enter 或点击添加。</p>
+    <p class="visually-hidden" role="status" data-le-token-status></p>
+  </div>
+</Demo>
+
+<Demo id="toggle" title="切换按钮与按钮组">
+  <div class="le-button-group le-toggle-group" role="group" aria-label="强调样式">
+    <button class="le-button le-toggle" type="button" aria-pressed="true" data-toggle-demo>粗体</button>
+    <button class="le-button le-toggle" type="button" aria-pressed="false" data-toggle-demo>斜体</button>
+    <button class="le-button le-toggle" type="button" aria-pressed="false" data-toggle-demo>下划线</button>
+  </div>
+</Demo>
+
+<Demo id="segmented" title="分段控制">
+  <fieldset class="le-segmented">
+    <legend class="le-label">查看范围</legend>
+    {['今日', '本周', '本月'].map((value, index) => (
+      <label class="le-segment"><input type="radio" name="demo-segment" value={value} checked={!index} /><span>{value}</span></label>
+    ))}
+  </fieldset>
+</Demo>
+
+<Demo id="mentions" title="提及建议">
+  <div class="le-field le-combobox" data-mentions-demo>
+    <label class="le-label" for="demo-mention">邀请同伴</label>
+    <input class="le-input" id="demo-mention" type="text" autocomplete="off" placeholder="输入 @ 搜索" data-le-combobox-input />
+    <div class="le-combobox-popup" data-le-combobox-popup hidden>
+      <ul class="le-combobox-list" id="demo-mention-options" aria-label="同伴" data-le-combobox-list>
+        <li class="le-combobox-option" data-le-option="lin" data-le-keywords="lin">小林</li>
+        <li class="le-combobox-option" data-le-option="zhou" data-le-keywords="zhou">小周</li>
+      </ul>
+    </div>
+  </div>
+</Demo>
+
+<Demo id="cascader" title="级联选择">
+  <div class="le-cascader" data-cascader-demo>
+    <div class="le-field"><label class="le-label" for="demo-cascade-category">类别</label><select class="le-select" id="demo-cascade-category" data-le-cascade><option value="">选择类别</option></select></div>
+    <div class="le-field"><label class="le-label" for="demo-cascade-project">项目</label><select class="le-select" id="demo-cascade-project" data-le-cascade disabled><option value="">选择项目</option></select></div>
+  </div>
+</Demo>
+
+<Demo id="tree-select" title="树选择">
+  <details class="le-tree-select" data-tree-select-demo>
+    <summary><span data-le-select-value>选择目录</span></summary>
+    <ul class="le-tree" aria-label="目录">
+      <li><details open><summary>项目</summary><ul>
+        <li><button class="le-button le-tree-choice" type="button" data-le-select-option="drafts">草图</button></li>
+        <li><button class="le-button le-tree-choice" type="button" data-le-select-option="notes">笔记</button></li>
+      </ul></details></li>
+      <li><button class="le-button le-tree-choice" type="button" data-le-select-option="archive">归档</button></li>
+    </ul>
+  </details>
+</Demo>
+
+<Demo id="select" title="选项选择">
+  <details class="le-tree-select" data-choice-select-demo>
+    <summary class="le-button"><span data-le-select-value>选择优先级</span></summary>
+    <ul class="le-tree" aria-label="优先级">
+      <li><button class="le-button le-tree-choice" type="button" data-le-select-option="high">高</button></li>
+      <li><button class="le-button le-tree-choice" type="button" data-le-select-option="normal">普通</button></li>
+      <li><button class="le-button le-tree-choice" type="button" data-le-select-option="low">低</button></li>
+    </ul>
+  </details>
+</Demo>
+
+<Demo id="transfer" title="穿梭框">
+  <div class="le-transfer" data-transfer-demo>
+    <div class="le-field">
+      <label class="le-label" for="demo-transfer-available">可选</label>
+      <select class="le-select" id="demo-transfer-available" data-le-transfer-source multiple size="3">
+        <option value="colors">色彩</option><option value="type">字体</option><option value="layout">布局</option>
+      </select>
+    </div>
+    <div class="le-field">
+      <label class="le-label" for="demo-transfer-selected">已选</label>
+      <select class="le-select" id="demo-transfer-selected" data-le-transfer-target multiple size="3"></select>
+    </div>
+    <div class="le-space le-transfer-controls">
+      <button class="le-button" type="button" data-le-transfer-add disabled>添加</button>
+      <button class="le-button" type="button" data-le-transfer-remove disabled>移除</button>
+    </div>
+  </div>
+</Demo>
+
+<Demo id="upload" title="文件队列">
+  <div class="component-demo-stack" data-upload-demo>
+    <div class="le-field le-upload-drop" data-le-upload-drop>
+      <label class="le-label" for="demo-upload">拖入文件或选择</label>
+      <input class="le-file" id="demo-upload" type="file" multiple />
+    </div>
+    <ul class="le-item-list" data-le-upload-list aria-label="已选文件"></ul>
+  </div>
+</Demo>
+
+<script>
+  import { createCascader, createMentions, createPasswordInput, createSelect, createToggleButton, createTokenInput, createTransfer, createTreeSelect, createUpload } from '@luminedge/ui';
+  const color = document.querySelector<HTMLInputElement>('#demo-color-picker');
+  const colorOutput = document.querySelector<HTMLOutputElement>('[data-color-picker-output]');
+  color?.addEventListener('input', () => { if (colorOutput) colorOutput.value = color.value.toUpperCase(); });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-toggle-demo]').forEach(createToggleButton);
+  const mentions = document.querySelector<HTMLElement>('[data-mentions-demo]');
+  const cascade = document.querySelector<HTMLElement>('[data-cascader-demo]');
+  const treeSelect = document.querySelector<HTMLDetailsElement>('[data-tree-select-demo]');
+  const select = document.querySelector<HTMLDetailsElement>('[data-choice-select-demo]');
+  const transfer = document.querySelector<HTMLElement>('[data-transfer-demo]');
+  const upload = document.querySelector<HTMLElement>('[data-upload-demo]');
+  const password = document.querySelector<HTMLInputElement>('#demo-password');
+  const passwordToggle = document.querySelector<HTMLButtonElement>('[data-password-toggle]');
+  const tokenInput = document.querySelector<HTMLElement>('[data-token-input-demo]');
+  if (mentions) createMentions(mentions);
+  if (cascade) createCascader(cascade, [
+    { value: 'design', label: '设计', children: [{ value: 'palette', label: '配色' }, { value: 'type', label: '排版' }] },
+    { value: 'writing', label: '写作', children: [{ value: 'essay', label: '随笔' }, { value: 'guide', label: '指南' }] },
+  ]);
+  if (treeSelect) createTreeSelect(treeSelect);
+  if (select) createSelect(select);
+  if (transfer) createTransfer(transfer);
+  if (upload) createUpload(upload, { removeLabel: '移除', stateLabels: { ready: '待提交' } });
+  if (password && passwordToggle) createPasswordInput(password, passwordToggle, { toggleLabel: '显示密码', showText: '显示', hideText: '隐藏' });
+  if (tokenInput) createTokenInput(tokenInput, {
+    name: 'topics',
+    values: ['设计', '灵感'],
+    removeLabel: (value) => `移除${value}`,
+    message: (change, value) => change === 'added' ? `已添加${value}` : change === 'removed' ? `已移除${value}` : `${value}已存在`,
+  });
+</script>

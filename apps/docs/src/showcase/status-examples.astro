@@ -1,0 +1,114 @@
+---
+import Demo from './Demo.astro';
+---
+
+<Demo id="alert-dialog" title="确认对话框">
+  <button class="le-button" type="button" id="demo-alert-open">移除草图</button>
+  <dialog class="le-dialog" id="demo-alert-dialog" role="alertdialog" aria-labelledby="demo-alert-title" aria-describedby="demo-alert-description">
+    <h4 id="demo-alert-title">移除这条草图？</h4>
+    <p id="demo-alert-description">确认后，这条草图会从当前列表移除。</p>
+    <form method="dialog" class="dialog-actions">
+      <button class="le-button le-button--secondary" value="cancel" type="submit" autofocus>取消</button>
+      <button class="le-button" value="remove" type="submit">确认移除</button>
+    </form>
+  </dialog>
+  <output class="component-demo-output" id="demo-alert-output" aria-live="polite"></output>
+</Demo>
+
+<Demo id="popconfirm" title="气泡确认">
+  <button class="le-button" type="button" popovertarget="demo-popconfirm-panel" aria-haspopup="dialog">归档笔记</button>
+  <div class="le-popover le-popconfirm" id="demo-popconfirm-panel" popover="auto" role="dialog" aria-labelledby="demo-popconfirm-title">
+    <p id="demo-popconfirm-title">将笔记移到归档？</p>
+    <div class="le-space">
+      <button class="le-button le-button--secondary" type="button" popovertarget="demo-popconfirm-panel" popovertargetaction="hide">取消</button>
+      <button class="le-button" type="button" id="demo-popconfirm-accept" popovertarget="demo-popconfirm-panel" popovertargetaction="hide">归档</button>
+    </div>
+  </div>
+  <output class="component-demo-output" id="demo-popconfirm-output" aria-live="polite"></output>
+</Demo>
+
+<Demo id="result" title="结果状态">
+  <div class="le-result">
+    <strong>记录已整理</strong>
+    <p>三条草图已归档。</p>
+    <a class="le-breadcrumb-link" href="#component-example-table">查看记录</a>
+  </div>
+</Demo>
+
+<Demo id="app" title="全局提示">
+  <div class="component-demo-stack" data-toast-app>
+    <div><button class="le-button" type="button" id="demo-app-alert">发送提示</button></div>
+    <div class="le-toast-region" aria-live="polite" data-le-app-notifications></div>
+  </div>
+</Demo>
+
+<Demo id="tour" title="分步引导">
+  <div class="le-space">
+    <span class="demo-surface" id="demo-tour-target-1">草图</span>
+    <span class="demo-surface" id="demo-tour-target-2">归档</span>
+    <button class="le-button" type="button" id="demo-tour-start">开始引导</button>
+  </div>
+  <dialog class="le-dialog" id="demo-tour-dialog" aria-labelledby="demo-tour-title" aria-describedby="demo-tour-description">
+    <div class="le-space"><span data-le-tour-progress></span></div>
+    <h4 id="demo-tour-title" data-le-tour-title></h4>
+    <p id="demo-tour-description" data-le-tour-description></p>
+    <div class="dialog-actions">
+      <form method="dialog"><button class="le-button le-button--secondary" type="submit">退出</button></form>
+      <button class="le-button le-button--secondary" type="button" data-le-tour-previous>上一步</button>
+      <button class="le-button" type="button" data-le-tour-next data-le-finish-label="完成" autofocus>下一步</button>
+    </div>
+  </dialog>
+</Demo>
+
+<Demo id="watermark" title="水印">
+  <div class="demo-surface le-watermark" id="demo-watermark">
+    <strong>项目草稿</strong>
+    <p>可选择的正文。</p>
+  </div>
+</Demo>
+
+<Demo id="border-beam" title="边缘提示">
+  <div class="demo-surface demo-beam" id="demo-beam-target">当前预览</div>
+  <div class="le-space"><button class="le-button" type="button" id="demo-beam-toggle" aria-pressed="false">强调边缘</button></div>
+</Demo>
+
+<script>
+  import { createApp, createDialog, createToggleButton, createTour, createWatermark } from '@luminedge/ui';
+  const confirm = document.querySelector<HTMLDialogElement>('#demo-alert-dialog');
+  const confirmOpen = document.querySelector<HTMLButtonElement>('#demo-alert-open');
+  const confirmOutput = document.querySelector<HTMLOutputElement>('#demo-alert-output');
+  if (confirm && confirmOpen && confirmOutput) {
+    const dialog = createDialog(confirm);
+    confirmOpen.addEventListener('click', () => { confirm.returnValue = ''; dialog.open(); });
+    confirm.addEventListener('close', () => {
+      if (confirm.returnValue === 'remove') confirmOutput.value = '已移除示例草图。';
+    });
+  }
+  const popconfirm = document.querySelector<HTMLOutputElement>('#demo-popconfirm-output');
+  document.querySelector('#demo-popconfirm-accept')?.addEventListener('click', () => {
+    if (popconfirm) popconfirm.value = '已归档示例笔记。';
+  });
+
+  const appRoot = document.querySelector<HTMLElement>('[data-toast-app]');
+  if (appRoot) {
+    const app = createApp(appRoot);
+    document.querySelector('#demo-app-alert')?.addEventListener('click', () => {
+      app.notify({ message: '已更新记录。', duration: 4000 });
+    });
+  }
+  const tourDialog = document.querySelector<HTMLDialogElement>('#demo-tour-dialog');
+  if (tourDialog) {
+    const tour = createTour(tourDialog, [
+      { target: document.querySelector<HTMLElement>('#demo-tour-target-1') ?? undefined, title: '草图', description: '在这里查看仍需整理的记录。' },
+      { target: document.querySelector<HTMLElement>('#demo-tour-target-2') ?? undefined, title: '归档', description: '整理完成的记录进入归档。' },
+    ]);
+    document.querySelector('#demo-tour-start')?.addEventListener('click', tour.open);
+  }
+  const watermark = document.querySelector<HTMLElement>('#demo-watermark');
+  if (watermark) createWatermark(watermark, 'Luminedge');
+  const beam = document.querySelector<HTMLButtonElement>('#demo-beam-toggle');
+  if (beam) {
+    const toggle = createToggleButton(beam);
+    beam.addEventListener('click', () => document.querySelector('#demo-beam-target')?.classList.toggle('le-border-beam', toggle.getPressed()));
+  }
+</script>

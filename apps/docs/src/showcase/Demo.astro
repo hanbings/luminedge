@@ -1,0 +1,13 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  wide?: boolean;
+}
+const { id, title, wide = false } = Astro.props;
+---
+
+<article id={`component-example-${id}`} class:list={['showcase', { 'showcase--wide': wide }]} aria-labelledby={`component-example-${id}-title`}>
+  <h4 class="showcase-heading" id={`component-example-${id}-title`}>{title}</h4>
+  <slot />
+</article>

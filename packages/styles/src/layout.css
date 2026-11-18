@@ -1,10 +1,10 @@
+@reference './tailwind.css';
+
 @layer luminedge {
   .le-container {
-    box-sizing: border-box;
+    @apply box-border mx-auto max-w-le-layout;
     width: calc(100% - var(--le-layout-gutter) - var(--le-layout-gutter));
-    max-width: var(--le-layout-max-width);
-    margin-inline: auto;
   }
 
-  .le-container--reading { max-width: var(--le-layout-reading-width); }
+  .le-container--reading { @apply max-w-le-reading; }
 }

@@ -1,0 +1,32 @@
+<article id="component-example-code-block" class="showcase">
+  <h4 class="showcase-heading">代码块</h4>
+  <figure class="le-code-block">
+    <figcaption class="le-code-toolbar">
+      <span>CSS</span>
+      <span data-copy-controls hidden>
+        <button class="le-button le-button--secondary" type="button" data-copy-code>复制代码</button>
+      </span>
+    </figcaption>
+    <pre tabindex="0" aria-label="CSS 示例"><code id="demo-copy-source">{`.notice {
+  color: var(--le-color-primary-text);
+}`}</code></pre>
+  </figure>
+  <output class="component-demo-output" data-copy-status aria-live="polite"></output>
+</article>
+
+<script>
+  import { createCopyButton, type CopyResult } from '@luminedge/ui';
+
+  const button = document.querySelector<HTMLButtonElement>('[data-copy-code]');
+  const source = document.querySelector<HTMLElement>('#demo-copy-source');
+  const status = document.querySelector<HTMLOutputElement>('[data-copy-status]');
+  const controls = document.querySelector<HTMLElement>('[data-copy-controls]');
+  if (button && source && status && controls) {
+    createCopyButton(button, source);
+    controls.hidden = false;
+    button.addEventListener('le:copy', (event) => {
+      const { copied, selected } = (event as CustomEvent<CopyResult>).detail;
+      status.value = copied ? '已复制。' : selected ? '已选中文本，可手动复制。' : '复制失败。';
+    });
+  }
+</script>

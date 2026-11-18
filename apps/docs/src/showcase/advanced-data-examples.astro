@@ -1,0 +1,123 @@
+---
+import Demo from './Demo.astro';
+const swatches = ['#87baff', '#ffc68b', '#91dcb0', '#ffdc91', '#ff7070'];
+const drawing = '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="270" viewBox="0 0 480 270"><rect width="480" height="270" fill="#f1f7ff"/>' +
+  swatches.map((color, index) => '<rect x="' + (35 + 84 * index) + '" y="54" width="74" height="162" rx="5" fill="' + color + '"/>').join('') + '</svg>';
+const image = 'data:image/svg+xml,' + encodeURIComponent(drawing);
+---
+
+<Demo id="carousel" title="轮播">
+  <div data-carousel-demo>
+    <ol class="le-carousel-list" data-le-carousel-list tabindex="0" aria-label="主题色卡">
+      <li class="demo-surface demo-slide">色彩</li>
+      <li class="demo-surface demo-slide">字体</li>
+      <li class="demo-surface demo-slide">布局</li>
+    </ol>
+    <div class="le-carousel-controls">
+      <button class="le-button" type="button" data-le-carousel-previous disabled>上一张</button>
+      <span class="component-demo-output" data-le-carousel-position>1 / 3</span>
+      <button class="le-button" type="button" data-le-carousel-next>下一张</button>
+    </div>
+  </div>
+</Demo>
+
+<Demo id="image" title="图片预览">
+  <button class="le-image-trigger" type="button" id="demo-image-open" aria-label="放大配色示意">
+    <img class="le-image" src={image} width="480" height="270" alt="蓝、橙、绿、黄和红的色卡" loading="lazy" />
+  </button>
+  <dialog class="le-dialog" id="demo-image-dialog" aria-label="配色示意">
+    <img class="le-image" src={image} width="480" height="270" alt="蓝、橙、绿、黄和红的色卡" loading="lazy" />
+    <form method="dialog" class="dialog-actions"><button class="le-button" type="submit" autofocus>关闭预览</button></form>
+  </dialog>
+</Demo>
+
+<Demo id="chart" title="图表">
+  <div class="component-demo-stack">
+    <div class="le-field">
+      <label class="le-label" for="demo-chart-period">记录数量</label>
+      <select class="le-select" id="demo-chart-period">
+        <option value="week">本周</option>
+        <option value="month">本月</option>
+      </select>
+    </div>
+    <ul class="le-chart" id="demo-chart-values" aria-label="各类记录数量"></ul>
+  </div>
+</Demo>
+
+<Demo id="statistic" title="统计数值">
+  <dl class="le-statistic"><dt>本月新增记录</dt><dd>{new Intl.NumberFormat('zh-CN').format(1290)}</dd></dl>
+</Demo>
+
+<Demo id="item" title="列表与列表项">
+  <ul class="le-item-list">
+    <li class="le-item"><a class="le-breadcrumb-link" href="#colors">颜色变量</a><span class="le-item-description">设计规范</span></li>
+    <li class="le-item"><a class="le-breadcrumb-link" href="#typography">字体参考</a><span class="le-item-description">排版</span></li>
+  </ul>
+</Demo>
+
+<Demo id="virtual-list" title="虚拟列表">
+  <div class="le-scroll-area demo-scroll" data-virtual-demo tabindex="0" style="--le-scroll-height: 9rem" aria-label="一千条记录">
+    <ol class="le-virtual-list" data-le-virtual-list>
+      <li>记录 1</li>
+    </ol>
+  </div>
+</Demo>
+
+<Demo id="tree" title="树形列表">
+  <ul class="le-tree" aria-label="工作区目录">
+    <li><details open><summary>设计规范</summary><ul>
+      <li><a class="le-breadcrumb-link" href="#colors">色彩</a></li>
+      <li><a class="le-breadcrumb-link" href="#typography">字体</a></li>
+    </ul></details></li>
+    <li><details><summary>组件与用法</summary><ul>
+      <li><a class="le-breadcrumb-link" href="#components">组件</a></li>
+      <li><a class="le-breadcrumb-link" href="#usage">使用</a></li>
+    </ul></details></li>
+  </ul>
+</Demo>
+
+<Demo id="qr-code" title="二维码">
+  <div class="component-demo-stack">
+    <div class="le-field">
+      <label class="le-label" for="demo-qr-text">要编码的文字</label>
+      <input class="le-input" type="text" id="demo-qr-text" maxlength="160" value="Luminedge" />
+    </div>
+    <div id="demo-qr-output"></div>
+  </div>
+</Demo>
+
+<script>
+  import { createBarChart, createCarousel, createDialog, createQrCode, createVirtualList } from '@luminedge/ui';
+  const carousel = document.querySelector<HTMLElement>('[data-carousel-demo]');
+  if (carousel) createCarousel(carousel);
+
+  const imageDialog = document.querySelector<HTMLDialogElement>('#demo-image-dialog');
+  const imageOpen = document.querySelector<HTMLButtonElement>('#demo-image-open');
+  if (imageDialog && imageOpen) createDialog(imageDialog, { openTriggers: [imageOpen] });
+
+  const series = {
+    week: [{ label: '草图', value: 7 }, { label: '笔记', value: 12 }, { label: '收藏', value: 5 }],
+    month: [{ label: '草图', value: 32 }, { label: '笔记', value: 52 }, { label: '收藏', value: 29 }],
+  };
+  const chartList = document.querySelector<HTMLElement>('#demo-chart-values');
+  const period = document.querySelector<HTMLSelectElement>('#demo-chart-period');
+  if (chartList && period) {
+    const chart = createBarChart(chartList, series.week);
+    period.addEventListener('change', () => chart.setItems(period.value === 'month' ? series.month : series.week));
+  }
+
+  const virtual = document.querySelector<HTMLElement>('[data-virtual-demo]');
+  if (virtual) {
+    createVirtualList(virtual, {
+      items: Array.from({ length: 1000 }, (_, index) => '记录 ' + (index + 1)),
+      rowHeight: 32,
+      render: (item) => document.createTextNode(item),
+    });
+  }
+  const qr = document.querySelector<HTMLElement>('#demo-qr-output');
+  const qrText = document.querySelector<HTMLInputElement>('#demo-qr-text');
+  if (qr && qrText) {
+    const code = createQrCode(qr, qrText.value, '示例文字的二维码');
+    qrText.addEventListener('input', () => code.setValue(qrText.value));
+  }
+</script>

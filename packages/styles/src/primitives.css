@@ -1,0 +1,67 @@
+@import './layout/primitives.css';
+
+@layer luminedge {
+  .le-affix { position: sticky; inset-block-start: var(--le-affix-offset, 0); z-index: 1; }
+  .le-float-button { position: fixed; inset-inline-end: var(--le-space-4); inset-block-end: var(--le-space-4); z-index: 2; }
+  .le-icon { display: inline-grid; width: 1em; height: 1em; place-items: center; vertical-align: -0.08em; }
+  .le-prose { max-inline-size: 65ch; line-height: var(--le-line-height-relaxed); }
+  .le-prose :is(h1, h2, h3, h4) { line-height: var(--le-line-height-tight); }
+  .le-prose blockquote { margin-inline: 0; padding-inline-start: var(--le-space-3); border-inline-start: 2px solid var(--le-color-primary-border); }
+  .le-prose code { font-family: var(--le-font-mono); }
+
+  .le-splitter { display: grid; grid-template-columns: minmax(0, var(--le-split, 50fr)) auto minmax(0, var(--le-split-rest, 50fr)); }
+  .le-splitter > :not(.le-split-handle) { min-width: 0; overflow: auto; }
+  .le-splitter--vertical { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, var(--le-split, 50fr)) auto minmax(0, var(--le-split-rest, 50fr)); }
+  .le-split-handle { position: relative; inline-size: 0.875rem; min-block-size: 1rem; cursor: col-resize; touch-action: none; }
+  .le-split-handle::after { position: absolute; inset: 0 calc(50% - 1px); background: var(--le-color-border-strong); content: ''; }
+  .le-splitter--vertical .le-split-handle { inline-size: auto; block-size: 0.875rem; min-block-size: 0; cursor: row-resize; }
+  .le-splitter--vertical .le-split-handle::after { inset: calc(50% - 1px) 0; }
+  .le-split-handle:focus-visible, .le-scroll-area:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 2px; }
+
+  .le-otp { inline-size: min(100%, 14ch); font-family: var(--le-font-mono); letter-spacing: 0.38em; text-align: center; }
+  .le-color-input { inline-size: 3rem; block-size: 2.25rem; padding: var(--le-space-1); border: 1px solid var(--le-color-border-strong); border-radius: var(--le-radius-sm); background: var(--le-color-surface); }
+  .le-toggle[aria-pressed='true'], .le-segment:has(input:checked) > span { background: var(--le-color-primary-200); color: var(--le-color-primary-text); }
+  .le-segmented { display: flex; flex-wrap: wrap; gap: var(--le-space-1); margin: 0; padding: 0; border: 0; min-inline-size: 0; }
+  .le-segment { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
+  .le-segment > input { position: absolute; width: 1px; height: 1px; inset-inline-start: 0; inset-block-start: 0; margin: 0; opacity: 0; }
+  .le-segment > span { display: inline-flex; padding: var(--le-space-2) var(--le-space-3); border: 1px solid var(--le-color-border-strong); border-radius: var(--le-radius-sm); color: var(--le-color-text); }
+  .le-segment:has(input:checked) > span { border-color: var(--le-color-secondary-indicator); }
+  .le-segment > input:focus-visible + span, .le-color-input:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 2px; }
+  .le-segment:has(input:disabled) { opacity: 0.55; cursor: not-allowed; }
+  .le-transfer, .le-cascader { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--le-space-3); }
+  .le-transfer-controls { grid-column: 1 / -1; }
+  .le-upload-drop { padding: var(--le-space-3); border: 1px dashed var(--le-color-border-strong); border-radius: var(--le-radius-sm); }
+  .le-upload-drop[data-dragging] { background: var(--le-color-primary-soft); }
+  @media (max-width: 32rem) {
+    .le-cascader { grid-template-columns: minmax(0, 1fr); }
+  }
+}
+
+@layer luminedge {
+  .le-hover-card { position: relative; display: inline-block; }
+  .le-hover-card-panel {
+    position: absolute;
+    z-index: 4;
+    inset-block-start: 100%;
+    inset-inline-start: 0;
+    width: min(16rem, 70vw);
+    padding: var(--le-space-3);
+    border: 1px solid var(--le-color-border-strong);
+    border-radius: var(--le-radius-sm);
+    color: var(--le-color-text);
+    background: var(--le-color-surface);
+    box-shadow: var(--le-shadow-md);
+  }
+  .le-tour-active { outline: 2px solid var(--le-color-primary-strong); outline-offset: 3px; }
+  .le-dialog.le-sheet {
+    position: fixed;
+    inset: auto 0 0;
+    inline-size: min(34rem, 100%);
+    max-inline-size: 100%;
+    max-block-size: 85vh;
+    margin: 0 auto;
+    padding: var(--le-space-4);
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+}

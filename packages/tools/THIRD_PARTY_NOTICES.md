@@ -10,3 +10,5 @@ Rough.js uses the following MIT-licensed runtime dependencies; their notices are
 - [points-on-path](https://github.com/pshihn/points-on-path) 0.2.1: [license](third_party/points-on-path/LICENSE)
 
 The 0.2.0 version of `points-on-curve` is a dependency of `points-on-path`; both versions carry the same license notice. Versions above describe the workspace lockfile and may differ in a downstream installation.
+
+QR encoding uses [uqr](https://github.com/unjs/uqr). Its [MIT notice](third_party/uqr/LICENSE) credits Project Nayuki and Anthony Fu.

@@ -12,11 +12,14 @@
   },
   "dependencies": {
     "@luminedge/styles": "0.1.0",
+    "@luminedge/tools": "0.1.0",
     "@luminedge/ui": "0.1.0",
     "astro": "^7.4.12"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@tailwindcss/vite": "^4.3.5",
+    "tailwindcss": "^4.3.5",
     "typescript": "^6.0.3"
   }
 }

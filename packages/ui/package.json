@@ -8,7 +8,8 @@
   "sideEffects": ["**/*.css"],
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./styles.css": "./dist/styles/index.css"
+    "./styles.css": "./dist/styles/index.css",
+    "./tailwind.css": "./dist/styles/tailwind.css"
   },
   "dependencies": {
     "@luminedge/components": "0.1.0",

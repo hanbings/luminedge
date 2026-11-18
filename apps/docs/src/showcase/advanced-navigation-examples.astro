@@ -1,0 +1,144 @@
+---
+import Demo from './Demo.astro';
+---
+
+<Demo id="anchor" title="锚点导航">
+  <nav class="le-anchor" aria-label="基础规范">
+    <a href="#colors">色彩</a>
+    <a href="#typography">字体</a>
+    <a href="#layout">布局</a>
+  </nav>
+</Demo>
+
+<Demo id="sidebar" title="侧栏与菜单">
+  <div class="le-layout le-layout--aside">
+    <aside class="le-sidebar">
+      <details open>
+        <summary>目录</summary>
+        <nav aria-label="规范示例">
+          <ul class="le-nav">
+            <li><a class="le-nav-link" href="#components" aria-current="location">组件</a></li>
+            <li><a class="le-nav-link" href="#usage">使用</a></li>
+          </ul>
+        </nav>
+      </details>
+    </aside>
+    <div class="demo-surface">页面内容</div>
+  </div>
+</Demo>
+
+<Demo id="navigation-menu" title="站点导航菜单">
+  <nav class="le-menubar" aria-label="示例站点导航" data-navigation-menu-demo>
+    <details class="le-menu" data-le-menubar-menu name="demo-navigation-menu">
+      <summary class="le-button">基础规范</summary>
+      <div class="le-menu-panel">
+        <a class="le-menu-item" href="#colors" data-le-menu-close>色彩</a>
+        <a class="le-menu-item" href="#typography" data-le-menu-close>字体</a>
+      </div>
+    </details>
+    <details class="le-menu" data-le-menubar-menu name="demo-navigation-menu">
+      <summary class="le-button">开发</summary>
+      <div class="le-menu-panel">
+        <a class="le-menu-item" href="#architecture" data-le-menu-close>架构</a>
+        <a class="le-menu-item" href="#usage" data-le-menu-close>使用</a>
+      </div>
+    </details>
+  </nav>
+</Demo>
+
+<Demo id="collapsible" title="单项折叠">
+  <div class="le-accordion">
+    <details>
+      <summary>查看更新说明</summary>
+      <div class="le-accordion-content">预览加入了表格筛选和键盘命令。</div>
+    </details>
+  </div>
+</Demo>
+
+<Demo id="menubar" title="菜单栏">
+  <nav class="le-menubar" aria-label="记录操作" data-menubar-demo>
+    <details class="le-menu" data-le-menubar-menu name="demo-menubar">
+      <summary class="le-button">文件</summary>
+      <div class="le-menu-panel">
+        <button class="le-menu-item" type="button" data-le-menu-close data-catalog-action="新建笔记">新建笔记</button>
+        <button class="le-menu-item" type="button" data-le-menu-close data-catalog-action="打开记录">打开记录</button>
+      </div>
+    </details>
+    <details class="le-menu" data-le-menubar-menu name="demo-menubar">
+      <summary class="le-button">编辑</summary>
+      <div class="le-menu-panel">
+        <button class="le-menu-item" type="button" data-le-menu-close data-catalog-action="撤销">撤销</button>
+        <button class="le-menu-item" type="button" data-le-menu-close data-catalog-action="重做">重做</button>
+      </div>
+    </details>
+  </nav>
+  <output class="component-demo-output" data-catalog-output aria-live="polite"></output>
+</Demo>
+
+<Demo id="context-menu" title="右键菜单">
+  <button class="le-button" type="button" id="demo-context-trigger" aria-controls="demo-context-panel">打开快捷菜单</button>
+  <div class="le-popover le-context-menu" id="demo-context-panel" popover="auto" role="group" aria-label="快捷操作">
+    <button class="le-menu-item" type="button" data-catalog-action="收藏">收藏</button>
+    <button class="le-menu-item" type="button" data-catalog-action="归档">归档</button>
+  </div>
+  <output class="component-demo-output" data-catalog-output aria-live="polite"></output>
+</Demo>
+
+<Demo id="hover-card" title="悬浮预览">
+  <span class="le-hover-card">
+    <a class="le-breadcrumb-link" id="demo-hover-trigger" href="#typography" aria-describedby="demo-hover-preview">字体规范 ↗</a>
+    <span class="le-hover-card-panel" id="demo-hover-preview" hidden>查看字号、字重、行高和推荐字体。</span>
+  </span>
+</Demo>
+
+<Demo id="sheet" title="侧滑面板">
+  <button class="le-button" type="button" id="demo-sheet-trigger">打开备注</button>
+  <dialog class="le-dialog le-sheet" id="demo-sheet-panel" aria-labelledby="demo-sheet-heading">
+    <h4 id="demo-sheet-heading">此页备注</h4>
+    <div class="le-field">
+      <label for="demo-sheet-note">备注</label>
+      <textarea class="le-textarea" id="demo-sheet-note" rows="2"></textarea>
+    </div>
+    <form method="dialog" class="dialog-actions">
+      <button class="le-button" type="submit">关闭</button>
+    </form>
+  </dialog>
+</Demo>
+
+<Demo id="float-button" title="悬浮按钮">
+  <div class="demo-float-stage">
+    <div class="le-scroll-area demo-scroll" style="--le-scroll-height: 8rem" tabindex="0" id="demo-float-scroll" aria-label="记录">
+      <ol class="le-item-list">
+        {['色彩', '字体', '间距', '圆角', '阴影', '布局', '组件'].map((text) => <li class="le-item">{text}</li>)}
+      </ol>
+    </div>
+    <button class="le-button le-float-button" type="button" data-demo-float aria-label="返回记录顶部" aria-controls="demo-float-scroll">↑</button>
+  </div>
+</Demo>
+
+<script>
+  import { createContextMenu, createDialog, createHoverCard, createMenubar } from '@luminedge/ui';
+
+  const contextTrigger = document.querySelector<HTMLButtonElement>('#demo-context-trigger');
+  const contextPanel = document.querySelector<HTMLElement>('#demo-context-panel');
+  if (contextTrigger && contextPanel && 'showPopover' in contextPanel) {
+    const menu = createContextMenu(contextTrigger, contextPanel);
+    contextTrigger.addEventListener('click', menu.open);
+  }
+  const hoverTrigger = document.querySelector<HTMLElement>('#demo-hover-trigger');
+  const hoverCard = document.querySelector<HTMLElement>('#demo-hover-preview');
+  if (hoverTrigger && hoverCard) createHoverCard(hoverTrigger, hoverCard);
+  document.querySelectorAll<HTMLElement>('[data-menubar-demo], [data-navigation-menu-demo]').forEach(createMenubar);
+  const sheet = document.querySelector<HTMLDialogElement>('#demo-sheet-panel');
+  const sheetTrigger = document.querySelector<HTMLButtonElement>('#demo-sheet-trigger');
+  if (sheet && sheetTrigger) createDialog(sheet, { openTriggers: [sheetTrigger] });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-catalog-action]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const output = button.closest('article')?.querySelector<HTMLOutputElement>('[data-catalog-output]');
+      if (output) output.value = button.dataset.catalogAction ?? '';
+    });
+  });
+  const viewport = document.querySelector<HTMLElement>('#demo-float-scroll');
+  document.querySelector('[data-demo-float]')?.addEventListener('click', () => viewport?.scrollTo({ top: 0 }));
+</script>

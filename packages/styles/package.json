@@ -3,12 +3,23 @@
   "version": "0.1.0",
   "description": "Framework-independent Luminedge design tokens and CSS.",
   "license": "MIT",
-  "files": ["src"],
+  "files": ["dist"],
   "sideEffects": ["**/*.css"],
   "exports": {
-    "./index.css": "./src/index.css",
-    "./tokens.css": "./src/tokens.css",
-    "./layout.css": "./src/layout.css",
-    "./components.css": "./src/components.css"
+    "./index.css": "./dist/index.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind.css": "./dist/tailwind.css",
+    "./layout.css": "./dist/layout.css",
+    "./components.css": "./dist/components.css",
+    "./forms.css": "./dist/forms.css",
+    "./feedback.css": "./dist/feedback.css",
+    "./navigation.css": "./dist/navigation.css",
+    "./data.css": "./dist/data.css",
+    "./primitives.css": "./dist/primitives.css",
+    "./collections.css": "./dist/collections.css"
+  },
+  "scripts": { "build": "node scripts/build.mjs" },
+  "devDependencies": {
+    "@tailwindcss/node": "^4.3.5"
   }
 }

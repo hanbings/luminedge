@@ -13,8 +13,9 @@
     "apps/docs"
   ],
   "scripts": {
-    "build:packages": "npm run build -w @luminedge/tools && npm run build -w @luminedge/components && npm run build -w @luminedge/ui",
+    "build:packages": "npm run build -w @luminedge/styles && npm run build -w @luminedge/tools && npm run build -w @luminedge/components && npm run build -w @luminedge/ui",
     "build": "npm run build:packages && npm run build -w @luminedge/docs",
+    "test": "npm run build:packages && node --test packages/components/test/*.test.mjs",
     "dev": "npm run build:packages && npm run dev -w @luminedge/docs"
   },
   "devDependencies": {

@@ -26,6 +26,7 @@
     "hachure-fill": "^0.5.2",
     "path-data-parser": "^0.1.0",
     "points-on-curve": "^1.0.1",
-    "points-on-path": "^0.2.1"
+    "points-on-path": "^0.2.1",
+    "uqr": "^0.1.3"
   }
 }

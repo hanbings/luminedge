@@ -1,0 +1,47 @@
+@reference '../tailwind.css';
+
+@layer luminedge {
+  .le-flex, .le-space, .le-button-group, .le-toggle-group {
+    @apply flex flex-wrap items-center;
+    gap: var(--le-gap, var(--le-space-2));
+  }
+
+  .le-space--vertical { @apply flex-col items-start; }
+
+  .le-grid, .le-layout {
+    @apply grid;
+    gap: var(--le-gap, var(--le-space-3));
+  }
+  .le-grid { grid-template-columns: repeat(var(--le-columns, 2), minmax(0, 1fr)); }
+  .le-layout { grid-template-columns: minmax(0, 1fr); }
+  .le-layout--aside { grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); }
+  .le-layout-wide { @apply col-span-full; }
+
+  .le-masonry {
+    columns: var(--le-columns, 2) 7rem;
+    column-gap: var(--le-gap, var(--le-space-3));
+  }
+  .le-masonry > * {
+    break-inside: avoid;
+    margin-block-end: var(--le-gap, var(--le-space-3));
+  }
+
+  .le-aspect {
+    @apply overflow-hidden;
+    aspect-ratio: var(--le-aspect-ratio, 16 / 9);
+  }
+  .le-aspect > :is(img, video, iframe) { @apply block h-full w-full object-cover; }
+
+  .le-scroll-area {
+    @apply box-border overflow-auto overscroll-contain rounded-le-sm;
+    max-block-size: var(--le-scroll-height, 12rem);
+    min-inline-size: 0;
+    border: 1px solid var(--le-color-border-strong);
+  }
+
+  .le-separator {
+    @apply my-le-3;
+    border: 0;
+    border-block-start: 1px solid var(--le-color-border-strong);
+  }
+}

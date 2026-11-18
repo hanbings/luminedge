@@ -1,0 +1,165 @@
+---
+import Demo from './Demo.astro';
+---
+
+<Demo id="typography" title="排版">
+  <div class="le-prose">
+    <strong>给灵感留一点空间</strong>
+    <blockquote>把值得留意的瞬间记下来。</blockquote>
+    <p>支持 <code>code</code> 与 <em>强调文字</em>。</p>
+  </div>
+</Demo>
+
+<Demo id="icon" title="图标">
+  <div class="le-space">
+    <span><span class="le-icon" aria-hidden="true">↗</span> 打开</span>
+    <span><span class="le-icon" aria-hidden="true">✓</span> 完成</span>
+  </div>
+</Demo>
+
+<Demo id="util" title="事件工具">
+  <div class="le-space">
+    <button class="le-button" id="demo-util-trigger" type="button">计数</button>
+    <button class="le-button le-button--secondary" id="demo-util-toggle" type="button" aria-pressed="true">监听</button>
+    <output class="component-demo-output" id="demo-util-count" aria-live="polite">0</output>
+  </div>
+</Demo>
+
+<Demo id="direction" title="方向与配置">
+  <div class="component-demo-stack">
+    <div class="le-space">
+      <button class="le-button" type="button" data-choose-direction="ltr" aria-pressed="true">从左到右</button>
+      <button class="le-button" type="button" data-choose-direction="rtl" aria-pressed="false">从右到左</button>
+    </div>
+    <div class="le-flex demo-surface" dir="ltr" id="demo-direction-scope">
+      <span class="le-tag">起点</span><span class="le-tag">终点</span>
+    </div>
+  </div>
+</Demo>
+
+<Demo id="attachment" title="附件">
+  <span class="le-attachment" id="demo-attachment-file">
+    <a class="le-breadcrumb-link" href="data:text/plain;charset=utf-8,Luminedge" download="luminedge.txt">luminedge.txt</a>
+    <button class="le-button le-button--secondary" type="button" id="demo-remove-attachment" aria-label="移除示例附件">×</button>
+  </span>
+  <output class="component-demo-output" id="demo-attachment-status" aria-live="polite"></output>
+</Demo>
+
+<Demo id="message" title="消息与气泡" wide>
+  <div class="component-demo-stack" data-message-demo>
+    <div class="le-scroll-area demo-scroll" data-le-message-scroll tabindex="0" role="log" aria-label="示例消息" style="--le-scroll-height: 9rem">
+      <div class="le-marker le-marker--separator">今天</div>
+      <article class="le-message"><span class="le-message-author">同伴</span><p class="le-bubble">草图整理好了吗？</p></article>
+      <article class="le-message le-message--outgoing"><span class="le-message-author">我</span><p class="le-bubble">第一版已经完成。</p></article>
+      <article class="le-message"><span class="le-message-author">同伴</span><p class="le-bubble">我来检查移动端。</p></article>
+    </div>
+    <div><button class="le-button le-button--secondary" type="button" data-le-message-latest>跳到最新</button></div>
+    <form class="le-field" data-message-form>
+      <label class="le-label" for="demo-message-input">写一条消息</label>
+      <div class="le-input-group">
+        <input class="le-input" id="demo-message-input" required maxlength="200" />
+        <button class="le-button" type="submit">发送</button>
+      </div>
+    </form>
+  </div>
+</Demo>
+
+<Demo id="marker" title="状态标记">
+  <div class="component-demo-stack">
+    <div class="le-marker"><span aria-hidden="true">✓</span> 整理了三条记录</div>
+    <div class="le-marker le-marker--separator">本次更新</div>
+  </div>
+</Demo>
+
+<Demo id="trace" title="执行轨迹">
+  <ol class="le-trace">
+    <li><details><summary>读取颜色变量</summary><p class="le-trace-content">找到了六组色阶。</p></details></li>
+    <li><details><summary>检查字体示例</summary><p class="le-trace-content">检查了字号、行高与字重。</p></details></li>
+  </ol>
+</Demo>
+
+<Demo id="questionnaire" title="分步问卷">
+  <form class="le-questionnaire" data-questionnaire-demo>
+    <output class="component-demo-output" data-le-question-progress aria-live="polite"></output>
+    <fieldset class="le-fieldset" data-le-question>
+      <legend>选择一个关注方向</legend>
+      <label class="le-choice"><input type="radio" name="interest" value="色彩" required /> 色彩</label>
+      <label class="le-choice"><input type="radio" name="interest" value="字体" /> 字体</label>
+    </fieldset>
+    <fieldset class="le-fieldset" data-le-question>
+      <legend>补充想法</legend>
+      <label for="demo-question-note">下一步想做什么？</label>
+      <textarea class="le-textarea" id="demo-question-note" name="note" rows="2"></textarea>
+    </fieldset>
+    <div class="le-space">
+      <button class="le-button le-button--secondary" type="button" data-le-question-back>上一步</button>
+      <button class="le-button" type="submit" data-le-question-submit data-le-next-label="下一步">完成</button>
+    </div>
+    <output class="component-demo-output" data-question-result aria-live="polite"></output>
+  </form>
+</Demo>
+
+<script>
+  import { configureUi, createMessageScroller, createQuestionnaire } from '@luminedge/ui';
+  import { listen } from '@luminedge/tools';
+  const scope = document.querySelector<HTMLElement>('#demo-direction-scope');
+  const directions = document.querySelectorAll<HTMLButtonElement>('[data-choose-direction]');
+  directions.forEach((button) => button.addEventListener('click', () => {
+    if (scope) configureUi(scope, { direction: button.dataset.chooseDirection === 'rtl' ? 'rtl' : 'ltr' });
+    directions.forEach((entry) => entry.setAttribute('aria-pressed', String(entry === button)));
+  }));
+
+  const counter = document.querySelector<HTMLButtonElement>('#demo-util-trigger');
+  const counterToggle = document.querySelector<HTMLButtonElement>('#demo-util-toggle');
+  const count = document.querySelector<HTMLOutputElement>('#demo-util-count');
+  if (counter && counterToggle && count) {
+    let value = 0;
+    const connect = () => listen(counter, 'click', () => { count.value = String(++value); });
+    let remove: (() => void) | undefined = connect();
+    counterToggle.addEventListener('click', () => {
+      if (remove) { remove(); remove = undefined; }
+      else remove = connect();
+      counterToggle.setAttribute('aria-pressed', String(!!remove));
+    });
+  }
+
+  document.querySelector('#demo-remove-attachment')?.addEventListener('click', () => {
+    document.querySelector('#demo-attachment-file')?.remove();
+    const status = document.querySelector<HTMLOutputElement>('#demo-attachment-status');
+    if (status) { status.value = '已移除附件。'; status.tabIndex = -1; status.focus(); }
+  });
+
+  const message = document.querySelector<HTMLElement>('[data-message-demo]');
+  const log = message?.querySelector<HTMLElement>('[data-le-message-scroll]');
+  const form = message?.querySelector<HTMLFormElement>('[data-message-form]');
+  const input = message?.querySelector<HTMLInputElement>('#demo-message-input');
+  if (message && log && form && input) {
+    const scroller = createMessageScroller(message);
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      const entry = document.createElement('article');
+      entry.className = 'le-message le-message--outgoing';
+      const author = document.createElement('span');
+      author.className = 'le-message-author';
+      author.textContent = '我';
+      const bubble = document.createElement('p');
+      bubble.className = 'le-bubble';
+      bubble.textContent = text;
+      entry.append(author, bubble);
+      log.append(entry);
+      scroller.scrollToLatest();
+      input.value = '';
+    });
+  }
+  const questionnaire = document.querySelector<HTMLFormElement>('[data-questionnaire-demo]');
+  const result = questionnaire?.querySelector<HTMLOutputElement>('[data-question-result]');
+  if (questionnaire && result) {
+    createQuestionnaire(questionnaire);
+    questionnaire.addEventListener('le:questionnaire-submit', (event) => {
+      const { answers } = (event as CustomEvent<{ answers: FormData }>).detail;
+      result.value = '已记录：' + answers.get('interest');
+    });
+  }
+</script>
