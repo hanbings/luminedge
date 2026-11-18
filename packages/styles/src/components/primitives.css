@@ -61,7 +61,7 @@
     background: var(--le-color-surface);
   }
   .le-toggle[aria-pressed='true'], .le-segment:has(input:checked) > span {
-    background: var(--le-color-primary-200);
+    background: var(--le-color-primary-selected);
     @apply text-le-primary-text;
   }
   .le-segmented {
@@ -101,7 +101,7 @@
   @media (forced-colors: none) {
     .le-transfer select[multiple] option:enabled:checked {
       /* Native listboxes can override the background and text colors while focused. */
-      background-image: linear-gradient(var(--le-color-primary-200) 0 0);
+      background-image: linear-gradient(var(--le-color-primary-selected) 0 0);
       @apply text-le-primary-text;
       -webkit-text-fill-color: var(--le-color-primary-text);
     }

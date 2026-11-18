@@ -1,5 +1,12 @@
 @reference '@luminedge/styles/tailwind.css';
 
+@custom-variant docs-dark {
+  &:where(:root[data-le-theme='dark'] *) { @slot; }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-le-theme='light']) *) { @slot; }
+  }
+}
+
 * { @apply box-border; }
 html { @apply le-scrollbar; scroll-behavior: smooth; scroll-padding-top: 2rem; }
 body {
@@ -8,10 +15,29 @@ body {
   margin: 0;
   @apply flex flex-col min-h-screen;
   @apply min-h-svh;
-  background: #fcfdff;
+  @apply bg-le-page;
   @apply text-le-text;
   font: var(--le-font-size-sm)/var(--le-line-height-normal) var(--le-font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+.theme-picker {
+  @apply fixed z-3 rounded-le-sm text-le-text-muted;
+  inset-block-start: max(0.5rem, env(safe-area-inset-top));
+  inset-inline-end: var(--page-gutter);
+  padding: 0.25rem;
+  min-height: 1.75rem;
+  border: 0;
+  background: var(--le-color-page);
+  font: inherit;
+  font-size: var(--le-font-size-xs);
+  cursor: pointer;
+}
+.theme-picker:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 2px; }
+.token-value-light { @variant docs-dark { display: none; } }
+.token-value-dark {
+  display: none;
+  @variant docs-dark { display: inline; }
 }
 
 .site-header {
@@ -138,7 +164,10 @@ h2, h3 { font-weight: var(--le-font-weight-medium); }
 h4, h5, h6, .landing-content strong { font-weight: var(--le-font-weight-regular); }
 code, pre { @apply font-le-mono; }
 .hero-visual { @apply grid place-items-center; width: min(100%, 72rem); }
-.hero-visual img { @apply block w-full h-auto mix-blend-multiply; }
+.hero-visual img {
+  @apply block w-full h-auto mix-blend-multiply;
+  @variant docs-dark { mix-blend-mode: normal; filter: url(#mascot-dark); }
+}
 
 .section-heading { margin-bottom: 1.5rem; }
 .section h1, .section h2 { margin-bottom: 0; font-size: 1.375rem; line-height: 1.3; letter-spacing: -0.04em; }
@@ -464,7 +493,7 @@ code, pre { @apply font-le-mono; }
 .sample-card-top { @apply flex items-start mb-le-6; }
 .sample-card .le-avatar {
   width: 2.5rem;
-  background: var(--le-color-primary-200);
+  background: var(--le-color-primary-selected);
   @apply text-le-primary-text text-le-sm;
   font-weight: var(--le-font-weight-medium);
 }
@@ -566,7 +595,7 @@ code, pre { @apply font-le-mono; }
     @apply w-full;
     padding: 0.75rem var(--page-gutter);
     transform: none;
-    background: rgb(252 253 255 / 0.94);
+    background: color-mix(in srgb, var(--le-color-page) 94%, transparent);
   }
   html[data-page='landing'].has-js:not(.index-visible) .site-header:not(:focus-within) { transition: none; }
   .site-header nav { @apply hidden; }

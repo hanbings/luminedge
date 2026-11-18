@@ -11,7 +11,7 @@
     font-weight: var(--le-font-weight-medium);
   }
   .le-tree li { @apply my-le-1; }
-  .le-tree ul { @apply ps-le-4 ms-le-2; border-inline-start: 1px solid var(--le-color-neutral-400); }
+  .le-tree ul { @apply ps-le-4 ms-le-2; border-inline-start: 1px solid var(--le-color-divider); }
   .le-tree summary { @apply cursor-pointer; }
   .le-tree summary::marker { @apply text-le-primary-strong; }
   .le-tree-choice[aria-pressed='true'] {
@@ -61,7 +61,7 @@
     @apply flex items-baseline justify-between gap-le-3;
     min-inline-size: 0;
     @apply py-le-2;
-    border-block-end: 1px solid var(--le-color-neutral-400);
+    border-block-end: 1px solid var(--le-color-divider);
     @apply text-le-text wrap-anywhere;
   }
   .le-item-description { @apply text-le-text-muted text-le-xs; }
@@ -170,7 +170,13 @@
   }
   .le-result p { margin: 0; @apply text-le-text-muted; }
   .le-watermark { @apply relative isolate; }
-  .le-watermark-layer { @apply absolute; inset: 0; @apply z-1 pointer-events-none; }
+  .le-watermark-layer {
+    @apply absolute z-1 pointer-events-none;
+    inset: 0;
+    background: currentColor;
+    mask-size: 180px 72px;
+    opacity: 0.16;
+  }
   .le-border-beam { @apply isolate relative; }
   .le-border-beam::after {
     @apply absolute;

@@ -1,5 +1,5 @@
 ---
-import { tokenValue } from '../token-values';
+import TokenValue from './TokenValue.astro';
 
 const shadows = [
   { name: '无', token: '--le-shadow-none' },
@@ -21,7 +21,7 @@ const shadows = [
           <div class="shadow-stage"><div class="shadow-sample" style={`box-shadow: var(${token})`}></div></div>
           <strong>{name}</strong>
           <code>{token}</code>
-          <span>{tokenValue(token)}</span>
+          <TokenValue token={token} />
         </div>
       ))}
     </div>

@@ -17,12 +17,9 @@ export function createWatermark(root: HTMLElement, text: string) {
     ink.font = '26px system-ui';
     ink.textAlign = 'center';
     ink.textBaseline = 'middle';
-    ink.fillStyle = getComputedStyle(root).color;
-    ink.globalAlpha = 0.16;
     ink.fillText(value, 0, 0, tile.width - 24);
     ink.restore();
-    layer.style.backgroundImage = 'url(' + tile.toDataURL() + ')';
-    layer.style.backgroundSize = '180px 72px';
+    layer.style.maskImage = 'url(' + tile.toDataURL() + ')';
   };
   setText(text);
   root.append(layer);

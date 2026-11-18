@@ -122,8 +122,7 @@ const textAnnotations = [
       const type = element.dataset.textAnnotation as RoughAnnotationType;
       return annotate(element, {
         type,
-        color: 'var(--le-color-primary)',
-        opacity: type === 'highlight' ? 0.5 : 1,
+        color: type === 'highlight' ? 'var(--le-color-primary-selected)' : 'var(--le-color-primary)',
         brackets: ['left', 'right'],
         padding: 3,
         animationDuration: 350,

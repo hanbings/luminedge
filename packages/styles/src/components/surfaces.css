@@ -34,7 +34,7 @@
     @apply text-le-text font-le-sans;
   }
 
-  .le-dialog::backdrop { background: rgb(60 80 102 / 0.32); }
+  .le-dialog::backdrop { background: var(--le-color-backdrop); }
 
   :root:has(.le-drawer:modal) { @apply overflow-hidden; scrollbar-gutter: auto; }
   .le-dialog.le-drawer {

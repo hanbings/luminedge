@@ -6,7 +6,7 @@
   .le-table caption { @apply pb-le-2 text-le-text-muted text-le-xs text-left; }
   .le-table th, .le-table td {
     padding: var(--le-space-2) var(--le-space-3);
-    border-bottom: 1px solid var(--le-color-neutral-400);
+    border-bottom: 1px solid var(--le-color-divider);
     @apply align-top;
   }
   .le-table th { font-weight: var(--le-font-weight-medium); }
@@ -88,7 +88,7 @@
   .le-step[aria-current='step'] { @apply text-le-text; }
   .le-step[aria-current='step'] .le-step-indicator {
     @apply border-le-primary-strong;
-    background: var(--le-color-primary-200);
+    background: var(--le-color-primary-selected);
     @apply text-le-primary-text;
   }
 
@@ -159,7 +159,7 @@
   .le-calendar-nav:disabled, .le-calendar-day:disabled { @apply opacity-40 cursor-not-allowed; }
   .le-calendar-day[aria-pressed='true'] {
     @apply border-le-primary-strong;
-    background: var(--le-color-primary-200);
+    background: var(--le-color-primary-selected);
     @apply text-le-primary-text;
   }
   .le-calendar-grid { @apply w-full border-collapse; table-layout: fixed; }

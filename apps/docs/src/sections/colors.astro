@@ -1,4 +1,5 @@
 ---
+import TokenValue from './TokenValue.astro';
 import { tokenValue } from '../token-values';
 
 const colors = [
@@ -39,7 +40,7 @@ const roles = [
           {colors.map(({ name, token }) => (
             <article class="swatch">
               <div class:list={['swatch-color', { 'swatch-color--outlined': token === '--le-color-text-inverse' }]} style={`background: var(${token})`}></div>
-              <div class="swatch-info"><strong>{name}</strong><span>{tokenValue(token).toUpperCase()}</span></div>
+              <div class="swatch-info"><strong>{name}</strong><TokenValue token={token} uppercase /></div>
               <code>{token}</code>
             </article>
           ))}

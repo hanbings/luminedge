@@ -91,6 +91,8 @@ Astro 展示站使用 Tailwind CSS 4。使用 Tailwind 的项目可以在样式�
 }
 ```
 
+样式默认跟随系统外观。给 `<html>` 或局部容器设置 `data-le-theme="light"` 或 `data-le-theme="dark"` 可以指定主题，移除属性即可恢复继承。页面背景和正文颜色分别使用 `--le-color-page` 和 `--le-color-text`。色阶在两个主题中保持一致，语义颜色和阴影随主题切换。
+
 色阶与语义色的组织参考了 [Material 3 色彩系统](https://developer.android.com/develop/ui/compose/designsystems/material3#color-scheme)和 [Apple 色彩指南](https://developer.apple.com/design/human-interface-guidelines/color)。
 
 布局容器也是可选的：

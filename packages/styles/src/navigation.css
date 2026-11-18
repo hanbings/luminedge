@@ -133,7 +133,7 @@
   .le-pagination-button:hover:not(:disabled) { background: var(--le-color-primary-soft); }
   .le-pagination-button[aria-current='page'] {
     @apply border-le-primary-strong;
-    background: var(--le-color-primary-200);
+    background: var(--le-color-primary-selected);
     @apply text-le-primary-text;
   }
   .le-pagination-button:disabled { @apply opacity-50 cursor-not-allowed; }

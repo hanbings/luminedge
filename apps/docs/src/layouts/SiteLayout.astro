@@ -30,11 +30,26 @@ const indexDuration = 280;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="description" content="Luminedge 设计变量与组件展示。" />
     <title>{title} — Luminedge</title>
     <script is:inline>
       (() => {
         const root = document.documentElement;
+        const themeKey = 'luminedge-theme';
+        const applyTheme = (preference) => {
+          if (preference === 'light' || preference === 'dark') root.dataset.leTheme = preference;
+          else delete root.dataset.leTheme;
+          const picker = document.querySelector('[data-theme-picker]');
+          if (picker) picker.value = root.dataset.leTheme || 'system';
+        };
+        try { applyTheme(localStorage.getItem(themeKey)); } catch { /* System colors also work without storage. */ }
+        window.addEventListener('storage', (event) => {
+          if (event.key === themeKey || event.key === null) {
+            try { applyTheme(localStorage.getItem(themeKey)); } catch { /* Storage may be disabled. */ }
+          }
+        });
+
         let scheduled = false;
         let activeSection = '';
 
@@ -78,6 +93,16 @@ const indexDuration = 280;
         window.addEventListener('resize', scheduleUpdate, { passive: true });
         window.addEventListener('pageshow', scheduleUpdate);
         document.addEventListener('DOMContentLoaded', () => {
+          const picker = document.querySelector('[data-theme-picker]');
+          picker.value = root.dataset.leTheme || 'system';
+          picker.hidden = false;
+          picker.addEventListener('change', () => {
+            applyTheme(picker.value);
+            try {
+              if (picker.value === 'system') localStorage.removeItem(themeKey);
+              else localStorage.setItem(themeKey, picker.value);
+            } catch { /* Keep the selection for this page. */ }
+          });
           document.querySelector('[data-mobile-scroll-cue]')?.addEventListener('click', () => {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             window.scrollBy({ top: window.innerHeight * 0.8, behavior: reduceMotion ? 'auto' : 'smooth' });
@@ -90,6 +115,11 @@ const indexDuration = 280;
   </head>
   <body>
     <a class="skip-link" href="#colors">跳到主要内容</a>
+    <select class="theme-picker" data-theme-picker aria-label="外观主题" hidden>
+      <option value="system">跟随系统</option>
+      <option value="light">浅色</option>
+      <option value="dark">深色</option>
+    </select>
     <header class="site-header" style={`--index-fade-duration: ${indexDuration}ms; --index-hide-delay: ${(navigation.length - 1) * indexStep + indexDuration}ms`}>
       <span class="mobile-section-label" data-current-section>Luminedge</span>
       <nav aria-label="页面导航">

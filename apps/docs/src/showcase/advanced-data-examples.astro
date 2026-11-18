@@ -1,7 +1,7 @@
 ---
 import Demo from './Demo.astro';
 const swatches = ['#87baff', '#ffc68b', '#91dcb0', '#ffdc91', '#ff7070'];
-const drawing = '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="270" viewBox="0 0 480 270"><rect width="480" height="270" fill="#f1f7ff"/>' +
+const drawing = '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="270" viewBox="0 0 480 270">' +
   swatches.map((color, index) => '<rect x="' + (35 + 84 * index) + '" y="54" width="74" height="162" rx="5" fill="' + color + '"/>').join('') + '</svg>';
 const image = 'data:image/svg+xml,' + encodeURIComponent(drawing);
 ---
@@ -23,10 +23,10 @@ const image = 'data:image/svg+xml,' + encodeURIComponent(drawing);
 
 <Demo id="image" title="图片预览">
   <button class="le-image-trigger" type="button" id="demo-image-open" aria-label="放大配色示意">
-    <img class="le-image" src={image} width="480" height="270" alt="蓝、橙、绿、黄和红的色卡" loading="lazy" />
+    <img class="le-image" style="background: var(--le-color-primary-soft)" src={image} width="480" height="270" alt="蓝、橙、绿、黄和红的色卡" loading="lazy" />
   </button>
   <dialog class="le-dialog" id="demo-image-dialog" aria-label="配色示意">
-    <img class="le-image" src={image} width="480" height="270" alt="蓝、橙、绿、黄和红的色卡" loading="lazy" />
+    <img class="le-image" style="background: var(--le-color-primary-soft)" src={image} width="480" height="270" alt="蓝、橙、绿、黄和红的色卡" loading="lazy" />
     <form method="dialog" class="dialog-actions"><button class="le-button" type="submit" autofocus>关闭预览</button></form>
   </dialog>
 </Demo>

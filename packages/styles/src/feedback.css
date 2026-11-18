@@ -13,7 +13,7 @@
     @apply box-border block;
     width: min(100%, var(--le-skeleton-width, 100%));
     height: var(--le-skeleton-height, 1em);
-    border: 1px solid var(--le-color-neutral-400);
+    border: 1px solid var(--le-color-divider);
     @apply rounded-le-sm;
     background: var(--le-color-control);
   }
@@ -60,7 +60,7 @@
     @apply text-le-primary-text text-le-xs;
     line-height: 1.5;
   }
-  .le-badge { padding-inline: 0.4rem; background: var(--le-color-primary-200); }
+  .le-badge { padding-inline: 0.4rem; background: var(--le-color-primary-selected); }
   .le-tag--secondary, .le-badge--secondary {
     @apply border-le-secondary-border;
     background: var(--le-color-secondary-soft);

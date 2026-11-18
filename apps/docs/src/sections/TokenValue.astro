@@ -1,0 +1,22 @@
+---
+import { tokenValue } from '../token-values';
+
+interface Props {
+  token: string;
+  uppercase?: boolean;
+}
+const { token, uppercase = false } = Astro.props;
+const format = (scheme: 'light' | 'dark') => {
+  const value = tokenValue(token, scheme);
+  return uppercase ? value.toUpperCase() : value;
+};
+const light = format('light');
+const dark = format('dark');
+---
+
+{light === dark ? <span>{light}</span> : (
+  <>
+    <span class="token-value-light">{light}</span>
+    <span class="token-value-dark">{dark}</span>
+  </>
+)}
