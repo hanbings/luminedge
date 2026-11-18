@@ -34,6 +34,18 @@
   .le-anchor { @apply flex flex-wrap; gap: var(--le-space-2) var(--le-space-3); }
   .le-anchor a { @apply text-le-link; text-underline-offset: 0.2em; }
   .le-sidebar > details > summary { @apply cursor-pointer; margin-block-end: var(--le-space-2); }
+  .le-sidebar-header { @apply flex items-center justify-between gap-le-3 mb-le-4; }
+  .le-sidebar .le-nav { @apply gap-le-1; }
+  .le-sidebar .le-nav-link {
+    @apply block rounded-le-sm px-le-3 py-le-2;
+    text-decoration: none;
+  }
+  .le-sidebar .le-nav-link:hover { @apply bg-le-primary-soft; }
+  .le-sidebar .le-nav-link[aria-current]:not([aria-current='false']) {
+    border: 0;
+    @apply bg-le-primary-soft-hover text-le-primary-text;
+  }
+  .le-sidebar .le-nav-link:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: -2px; }
 
   .le-context-menu:not(:popover-open) { @apply hidden; }
   .le-context-menu:popover-open {

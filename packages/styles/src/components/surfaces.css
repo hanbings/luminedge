@@ -36,16 +36,31 @@
 
   .le-dialog::backdrop { background: rgb(60 80 102 / 0.32); }
 
+  :root:has(.le-drawer:modal) { @apply overflow-hidden; scrollbar-gutter: auto; }
   .le-dialog.le-drawer {
     @apply fixed;
     inset: 0;
-    inline-size: min(24rem, 100%);
+    inline-size: min(var(--le-drawer-width, 32rem), calc(100% - var(--le-space-6)));
     block-size: 100%;
     max-inline-size: 100%;
     max-block-size: 100%;
     margin-block: 0;
     margin-inline: auto 0;
-    @apply p-le-6 rounded-none overflow-auto;
+    @apply p-le-6 rounded-none overflow-auto overscroll-contain;
   }
   .le-dialog.le-drawer--start { margin-inline: 0 auto; }
+  .le-drawer.le-sidebar { --le-drawer-width: 18rem; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .le-drawer--start, .le-drawer:dir(rtl) { --le-drawer-offset: -100%; }
+    .le-drawer--start:dir(rtl) { --le-drawer-offset: 100%; }
+    .le-dialog.le-drawer {
+      translate: var(--le-drawer-offset, 100%);
+      transition: translate 180ms ease-out, overlay 180ms allow-discrete, display 180ms allow-discrete;
+    }
+    .le-dialog.le-drawer[open] { translate: 0; }
+    @starting-style {
+      .le-dialog.le-drawer[open] { translate: var(--le-drawer-offset, 100%); }
+    }
+  }
 }

@@ -10,21 +10,25 @@ import Demo from './Demo.astro';
   </nav>
 </Demo>
 
-<Demo id="sidebar" title="侧栏与菜单">
-  <div class="le-layout le-layout--aside">
-    <aside class="le-sidebar">
-      <details open>
-        <summary>目录</summary>
-        <nav aria-label="规范示例">
-          <ul class="le-nav">
-            <li><a class="le-nav-link" href="#components" aria-current="location">组件</a></li>
-            <li><a class="le-nav-link" href="#usage">使用</a></li>
-          </ul>
-        </nav>
-      </details>
-    </aside>
-    <div class="demo-surface">页面内容</div>
-  </div>
+<Demo id="sidebar" title="侧边栏">
+  <button class="le-button" type="button" id="demo-sidebar-open" aria-haspopup="dialog" aria-controls="demo-sidebar" disabled>打开侧边栏</button>
+  <dialog class="le-dialog le-drawer le-drawer--start le-sidebar" id="demo-sidebar" aria-labelledby="demo-sidebar-title" closedby="any">
+    <header class="le-sidebar-header">
+      <h2 id="demo-sidebar-title">组件目录</h2>
+      <form method="dialog"><button class="le-button le-button--secondary" type="submit" aria-label="关闭侧边栏">关闭</button></form>
+    </header>
+    <nav aria-labelledby="demo-sidebar-title">
+      <ul class="le-nav">
+        <li><a class="le-nav-link" href="#catalog-basics">通用</a></li>
+        <li><a class="le-nav-link" href="#catalog-layout">布局</a></li>
+        <li><a class="le-nav-link" href="#catalog-forms">输入</a></li>
+        <li><a class="le-nav-link" href="#catalog-navigation" aria-current="location" autofocus>导航</a></li>
+        <li><a class="le-nav-link" href="#catalog-feedback">反馈</a></li>
+        <li><a class="le-nav-link" href="#catalog-data">数据</a></li>
+        <li><a class="le-nav-link" href="#catalog-content">内容</a></li>
+      </ul>
+    </nav>
+  </dialog>
 </Demo>
 
 <Demo id="navigation-menu" title="站点导航菜单">
@@ -119,6 +123,12 @@ import Demo from './Demo.astro';
 <script>
   import { createContextMenu, createDialog, createHoverCard, createMenubar } from '@luminedge/ui';
 
+  const sidebar = document.querySelector<HTMLDialogElement>('#demo-sidebar');
+  const sidebarOpen = document.querySelector<HTMLButtonElement>('#demo-sidebar-open');
+  if (sidebar && sidebarOpen) {
+    createDialog(sidebar, { openTriggers: [sidebarOpen], closeTriggers: sidebar.querySelectorAll('nav a') });
+    sidebarOpen.disabled = false;
+  }
   const contextTrigger = document.querySelector<HTMLButtonElement>('#demo-context-trigger');
   const contextPanel = document.querySelector<HTMLElement>('#demo-context-panel');
   if (contextTrigger && contextPanel && 'showPopover' in contextPanel) {

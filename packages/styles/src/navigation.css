@@ -51,11 +51,12 @@
   .le-menu > summary { list-style: none; }
   .le-menu > summary::-webkit-details-marker { @apply hidden; }
   .le-menu-panel {
-    @apply absolute z-3;
+    @apply absolute z-3 grid;
     top: calc(100% + 0.25rem);
     left: 0;
-    @apply grid;
-    min-width: 10rem;
+  }
+  .le-menu-panel, .le-context-menu[popover] {
+    min-width: min(10rem, calc(100vw - 1rem));
     @apply p-le-1;
     border: 1px solid var(--le-color-border-strong);
     @apply rounded-le-sm;
@@ -75,7 +76,7 @@
     @apply cursor-pointer;
   }
   /* Subtract the panel padding and border to keep adjacent corners concentric. */
-  .le-menu-panel > .le-menu-item { border-radius: max(0px, calc(var(--le-radius-sm) - var(--le-space-1) - 1px)); }
+  :is(.le-menu-panel, .le-context-menu) > .le-menu-item { border-radius: max(0px, calc(var(--le-radius-sm) - var(--le-space-1) - 1px)); }
   .le-menu-item:hover { background: var(--le-color-primary-soft); }
   .le-menu-item:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: -2px; }
 

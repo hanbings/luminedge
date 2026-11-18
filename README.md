@@ -146,7 +146,7 @@ const controller = createDialog(dialog, {
 | 导航 | `le-tablist`、`le-tab`、`le-tab-panel`、`le-menu`、`le-tooltip`、`le-popover`、`le-pagination` |
 | 数据 | `le-table-wrap`、`le-table`、`le-steps`、`le-timeline`、`le-calendar` |
 | 输入补充 | `le-input-group` 组合输入框与附加内容；`le-slider`、`le-file` 分别用于原生范围和文件输入；`le-token-input` 用于简单标签输入 |
-| 导航补充 | `le-breadcrumb` 用于路径列表；`le-accordion` 容纳一组 `details`，相同的 `name` 可让它们互斥展开；在 `le-dialog` 上加 `le-drawer` 可显示为抽屉 |
+| 导航补充 | `le-breadcrumb` 用于路径列表。`le-accordion` 容纳一组 `details`，相同的 `name` 可让它们互斥展开。在 `le-dialog` 上加 `le-drawer` 可显示为抽屉，默认宽度为 `32rem`，可通过 `--le-drawer-width` 调整。模态抽屉锁定页面滚动，`createDialog` 默认允许点击遮罩关闭。 |
 | 内容与状态 | `le-descriptions` 用于 `dl`；`le-code-block` 与 `le-kbd` 用于代码与快捷键；`le-empty` 与 `le-skeleton` 用于空状态与加载占位 |
 
 例如，表单项使用关联的标签和说明；错误时可设置 `aria-invalid="true"` 并将错误说明加入 `aria-describedby`：
@@ -188,7 +188,7 @@ const controller = createDialog(dialog, {
 | --- | --- |
 | 布局 | `createSplitter` 使用 `data-le-split-handle`，支持拖动与方向键。普通栅格、间距、粘滞区域、分隔线与滚动区域可直接应用 CSS。见[布局](apps/docs/src/showcase/layout-examples.astro)。 |
 | 输入 | `createCascader` 按层填充原生选择框，`createSelect` 和 `createTreeSelect` 使用可折叠的选项列表，`createMentions` 在光标处插入提及。`createTransfer` 移动两列的选项，`createUpload` 提供文件队列，接收业务方提供的上传函数、进度和取消信号。见[输入组件](apps/docs/src/showcase/advanced-form-examples.astro)。 |
-| 导航与浮层 | `createMenubar`、`createContextMenu` 支持键盘操作，`createHoverCard` 在悬停或聚焦时显示预览。侧栏和折叠项可以使用原生 `details`。见[导航组件](apps/docs/src/showcase/advanced-navigation-examples.astro)。 |
+| 导航与浮层 | `createMenubar`、`createContextMenu` 支持键盘操作，`createHoverCard` 在悬停或聚焦时显示预览。在抽屉上组合 `le-drawer--start le-sidebar` 可从行首滑出导航侧栏，默认宽度为 `18rem`。使用 `createDialog` 的 `closeTriggers` 可在选择导航链接时收起侧栏。见[导航组件](apps/docs/src/showcase/advanced-navigation-examples.astro)。 |
 | 数据 | `createCarousel` 增强可滚动的幻灯列表，`createVirtualList` 用于固定行高的展示列表，`createBarChart` 绘制非负数值的柱状图，`createQrCode` 在本地生成二维码。见[数据组件](apps/docs/src/showcase/advanced-data-examples.astro)。 |
 | 内容与状态 | `createQuestionnaire` 验证步骤并通过 `le:questionnaire-submit` 提供 `FormData`，`createMessageScroller` 跟随新消息。`createTour` 提供分步指导，`createWatermark` 生成重复水印。`createApp` 使用指定的通知区域，`configureUi` 为 DOM 子树配置语言、方向和设计变量。见[内容](apps/docs/src/showcase/rich-content-examples.astro)与[反馈组件](apps/docs/src/showcase/status-examples.astro)。 |
 

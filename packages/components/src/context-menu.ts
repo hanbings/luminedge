@@ -22,11 +22,19 @@ export function createContextMenu(trigger: HTMLElement, menu: HTMLElement) {
     if (menu.matches(':popover-open')) menu.hidePopover();
     trigger.focus();
   };
+  let pendingPoint: MouseEvent | undefined;
   const cleanup = [
+    listen(trigger, 'pointerdown', () => { pendingPoint = undefined; }),
+    listen(trigger, 'pointerup', () => {
+      if (pendingPoint) open(pendingPoint.clientX, pendingPoint.clientY);
+      pendingPoint = undefined;
+    }),
     listen(trigger, 'contextmenu', (event) => {
       event.preventDefault();
       const mouse = event as MouseEvent;
-      if (mouse.clientX || mouse.clientY) open(mouse.clientX, mouse.clientY);
+      // Some platforms dispatch contextmenu on press, before native popover light dismissal on release.
+      if (mouse.buttons & 2) pendingPoint = mouse;
+      else if (mouse.clientX || mouse.clientY) open(mouse.clientX, mouse.clientY);
       else openFromKeyboard();
     }),
     listen(trigger, 'keydown', (event) => {
