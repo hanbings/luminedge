@@ -23,7 +23,7 @@
     @apply grid;
     grid-template-columns: minmax(0, var(--le-split, 50fr)) auto minmax(0, var(--le-split-rest, 50fr));
   }
-  .le-splitter > :not(.le-split-handle) { min-width: 0; @apply overflow-auto; }
+  .le-splitter > :not(.le-split-handle) { min-width: 0; @apply overflow-auto le-scrollbar; }
   .le-splitter--vertical { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, var(--le-split, 50fr)) auto minmax(0, var(--le-split-rest, 50fr)); }
   .le-split-handle {
     @apply relative;
@@ -87,19 +87,24 @@
     border: 1px solid var(--le-color-border-strong);
     @apply rounded-le-sm text-le-text;
   }
-  .le-segment:has(input:checked) > span { @apply border-le-secondary-indicator; }
+  .le-segment:has(input:checked) > span { @apply border-le-primary-strong; }
   .le-segment > input:focus-visible + span, .le-color-input:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 2px; }
   .le-segment:has(input:disabled) { @apply opacity-55 cursor-not-allowed; }
   .le-transfer, .le-cascader { @apply grid grid-cols-2 gap-le-3; }
   .le-transfer > .le-field { grid-template-rows: auto 1fr; }
-  .le-transfer select[multiple] { @apply self-stretch p-le-1; }
+  .le-transfer select[multiple] { @apply self-stretch overflow-y-auto p-le-1; }
   .le-transfer select[multiple] option {
     @apply px-le-2 py-le-1;
     border-radius: max(0px, calc(var(--le-radius-sm) - var(--le-space-1) - 1px));
   }
-  .le-transfer select[multiple] option:hover:not(:disabled) { @apply bg-le-primary-soft; }
-  .le-transfer select[multiple] option:checked {
-    @apply bg-le-primary-soft-hover text-le-primary-text;
+  .le-transfer select[multiple] option:enabled:hover:not(:checked) { @apply bg-le-primary-soft; }
+  @media (forced-colors: none) {
+    .le-transfer select[multiple] option:enabled:checked {
+      /* Native listboxes can override the background and text colors while focused. */
+      background-image: linear-gradient(var(--le-color-primary-200) 0 0);
+      @apply text-le-primary-text;
+      -webkit-text-fill-color: var(--le-color-primary-text);
+    }
   }
   .le-transfer select[multiple] option:disabled { @apply text-le-text-muted; }
   @media (forced-colors: active) {
@@ -126,7 +131,12 @@
     background: var(--le-color-surface);
     box-shadow: var(--le-shadow-md);
   }
-  .le-tour-active { outline: 2px solid var(--le-color-primary-strong); outline-offset: 3px; }
+  .le-dialog:has([data-le-tour-title]) { border-color: var(--le-color-primary-border); }
+  .le-tour-active { outline: 2px solid var(--le-color-primary); outline-offset: 3px; }
+  @media (prefers-contrast: more) {
+    .le-dialog:has([data-le-tour-title]) { border-color: var(--le-color-focus); }
+    .le-tour-active { outline-color: var(--le-color-focus); }
+  }
   .le-dialog.le-sheet {
     @apply fixed;
     inset: auto 0 0;

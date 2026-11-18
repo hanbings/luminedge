@@ -35,9 +35,9 @@
     @apply text-le-success-text;
   }
   .le-alert--secondary {
-    @apply border-le-secondary-border;
-    background: var(--le-color-secondary-soft);
-    @apply text-le-secondary-text;
+    @apply border-le-primary-indicator;
+    background: var(--le-color-primary-soft-hover);
+    @apply text-le-primary-text;
   }
   .le-alert--warning {
     @apply border-le-warning-border;
@@ -156,7 +156,7 @@
     width: 1.25rem;
     height: 1.25rem;
     border: 2px solid var(--le-color-primary-border);
-    @apply border-t-le-secondary-indicator;
+    @apply border-t-le-primary-strong;
     border-radius: 50%;
     @apply align-middle;
     animation: le-spin 800ms linear infinite;

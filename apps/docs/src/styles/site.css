@@ -1,8 +1,7 @@
 @reference '@luminedge/styles/tailwind.css';
 
 * { @apply box-border; }
-html { scroll-behavior: smooth; scroll-padding-top: 2rem; scrollbar-width: none; }
-html::-webkit-scrollbar { @apply hidden; }
+html { @apply le-scrollbar; scroll-behavior: smooth; scroll-padding-top: 2rem; }
 body {
   --sidebar-width: 10rem;
   --page-gutter: var(--le-layout-gutter);
@@ -506,7 +505,7 @@ code, pre { @apply font-le-mono; }
 .code-label { @apply flex justify-between text-le-text-muted; font-size: 0.7rem; }
 .code-label span:last-child { font-size: 0.65rem; letter-spacing: 0.08em; }
 .code-card pre {
-  @apply overflow-x-auto;
+  @apply overflow-x-auto le-scrollbar;
   margin: 1rem 0 0;
   font-size: 0.75rem;
   line-height: 1.7;
@@ -619,7 +618,7 @@ code, pre { @apply font-le-mono; }
   .site-header {
     top: 0.5rem;
     max-height: calc(100svh - 1rem);
-    @apply overflow-y-auto;
+    @apply overflow-y-auto le-scrollbar;
     transform: none;
   }
 }

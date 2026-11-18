@@ -35,13 +35,6 @@ import Demo from './Demo.astro';
   </div>
 </Demo>
 
-<Demo id="app" title="全局提示">
-  <div class="component-demo-stack" data-toast-app>
-    <div><button class="le-button" type="button" id="demo-app-alert">发送提示</button></div>
-    <div class="le-toast-region" aria-live="polite" data-le-app-notifications></div>
-  </div>
-</Demo>
-
 <Demo id="tour" title="分步引导">
   <div class="le-space">
     <span class="demo-surface" id="demo-tour-target-1">草图</span>
@@ -73,7 +66,7 @@ import Demo from './Demo.astro';
 </Demo>
 
 <script>
-  import { createApp, createDialog, createToggleButton, createTour, createWatermark } from '@luminedge/ui';
+  import { createDialog, createToggleButton, createTour, createWatermark } from '@luminedge/ui';
   const confirm = document.querySelector<HTMLDialogElement>('#demo-alert-dialog');
   const confirmOpen = document.querySelector<HTMLButtonElement>('#demo-alert-open');
   const confirmOutput = document.querySelector<HTMLOutputElement>('#demo-alert-output');
@@ -89,13 +82,6 @@ import Demo from './Demo.astro';
     if (popconfirm) popconfirm.value = '已归档示例笔记。';
   });
 
-  const appRoot = document.querySelector<HTMLElement>('[data-toast-app]');
-  if (appRoot) {
-    const app = createApp(appRoot);
-    document.querySelector('#demo-app-alert')?.addEventListener('click', () => {
-      app.notify({ message: '已更新记录。', duration: 4000 });
-    });
-  }
   const tourDialog = document.querySelector<HTMLDialogElement>('#demo-tour-dialog');
   if (tourDialog) {
     const tour = createTour(tourDialog, [

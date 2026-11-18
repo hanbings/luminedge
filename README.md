@@ -82,7 +82,7 @@ Astro 展示站使用 Tailwind CSS 4。使用 Tailwind 的项目可以在样式�
 
 样式包提供色彩、字体、布局、间距、圆角和阴影变量，例如 `--le-font-size-base`、`--le-font-weight-semibold`、`--le-space-4` 和 `--le-radius-md`。这些变量可以通过普通 CSS 按页面或组件覆盖。字体字重提供 regular（400）、medium（500）、semibold（600）和 bold（700）。
 
-主色、辅色、成功、警告、危险和中性色各有从 `50`（浅）到 `900`（深）的色阶，例如 `--le-color-primary-50`、`--le-color-primary-500` 和 `--le-color-primary-900`。组件也可以使用按用途命名的语义变量，例如 `--le-color-primary-soft`、`--le-color-primary-indicator`、`--le-color-secondary-indicator`、`--le-color-primary-text`、`--le-color-danger` 和 `--le-color-on-danger`。链接文字可使用辅色系的 `--le-color-link` 和 `--le-color-link-hover`；深色背景可搭配 `--le-color-surface-inverse` 和白色的 `--le-color-text-inverse`。覆盖对应语义变量即可单独调整组件用色。
+主色、辅色、成功、警告、危险和中性色各有从 `50`（浅）到 `900`（深）的色阶，例如 `--le-color-primary-50`、`--le-color-primary-500` 和 `--le-color-primary-900`。组件也可以使用按用途命名的语义变量，例如 `--le-color-primary-soft`、`--le-color-primary-indicator`、`--le-color-primary-text`、`--le-color-danger` 和 `--le-color-on-danger`。链接使用主色系的 `--le-color-link` 和 `--le-color-link-hover`。辅色用于标签与徽标的辅色变体，以及标签输入中已添加的词条。反色表面使用 `--le-color-surface-inverse` 和 `--le-color-text-inverse`。覆盖对应语义变量即可单独调整组件用色。
 
 ```css
 .notice {
@@ -159,7 +159,7 @@ const controller = createDialog(dialog, {
 </div>
 ```
 
-复选框、单选框和选择框沿用浏览器原生交互；开关使用 `<input type="checkbox" role="switch" class="le-switch">`。支持自定义原生选择框的浏览器会使用辅色标记和轮廓，不支持的浏览器保留系统选项列表。提示、标签和徽标支持 `--secondary`、`--success`、`--warning`、`--danger` 变体。进度条和计量条分别使用原生 `<progress>` 与 `<meter>`；旋转加载图形应配合可访问的状态文字。
+复选框、单选框和选择框沿用浏览器原生交互。开关使用 `<input type="checkbox" role="switch" class="le-switch">`。支持自定义原生选择框的浏览器使用浅蓝底色和深蓝勾选标记，其他浏览器使用系统选项列表。提示、标签和徽标支持 `--secondary`、`--success`、`--warning`、`--danger` 变体。进度条和计量条分别使用原生 `<progress>` 与 `<meter>`。旋转加载图形应配合可访问的状态文字。
 
 标签输入将 `le-token-list` 与输入行 `le-token-input` 放在同一个容器中；输入行使用 `le-token-editor` 和添加按钮。完整示例见[输入组件](apps/docs/src/showcase/advanced-form-examples.astro)。
 

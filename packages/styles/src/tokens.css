@@ -85,8 +85,8 @@
   --le-color-secondary-indicator: var(--le-color-secondary-700);
   --le-color-secondary-text: var(--le-color-secondary-800);
   --le-color-on-secondary: var(--le-color-secondary-900);
-  --le-color-link: var(--le-color-secondary-text);
-  --le-color-link-hover: var(--le-color-secondary-900);
+  --le-color-link: var(--le-color-primary-text);
+  --le-color-link-hover: var(--le-color-primary-contrast);
 
   --le-color-success: var(--le-color-success-500);
   --le-color-success-hover: var(--le-color-success-600);
@@ -122,9 +122,9 @@
   --le-color-border: var(--le-color-neutral-200);
   --le-color-border-strong: var(--le-color-neutral-600);
   --le-color-focus: var(--le-color-primary-700);
-  --le-color-input-focus: var(--le-color-primary-500);
+  --le-color-input-focus: var(--le-color-primary-600);
   --le-color-track: var(--le-color-primary-100);
-  --le-color-track-fill: var(--le-color-secondary);
+  --le-color-track-fill: var(--le-color-primary);
   --le-color-track-border: var(--le-color-border-strong);
 
   --le-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

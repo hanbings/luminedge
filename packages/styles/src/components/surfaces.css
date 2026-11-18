@@ -24,7 +24,7 @@
   .le-avatar img { @apply w-full h-full object-cover; }
 
   .le-dialog {
-    @apply box-border;
+    @apply box-border le-scrollbar;
     width: min(28rem, calc(100% - 2rem));
     padding: var(--le-dialog-padding, 0.85rem);
     border: 1px solid var(--le-color-border-strong);

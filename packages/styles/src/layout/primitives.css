@@ -33,7 +33,7 @@
   .le-aspect > :is(img, video, iframe) { @apply block h-full w-full object-cover; }
 
   .le-scroll-area {
-    @apply box-border overflow-auto overscroll-contain rounded-le-sm;
+    @apply box-border overflow-auto overscroll-contain rounded-le-sm le-scrollbar;
     max-block-size: var(--le-scroll-height, 12rem);
     min-inline-size: 0;
     border: 1px solid var(--le-color-border-strong);

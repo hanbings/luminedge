@@ -23,9 +23,9 @@
 
 <article id="component-example-toast" class="showcase">
   <h4 class="showcase-heading">消息通知</h4>
-  <div class="component-demo-stack">
+  <div class="component-demo-stack" id="component-example-app">
     <button class="le-button component-demo-button" type="button" data-show-toast>显示通知</button>
-    <div class="le-toast-region" data-toast-region role="status" aria-live="polite" aria-atomic="false"></div>
+    <div class="le-toast-region" data-le-app-notifications role="status" aria-live="polite" aria-atomic="false"></div>
   </div>
 </article>
 
@@ -63,13 +63,15 @@
 </article>
 
 <script>
-  import { showToast, type ToastController } from '@luminedge/ui';
+  import { createApp, type ToastController } from '@luminedge/ui';
 
-  const button = document.querySelector<HTMLButtonElement>('[data-show-toast]');
-  const region = document.querySelector<HTMLElement>('[data-toast-region]');
-  let current: ToastController | undefined;
-  if (button && region) button.addEventListener('click', () => {
-    current?.dismiss();
-    current = showToast(region, { message: '内容已保存。', variant: 'success' });
-  });
+  const demo = document.querySelector<HTMLElement>('#component-example-toast');
+  if (demo) {
+    const app = createApp(demo);
+    let current: ToastController | undefined;
+    demo.querySelector('[data-show-toast]')?.addEventListener('click', () => {
+      current?.dismiss();
+      current = app.notify({ message: '内容已保存。', variant: 'success' });
+    });
+  }
 </script>

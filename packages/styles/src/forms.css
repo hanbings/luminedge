@@ -19,10 +19,11 @@
   }
 
   .le-textarea { min-height: 5rem; resize: vertical; }
+  .le-textarea, .le-select:is([multiple], [size]) { @apply le-scrollbar; }
   .le-select:not([multiple]):not([size]) {
     @apply appearance-none;
     padding-inline-end: 2.25rem;
-    background-image: linear-gradient(45deg, transparent 50%, var(--le-color-secondary-indicator) 50%), linear-gradient(135deg, var(--le-color-secondary-indicator) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, transparent 50%, var(--le-color-primary-strong) 50%), linear-gradient(135deg, var(--le-color-primary-strong) 50%, transparent 50%);
     background-position: calc(100% - 1.05rem) 50%, calc(100% - 0.75rem) 50%;
     background-size: 0.3rem 0.3rem;
     @apply bg-no-repeat cursor-pointer;
@@ -32,7 +33,7 @@
   @supports (appearance: base-select) and selector(::picker(select)) {
     .le-select:not([multiple]):not([size]), .le-select:not([multiple]):not([size])::picker(select) { appearance: base-select; }
     .le-select:not([multiple]):not([size]) { padding-inline-end: 0.75rem; @apply bg-none; }
-    .le-select:not([multiple]):not([size])::picker-icon { @apply text-le-secondary-indicator; }
+    .le-select:not([multiple]):not([size])::picker-icon { @apply text-le-primary-strong; }
     .le-select:not([multiple]):not([size])::picker(select) {
       margin-block-start: var(--le-space-1);
       @apply p-le-1;
@@ -47,9 +48,9 @@
       @apply text-le-text;
     }
     .le-select:not([multiple]):not([size]) option:hover, .le-select:not([multiple]):not([size]) option:focus { background: var(--le-color-primary-soft); }
-    .le-select:not([multiple]):not([size]) option:checked { background: var(--le-color-secondary-soft); }
+    .le-select:not([multiple]):not([size]) option:checked { background: var(--le-color-primary-soft-hover); }
     .le-select:not([multiple]):not([size]) option:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: -2px; }
-    .le-select:not([multiple]):not([size]) option::checkmark { @apply text-le-secondary-indicator; }
+    .le-select:not([multiple]):not([size]) option::checkmark { @apply text-le-primary-strong; }
   }
   .le-input::placeholder, .le-textarea::placeholder, .le-token-editor::placeholder { @apply text-le-text-muted opacity-100; }
   :is(.le-input, .le-textarea, .le-select, .le-token-editor):focus-visible,
@@ -262,7 +263,7 @@
     inset-inline: 0;
     top: calc(100% + var(--le-space-1));
     max-height: 14rem;
-    @apply overflow-auto p-le-1;
+    @apply overflow-auto p-le-1 le-scrollbar;
     border: 1px solid var(--le-color-border-strong);
     @apply rounded-le-sm;
     background: var(--le-color-surface);
@@ -305,15 +306,15 @@
   .le-choice input[type='radio']:not(.le-switch) { border-radius: 50%; }
   .le-choice input:is([type='checkbox'], [type='radio']):not(.le-switch):checked,
   .le-choice input[type='checkbox']:not(.le-switch):indeterminate {
-    @apply border-le-secondary-indicator;
-    background: var(--le-color-secondary-soft);
+    @apply border-le-primary-strong;
+    background: var(--le-color-primary-soft);
   }
   .le-choice input[type='checkbox']:not(.le-switch)::before {
     @apply box-border;
     width: 0.3rem;
     height: 0.55rem;
     margin-top: -0.1rem;
-    border: solid var(--le-color-secondary-indicator);
+    border: solid var(--le-color-primary-strong);
     border-width: 0 1.5px 1.5px 0;
     content: '';
     transform: rotate(45deg) scale(0);
@@ -327,13 +328,13 @@
     transform: none;
   }
   .le-choice input[type='radio']:not(.le-switch):checked {
-    background-image: radial-gradient(circle closest-side at center, var(--le-color-secondary-indicator) 47%, transparent 54%);
+    background-image: radial-gradient(circle closest-side at center, var(--le-color-primary-strong) 47%, transparent 54%);
   }
   .le-choice input:disabled { @apply cursor-not-allowed; }
   .le-choice:has(input:disabled) { @apply opacity-60 cursor-not-allowed; }
 
   .le-switch {
-    @apply appearance-none relative;
+    @apply appearance-none box-border relative;
     flex: 0 0 auto;
     width: 2.5rem;
     height: 1.5rem;
@@ -346,13 +347,12 @@
   }
   .le-switch::before {
     @apply box-border absolute;
-    top: 0.125rem;
-    left: 0.125rem;
-    width: 1.125rem;
-    height: 1.125rem;
-    border: 1px solid var(--le-color-neutral-700);
+    inset: 0 auto 0 0;
+    aspect-ratio: 1;
+    border: 0.125rem solid transparent;
     border-radius: 50%;
-    background: var(--le-color-surface);
+    background: var(--le-color-surface) padding-box;
+    box-shadow: inset 0 0 0 1px var(--le-color-neutral-700);
     content: '';
     transition: transform 160ms ease;
   }
@@ -382,7 +382,7 @@
       .le-select:not([multiple]):not([size])::picker(select) { @apply appearance-auto; }
     }
     .le-switch { border-color: ButtonText; }
-    .le-switch::before { background: ButtonText; }
+    .le-switch::before { forced-color-adjust: none; background: ButtonText padding-box; box-shadow: none; }
     .le-switch:checked { border-color: Highlight; }
   }
 }
