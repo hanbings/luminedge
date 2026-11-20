@@ -4,7 +4,6 @@ import FeedbackExamples from '../showcase/feedback-examples.astro';
 import NavigationExamples from '../showcase/navigation-examples.astro';
 import DataExamples from '../showcase/data-examples.astro';
 import ContentExamples from '../showcase/content-examples.astro';
-import LayoutExamples from '../showcase/layout-examples.astro';
 import AdvancedFormExamples from '../showcase/advanced-form-examples.astro';
 import AdvancedNavigationExamples from '../showcase/advanced-navigation-examples.astro';
 import StatusExamples from '../showcase/status-examples.astro';
@@ -17,7 +16,7 @@ import RichContentExamples from '../showcase/rich-content-examples.astro';
     <div class="section-heading">
       <h2 id="components-title">组件</h2>
     </div>
-    <section class="component-group" id="catalog-basics" aria-labelledby="catalog-basics-title">
+    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-basics" aria-labelledby="catalog-basics-title">
       <h3 id="catalog-basics-title">通用</h3>
       <div class="component-grid">
       <article id="component-example-button" class="showcase showcase-buttons">
@@ -60,27 +59,23 @@ import RichContentExamples from '../showcase/rich-content-examples.astro';
       </article>
       </div>
     </section>
-    <section class="component-group" id="catalog-layout" aria-labelledby="catalog-layout-title">
-      <h3 id="catalog-layout-title">布局</h3>
-      <div class="component-grid"><LayoutExamples /></div>
-    </section>
-    <section class="component-group" id="catalog-forms" aria-labelledby="catalog-forms-title">
+    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-forms" aria-labelledby="catalog-forms-title">
       <h3 id="catalog-forms-title">输入</h3>
       <div class="component-grid"><FormExamples /><AdvancedFormExamples /></div>
     </section>
-    <section class="component-group" id="catalog-navigation" aria-labelledby="catalog-navigation-title">
+    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-navigation" aria-labelledby="catalog-navigation-title">
       <h3 id="catalog-navigation-title">导航</h3>
       <div class="component-grid"><NavigationExamples /><AdvancedNavigationExamples /></div>
     </section>
-    <section class="component-group" id="catalog-feedback" aria-labelledby="catalog-feedback-title">
+    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-feedback" aria-labelledby="catalog-feedback-title">
       <h3 id="catalog-feedback-title">反馈</h3>
       <div class="component-grid"><FeedbackExamples /><StatusExamples /></div>
     </section>
-    <section class="component-group" id="catalog-data" aria-labelledby="catalog-data-title">
+    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-data" aria-labelledby="catalog-data-title">
       <h3 id="catalog-data-title">数据</h3>
       <div class="component-grid"><DataExamples /><AdvancedDataExamples /></div>
     </section>
-    <section class="component-group" id="catalog-content" aria-labelledby="catalog-content-title">
+    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-content" aria-labelledby="catalog-content-title">
       <h3 id="catalog-content-title">内容</h3>
       <div class="component-grid"><ContentExamples /><RichContentExamples /></div>
     </section>

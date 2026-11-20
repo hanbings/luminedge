@@ -44,7 +44,7 @@ const textAnnotations = [
     </div>
 
     <div class="section-content typography-main">
-      <div class="typography-group">
+      <div class="typography-group" id="typography-scale" data-index-subsection tabindex="-1">
         <h3>字号与字重</h3>
         <div class="foundation-rows type-scale">
           {sizes.map(({ name, token, weight, sample }) => (
@@ -58,7 +58,7 @@ const textAnnotations = [
       </div>
 
       <div class="typography-details">
-        <div class="typography-group">
+        <div class="typography-group" id="typography-line-height" data-index-subsection tabindex="-1">
           <h3>行高</h3>
           <ul class="line-height-list">
             {lineHeights.map(({ name, token }) => (
@@ -67,7 +67,7 @@ const textAnnotations = [
           </ul>
         </div>
 
-        <div class="typography-group">
+        <div class="typography-group" id="typography-families" data-index-subsection tabindex="-1">
           <h3>字体族</h3>
           <div class="font-recommendations">
             <div class="font-family">
@@ -95,7 +95,7 @@ const textAnnotations = [
       </div>
     </div>
 
-    <aside class="text-annotations" data-text-annotations aria-labelledby="text-annotations-title">
+    <aside class="text-annotations" id="typography-annotations" data-index-subsection tabindex="-1" data-text-annotations aria-labelledby="text-annotations-title">
       <div class="text-annotations-heading">
         <h3 id="text-annotations-title">文字标记</h3>
         <button class="text-annotations-replay" type="button" data-text-annotations-replay aria-label="重播文字标记动画" hidden>重播 ↻</button>

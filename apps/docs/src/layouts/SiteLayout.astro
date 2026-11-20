@@ -23,6 +23,12 @@ const navigation: { page: Page; label: string; path: string }[] = [
 ];
 const indexStep = 60;
 const indexDuration = 280;
+const accents = [
+  { value: 'blue', label: '雾蓝' },
+  { value: 'teal', label: '薄荷青' },
+  { value: 'violet', label: '藤紫' },
+  { value: 'rose', label: '玫瑰粉' },
+];
 ---
 
 <!doctype html>
@@ -33,95 +39,105 @@ const indexDuration = 280;
     <meta name="color-scheme" content="light dark" />
     <meta name="description" content="Luminedge 设计变量与组件展示。" />
     <title>{title} — Luminedge</title>
-    <script is:inline>
+    <script define:vars={{ accentValues: accents.map(({ value }) => value) }}>
       (() => {
         const root = document.documentElement;
         const themeKey = 'luminedge-theme';
-        const applyTheme = (preference) => {
+        const linesKey = 'luminedge-lines';
+        const accentKey = 'luminedge-accent';
+        function applyAccent(preference) {
+          if (preference !== 'blue' && accentValues.includes(preference)) root.dataset.leAccent = preference;
+          else delete root.dataset.leAccent;
+          const picker = document.querySelector('[data-accent-picker]');
+          if (picker) picker.value = root.dataset.leAccent || 'blue';
+        }
+        function applyTheme(preference) {
           if (preference === 'light' || preference === 'dark') root.dataset.leTheme = preference;
           else delete root.dataset.leTheme;
           const picker = document.querySelector('[data-theme-picker]');
           if (picker) picker.value = root.dataset.leTheme || 'system';
-        };
-        try { applyTheme(localStorage.getItem(themeKey)); } catch { /* System colors also work without storage. */ }
+        }
+        function applyLines(preference) {
+          if (preference === 'off') root.dataset.leLines = 'off';
+          else delete root.dataset.leLines;
+          const toggle = document.querySelector('[data-lines-toggle]');
+          if (toggle) toggle.checked = preference !== 'off';
+        }
+        function restoreAppearance() {
+          try {
+            applyTheme(localStorage.getItem(themeKey));
+            applyLines(localStorage.getItem(linesKey));
+            applyAccent(localStorage.getItem(accentKey));
+          } catch { /* Storage is optional. */ }
+        }
+        function save(key, value) {
+          try {
+            if (value === null) localStorage.removeItem(key);
+            else localStorage.setItem(key, value);
+          } catch { /* Keep the selection for this page. */ }
+        }
+        restoreAppearance();
         window.addEventListener('storage', (event) => {
-          if (event.key === themeKey || event.key === null) {
-            try { applyTheme(localStorage.getItem(themeKey)); } catch { /* Storage may be disabled. */ }
-          }
+          if ([themeKey, linesKey, accentKey, null].includes(event.key)) restoreAppearance();
+        });
+        window.addEventListener('pageshow', (event) => {
+          if (event.persisted) restoreAppearance();
         });
 
-        let scheduled = false;
-        let activeSection = '';
-
-        const updateIndex = () => {
-          root.classList.toggle('index-visible', window.scrollY > 24);
-          const cue = document.querySelector('[data-mobile-scroll-cue]');
-          if (cue) cue.hidden = window.scrollY + window.innerHeight >= root.scrollHeight - 1;
-
-          const center = window.innerHeight / 2;
-          const section = Array.from(document.querySelectorAll('[data-index-section]')).find((element) => {
-            const bounds = element.getBoundingClientRect();
-            return bounds.top <= center && bounds.bottom > center;
-          });
-          const currentSection = section?.id || '';
-          if (currentSection === activeSection) return;
-          activeSection = currentSection;
-          let label = 'Luminedge';
-          document.querySelectorAll('[data-index-target]').forEach((link) => {
-            if (activeSection && link.getAttribute('data-index-target') === activeSection) {
-              link.setAttribute('aria-current', 'location');
-              label = link.textContent?.trim() || label;
-            } else {
-              link.removeAttribute('aria-current');
-            }
-          });
-          const currentLabel = document.querySelector('[data-current-section]');
-          if (currentLabel) currentLabel.textContent = label;
-        };
-
-        const scheduleUpdate = () => {
-          if (scheduled) return;
-          scheduled = true;
-          requestAnimationFrame(() => {
-            scheduled = false;
-            updateIndex();
-          });
-        };
-
         root.classList.add('has-js');
-        window.addEventListener('scroll', scheduleUpdate, { passive: true });
-        window.addEventListener('resize', scheduleUpdate, { passive: true });
-        window.addEventListener('pageshow', scheduleUpdate);
         document.addEventListener('DOMContentLoaded', () => {
           const picker = document.querySelector('[data-theme-picker]');
+          const toggle = document.querySelector('[data-lines-toggle]');
+          const accentPicker = document.querySelector('[data-accent-picker]');
+          accentPicker.value = root.dataset.leAccent || 'blue';
           picker.value = root.dataset.leTheme || 'system';
-          picker.hidden = false;
+          toggle.checked = root.dataset.leLines !== 'off';
+          document.querySelector('.appearance-controls').hidden = false;
           picker.addEventListener('change', () => {
             applyTheme(picker.value);
-            try {
-              if (picker.value === 'system') localStorage.removeItem(themeKey);
-              else localStorage.setItem(themeKey, picker.value);
-            } catch { /* Keep the selection for this page. */ }
+            save(themeKey, picker.value === 'system' ? null : picker.value);
+          });
+          accentPicker.addEventListener('change', () => {
+            applyAccent(accentPicker.value);
+            save(accentKey, root.dataset.leAccent || null);
+          });
+          toggle.addEventListener('change', () => {
+            const preference = toggle.checked ? null : 'off';
+            applyLines(preference);
+            save(linesKey, preference);
           });
           document.querySelector('[data-mobile-scroll-cue]')?.addEventListener('click', () => {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             window.scrollBy({ top: window.innerHeight * 0.8, behavior: reduceMotion ? 'auto' : 'smooth' });
           });
-          updateIndex();
         }, { once: true });
-        updateIndex();
       })();
     </script>
   </head>
   <body>
     <a class="skip-link" href="#colors">跳到主要内容</a>
-    <select class="theme-picker" data-theme-picker aria-label="外观主题" hidden>
-      <option value="system">跟随系统</option>
-      <option value="light">浅色</option>
-      <option value="dark">深色</option>
-    </select>
+    <div class="appearance-controls" hidden>
+      <label class="line-toggle">
+        <input class="le-switch" type="checkbox" role="switch" data-lines-toggle checked />
+        强调线条
+      </label>
+      <div class="appearance-pickers">
+        <select class="theme-picker accent-picker" data-accent-picker aria-label="主题色">
+          {accents.map(({ value, label }) => <option value={value}>{label}</option>)}
+        </select>
+        <select class="theme-picker" data-theme-picker aria-label="外观主题">
+          <option value="system">跟随系统</option>
+          <option value="light">浅色</option>
+          <option value="dark">深色</option>
+        </select>
+      </div>
+    </div>
     <header class="site-header" style={`--index-fade-duration: ${indexDuration}ms; --index-hide-delay: ${(navigation.length - 1) * indexStep + indexDuration}ms`}>
-      <span class="mobile-section-label" data-current-section>Luminedge</span>
+      <select class="mobile-index mobile-section-label" data-section-picker aria-label="章节">
+        <option value="" hidden disabled selected>Luminedge</option>
+        {navigation.map(({ page, label }) => <option value={page}>{label}</option>)}
+      </select>
+      <select class="mobile-index mobile-subsection-label" data-subsection-picker aria-label="章节内导航" hidden></select>
       <nav aria-label="页面导航">
         {navigation.map(({ page, label, path }, index) => (
           <a href={`${base}${path}`} data-index-target={page} style={`--index-delay: ${index * indexStep}ms; --index-exit-delay: ${(navigation.length - 1 - index) * indexStep}ms`}>{label}</a>
@@ -129,9 +145,14 @@ const indexDuration = 280;
       </nav>
     </header>
 
+    <nav class="subsection-index" aria-label="章节内导航" data-subsection-index hidden></nav>
+
     <main id="top" class="landing-main" tabindex="-1">
       <slot />
     </main>
     <button class="mobile-scroll-cue" type="button" data-mobile-scroll-cue aria-label="向下滚动" hidden><span aria-hidden="true">↓</span></button>
+    <script>
+      import '../section-index';
+    </script>
   </body>
 </html>

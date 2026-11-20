@@ -34,20 +34,25 @@ const roles = [
   <div class="color-content">
     <div class="section-heading"><h2 id="colors-title">色彩</h2></div>
     <div class="color-layout">
-      <div class="palette-content">
+      <div class="palette-content" id="colors-theme" data-index-subsection="主题" tabindex="-1">
         <h3>主要颜色</h3>
         <div class="palette">
           {colors.map(({ name, token }) => (
             <article class="swatch">
               <div class:list={['swatch-color', { 'swatch-color--outlined': token === '--le-color-text-inverse' }]} style={`background: var(${token})`}></div>
-              <div class="swatch-info"><strong>{name}</strong><TokenValue token={token} uppercase /></div>
+              <div class="swatch-info">
+                <strong>{name}</strong>
+                {token === '--le-color-primary' || token === '--le-color-secondary'
+                  ? <span data-accent-token={token}>{tokenValue(token).toUpperCase()}</span>
+                  : <TokenValue token={token} uppercase />}
+              </div>
               <code>{token}</code>
             </article>
           ))}
         </div>
       </div>
 
-      <div class="color-roles">
+      <div class="color-roles" id="colors-roles" data-index-subsection="语义" tabindex="-1">
         <h3>语义用色</h3>
         <div class="color-role-grid">
           {roles.map(({ name, background, foreground }) => (
@@ -59,7 +64,7 @@ const roles = [
         </div>
       </div>
 
-      <div class="color-scales">
+      <div class="color-scales" id="colors-scales" data-index-subsection tabindex="-1">
         <div class="color-scale-area">
           <h3>色阶</h3>
           <details class="color-scale-toggle" data-color-scale-toggle>
@@ -70,7 +75,7 @@ const roles = [
             {scales.map(({ name, key }) => (
               <div class="color-scale-group">
                 <div class="color-scale-heading"><strong>{name}</strong></div>
-                <ol class="color-scale" aria-label={`${name}色阶`} data-color-scale>
+                <ol class="color-scale" aria-label={`${name}色阶`} data-color-scale={key}>
                   {steps.map((step) => {
                     const token = `--le-color-${key}-${step}`;
                     const value = tokenValue(token).toUpperCase();
@@ -93,6 +98,37 @@ const roles = [
 </section>
 
 <script>
+  const accentValues = document.querySelectorAll<HTMLElement>('[data-accent-token]');
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = 1;
+  const context = canvas.getContext('2d', { willReadFrequently: true });
+  function syncAccentValues() {
+    if (!context) return;
+    const style = getComputedStyle(document.documentElement);
+    // Render relative colors to the same 8-bit sRGB values as the displayed hex codes.
+    const hex = (token: string) => {
+      const color = style.getPropertyValue(token).trim();
+      if (/^#[\da-f]{6}$/i.test(color)) return color.toUpperCase();
+      context.fillStyle = color;
+      context.fillRect(0, 0, 1, 1);
+      const [r, g, b] = context.getImageData(0, 0, 1, 1).data;
+      return '#' + [r, g, b].map((v) => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+    };
+    for (const value of accentValues) value.textContent = hex(value.dataset.accentToken!);
+    for (const key of ['primary', 'secondary']) {
+      const name = key === 'primary' ? '主色' : '辅色';
+      for (const button of document.querySelectorAll<HTMLButtonElement>(`[data-color-scale="${key}"] [data-color-step]`)) {
+        const step = button.dataset.colorStep;
+        const token = `--le-color-${key}-${step}`;
+        const value = hex(token);
+        button.setAttribute('aria-label', `${name} ${step}，${value}，${token}`);
+        button.nextElementSibling!.querySelector('code')!.textContent = value;
+      }
+    }
+  }
+  syncAccentValues();
+  new MutationObserver(syncAccentValues).observe(document.documentElement, { attributeFilter: ['data-le-accent'] });
+
   const toggle = document.querySelector<HTMLDetailsElement>('[data-color-scale-toggle]');
   const groups = Array.from(document.querySelectorAll<HTMLOListElement>('[data-color-scale]'), (group) =>
     Array.from(group.querySelectorAll<HTMLButtonElement>('[data-color-step]')),

@@ -1,4 +1,5 @@
 ---
+import LayoutExamples from '../showcase/layout-examples.astro';
 import { tokenValue } from '../token-values';
 
 const dimensions = [
@@ -11,25 +12,30 @@ const dimensions = [
 <section class="section landing-content" id="layout" data-index-section aria-labelledby="layout-title" tabindex="-1">
   <div class="section-content">
     <div class="section-heading">
-      <h2 id="layout-title">页面布局</h2>
+      <h2 id="layout-title">布局</h2>
     </div>
 
-    <div class="rounded-le-lg bg-le-surface-subtle py-le-4" aria-label="内容容器示例">
-      <div class="le-container flex min-h-le-16 flex-col justify-center rounded-le-md bg-le-surface p-le-3 text-[0.8125rem]">
-        <strong>内容区域</strong>
-        <span class="text-le-xs text-le-text-muted">两侧留白随屏幕宽度调整</span>
-      </div>
-    </div>
-
-    <div class="foundation-rows layout-tokens">
-      {dimensions.map(({ name, token }) => (
-        <div class="foundation-row foundation-row--definition">
-          <div class="foundation-label"><strong>{name}</strong><code>{token}</code></div>
-          <code class="token-value">{tokenValue(token)}</code>
+    <section class="component-group" id="layout-container" data-index-subsection tabindex="-1" aria-labelledby="layout-container-title">
+      <h3 id="layout-container-title">内容容器</h3>
+      <div class="rounded-le-lg bg-le-surface-subtle py-le-4" aria-label="内容容器示例">
+        <div class="le-container flex min-h-le-16 flex-col justify-center rounded-le-md bg-le-surface p-le-3 text-[0.8125rem]">
+          <strong>内容区域</strong>
+          <span class="text-le-xs text-le-text-muted">两侧留白随屏幕宽度调整</span>
         </div>
-      ))}
-    </div>
+      </div>
 
-    <p class="foundation-note">使用 <code>le-container</code> 创建居中容器；添加 <code>le-container--reading</code> 可以限制阅读宽度。</p>
+      <div class="foundation-rows layout-tokens">
+        {dimensions.map(({ name, token }) => (
+          <div class="foundation-row foundation-row--definition">
+            <div class="foundation-label"><strong>{name}</strong><code>{token}</code></div>
+            <code class="token-value">{tokenValue(token)}</code>
+          </div>
+        ))}
+      </div>
+
+      <p class="foundation-note">使用 <code>le-container</code> 创建居中容器；添加 <code>le-container--reading</code> 可以限制阅读宽度。</p>
+    </section>
+
+    <LayoutExamples />
   </div>
 </section>
