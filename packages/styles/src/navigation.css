@@ -17,7 +17,7 @@
   .le-accordion { @apply grid gap-le-2; }
   .le-accordion summary {
     padding: var(--le-space-2) var(--le-space-3);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-surface-subtle);
     @apply text-le-text;
@@ -30,7 +30,7 @@
 
   .le-command-list .le-combobox-popup { @apply static; box-shadow: none; }
 
-  .le-tablist { @apply flex flex-wrap gap-le-2; border-bottom: 1px solid var(--le-color-border); }
+  .le-tablist { @apply flex flex-wrap gap-le-2; border-bottom: 1px solid var(--le-line-color, var(--le-color-border)); }
   .le-tab {
     @apply relative;
     padding: var(--le-space-2) var(--le-space-3);
@@ -65,7 +65,7 @@
   .le-menu-panel, .le-context-menu[popover] {
     min-width: min(10rem, calc(100vw - 1rem));
     @apply p-le-1;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-surface);
     box-shadow: var(--le-shadow-sm);
@@ -95,7 +95,7 @@
     @apply w-max;
     max-width: min(16rem, 80vw);
     padding: var(--le-space-2) var(--le-space-3);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-primary-soft);
     @apply text-le-text;
@@ -108,7 +108,7 @@
   .le-popover {
     max-width: min(20rem, calc(100% - 2rem));
     @apply p-le-4;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-md;
     background: var(--le-color-surface);
     @apply text-le-text;
@@ -122,7 +122,7 @@
     min-width: 2rem;
     min-height: 2rem;
     padding: var(--le-space-1) var(--le-space-2);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: transparent;
     @apply text-le-text;

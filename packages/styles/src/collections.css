@@ -24,7 +24,7 @@
   .le-tree-select > summary:not(.le-button) {
     @apply w-fit;
     padding: var(--le-space-2) var(--le-space-3);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-surface);
   }
@@ -61,7 +61,7 @@
     @apply flex items-baseline justify-between gap-le-3;
     min-inline-size: 0;
     @apply py-le-2;
-    border-block-end: 1px solid var(--le-color-divider);
+    border-block-end: 1px solid var(--le-line-color, var(--le-color-divider));
     @apply text-le-text wrap-anywhere;
   }
   .le-item-description { @apply text-le-text-muted text-le-xs; }
@@ -69,7 +69,7 @@
     @apply grid gap-le-1;
     margin: 0;
     @apply ps-le-3;
-    border-inline-start: 1px solid var(--le-color-border-strong);
+    border-inline-start: 1px solid var(--le-line-color, var(--le-color-border-strong));
   }
   .le-statistic dt { @apply text-le-text-muted; }
   .le-statistic dd { margin: 0; @apply text-le-text text-le-xl; font-variant-numeric: tabular-nums; }
@@ -127,7 +127,7 @@
     max-inline-size: 100%;
     padding: var(--le-attachment-inset);
     @apply ps-le-2;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     border-radius: calc(var(--le-radius-sm) + var(--le-attachment-inset) + 1px);
     background: var(--le-color-control);
     @apply wrap-anywhere;
@@ -145,7 +145,7 @@
     max-inline-size: min(100%, 42ch);
     margin: 0;
     padding: var(--le-space-2) var(--le-space-3);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-surface-subtle);
     @apply text-le-text wrap-anywhere;
@@ -157,7 +157,7 @@
   .le-questionnaire [hidden] { @apply hidden; }
   .le-result {
     @apply grid justify-items-start gap-le-2 ps-le-3;
-    border-inline-start: 1px solid var(--le-color-border-strong);
+    border-inline-start: 1px solid var(--le-line-color, var(--le-color-border-strong));
     @apply text-le-text;
   }
   .le-result p { margin: 0; @apply text-le-text-muted; }
@@ -198,7 +198,7 @@
     @apply block;
     max-inline-size: 100%;
     padding: 0;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: transparent;
     cursor: zoom-in;

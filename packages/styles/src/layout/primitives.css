@@ -36,7 +36,7 @@
     @apply box-border overflow-auto overscroll-contain rounded-le-sm le-scrollbar;
     max-block-size: var(--le-scroll-height, 12rem);
     min-inline-size: 0;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
   }
 
   .le-separator {

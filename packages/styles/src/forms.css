@@ -11,9 +11,9 @@
     @apply box-border w-full;
     min-height: 2.25rem;
     padding: 0.5rem 0.75rem;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
-    background: var(--le-color-surface);
+    background: var(--le-field-surface, var(--le-color-surface));
     @apply text-le-text;
     font: var(--le-font-weight-regular) var(--le-font-size-sm)/var(--le-line-height-normal) var(--le-font-sans);
   }
@@ -37,7 +37,7 @@
     .le-select:not([multiple]):not([size])::picker(select) {
       margin-block-start: var(--le-space-1);
       @apply p-le-1;
-      border: 1px solid var(--le-color-control-outline);
+      border: 1px solid var(--le-line-color, var(--le-color-control-outline));
       @apply rounded-le-sm;
       background: var(--le-color-surface);
       box-shadow: var(--le-shadow-sm);
@@ -76,9 +76,9 @@
   .le-input-group {
     @apply flex items-center;
     min-width: 0;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     border-radius: var(--le-input-group-radius, var(--le-radius-sm));
-    background: var(--le-color-surface);
+    background: var(--le-field-surface, var(--le-color-surface));
   }
   .le-input-group:has(> .le-input[aria-invalid='true']:focus-visible) {
     @apply border-le-danger-text outline-le-danger-text;
@@ -172,7 +172,7 @@
     min-width: 0;
     @apply max-w-full;
     padding: 0.1rem 0.4rem;
-    border: 1px solid var(--le-color-secondary-border);
+    border: 1px solid var(--le-line-color, var(--le-color-secondary-border));
     @apply rounded-le-full;
     background: var(--le-color-secondary-soft);
     @apply text-le-secondary-text text-le-xs wrap-anywhere;
@@ -236,7 +236,7 @@
   .le-file::file-selector-button {
     @apply me-le-2;
     padding: var(--le-space-2) var(--le-space-3);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-control);
     @apply text-le-control-text;
@@ -254,7 +254,7 @@
     top: calc(100% + var(--le-space-1));
     max-height: 14rem;
     @apply overflow-auto p-le-1 le-scrollbar;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-surface);
     box-shadow: var(--le-shadow-md);

@@ -3,7 +3,7 @@
 @layer luminedge {
   .le-empty {
     @apply grid justify-items-start gap-le-1 py-le-3 ps-le-3;
-    border-inline-start: 1px solid var(--le-color-border-strong);
+    border-inline-start: 1px solid var(--le-line-color, var(--le-color-border-strong));
     @apply text-le-text-muted text-le-sm;
   }
   .le-empty[hidden] { @apply hidden; }
@@ -13,7 +13,7 @@
     @apply box-border block;
     width: min(100%, var(--le-skeleton-width, 100%));
     height: var(--le-skeleton-height, 1em);
-    border: 1px solid var(--le-color-divider);
+    border: 1px solid var(--le-line-color, var(--le-color-divider));
     @apply rounded-le-sm;
     background: var(--le-color-control);
   }
@@ -23,29 +23,29 @@
 
   .le-alert {
     padding: var(--le-space-3) var(--le-space-4);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-primary-soft);
     @apply text-le-primary-text text-le-sm;
     line-height: var(--le-line-height-normal);
   }
   .le-alert--success {
-    @apply border-le-success-border;
+    border-color: var(--le-line-color, var(--le-color-success-border));
     background: var(--le-color-success-soft);
     @apply text-le-success-text;
   }
   .le-alert--secondary {
-    @apply border-le-primary-indicator;
+    border-color: var(--le-line-color, var(--le-color-primary-indicator));
     background: var(--le-color-primary-soft-hover);
     @apply text-le-primary-text;
   }
   .le-alert--warning {
-    @apply border-le-warning-border;
+    border-color: var(--le-line-color, var(--le-color-warning-border));
     background: var(--le-color-warning-soft);
     @apply text-le-warning-text;
   }
   .le-alert--danger {
-    @apply border-le-danger-border;
+    border-color: var(--le-line-color, var(--le-color-danger-border));
     background: var(--le-color-danger-soft);
     @apply text-le-danger-text;
   }
@@ -54,7 +54,7 @@
     @apply inline-flex items-center justify-center;
     min-width: 1.5rem;
     padding: 0.15rem 0.55rem;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-full;
     background: var(--le-color-primary-soft);
     @apply text-le-primary-text text-le-xs;
@@ -62,22 +62,22 @@
   }
   .le-badge { padding-inline: 0.4rem; background: var(--le-color-primary-selected); }
   .le-tag--secondary, .le-badge--secondary {
-    @apply border-le-secondary-border;
+    border-color: var(--le-line-color, var(--le-color-secondary-border));
     background: var(--le-color-secondary-soft);
     @apply text-le-secondary-text;
   }
   .le-tag--success, .le-badge--success {
-    @apply border-le-success-border;
+    border-color: var(--le-line-color, var(--le-color-success-border));
     background: var(--le-color-success-soft);
     @apply text-le-success-text;
   }
   .le-tag--warning, .le-badge--warning {
-    @apply border-le-warning-border;
+    border-color: var(--le-line-color, var(--le-color-warning-border));
     background: var(--le-color-warning-soft);
     @apply text-le-warning-text;
   }
   .le-tag--danger, .le-badge--danger {
-    @apply border-le-danger-border;
+    border-color: var(--le-line-color, var(--le-color-danger-border));
     background: var(--le-color-danger-soft);
     @apply text-le-danger-text;
   }
@@ -86,7 +86,7 @@
   .le-toast {
     @apply box-border flex items-center gap-le-3 w-fit max-w-full;
     padding: var(--le-space-3) var(--le-space-4);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-md;
     background: var(--le-color-surface);
     @apply text-le-text;
@@ -94,17 +94,17 @@
     @apply text-le-sm;
   }
   .le-toast--success {
-    @apply border-le-success-border;
+    border-color: var(--le-line-color, var(--le-color-success-border));
     background: var(--le-color-success-soft);
     @apply text-le-success-text;
   }
   .le-toast--warning {
-    @apply border-le-warning-border;
+    border-color: var(--le-line-color, var(--le-color-warning-border));
     background: var(--le-color-warning-soft);
     @apply text-le-warning-text;
   }
   .le-toast--danger {
-    @apply border-le-danger-border;
+    border-color: var(--le-line-color, var(--le-color-danger-border));
     background: var(--le-color-danger-soft);
     @apply text-le-danger-text;
   }

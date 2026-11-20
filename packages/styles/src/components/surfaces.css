@@ -3,7 +3,7 @@
 @layer luminedge {
   .le-card {
     @apply box-border p-le-4;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-lg;
     background: var(--le-color-primary-soft);
     @apply text-le-text;
@@ -14,7 +14,7 @@
     width: 2.25rem;
     aspect-ratio: 1;
     @apply overflow-hidden;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     border-radius: 50%;
     background: var(--le-color-primary-soft);
     @apply text-le-primary-strong;
@@ -27,7 +27,7 @@
     @apply box-border le-scrollbar;
     width: min(28rem, calc(100% - 2rem));
     padding: var(--le-dialog-padding, 0.85rem);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-lg;
     background: var(--le-color-surface);
     box-shadow: var(--le-shadow-lg);

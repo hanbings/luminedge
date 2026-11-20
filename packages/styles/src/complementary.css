@@ -1,0 +1,19 @@
+/* Calibrate each stop against the original blue/orange pair in tokens.css:
+   rotate hue by the reference difference, scale saturation by the reference
+   ratio, and add the lightness difference. Relative HSL uses 0–100 for S/L. */
+@supports (color: hsl(from red calc(h + 1) calc(s * 0.5) calc(l + 1))) {
+  :root, [data-le-accent] {
+    --le-color-secondary-50: hsl(from var(--le-color-primary-50) calc(h + 175.71) s l);
+    --le-color-secondary-100: hsl(from var(--le-color-primary-100) calc(h + 175.4) s calc(l - 1.96));
+    --le-color-secondary-200: hsl(from var(--le-color-primary-200) calc(h + 177.91) s calc(l - 4.12));
+    --le-color-secondary-300: hsl(from var(--le-color-primary-300) calc(h + 179.39) s calc(l - 2.94));
+    --le-color-secondary-400: hsl(from var(--le-color-primary-400) calc(h + 176.34) s calc(l - 1.37));
+    --le-color-secondary-500: hsl(from var(--le-color-primary-500) calc(h + 176.02) s calc(l + 0.78));
+    --le-color-secondary-600: hsl(from var(--le-color-primary-600) calc(h + 175.68) calc(s * 0.965) calc(l - 2.55));
+    --le-color-secondary-700: hsl(from var(--le-color-primary-700) calc(h + 175.47) calc(s * 1.02) calc(l + 3.92));
+    --le-color-secondary-800: hsl(from var(--le-color-primary-800) calc(h + 174.02) calc(s * 1.082) calc(l - 5.88));
+    --le-color-secondary-900: hsl(from var(--le-color-primary-900) calc(h + 174.18) calc(s * 1.189) calc(l + 0.2));
+    --le-secondary-dark-soft: hsl(from var(--le-accent-dark-soft) calc(h + 175.7) calc(s * 0.573) calc(l + 0.2));
+    --le-secondary-dark-border: hsl(from var(--le-accent-dark-border) calc(h + 176.71) calc(s * 1.236) calc(l + 5.88));
+  }
+}

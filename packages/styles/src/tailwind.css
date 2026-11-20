@@ -82,11 +82,15 @@
   --shadow-le-card: var(--le-shadow-card);
 }
 
+@utility le-border {
+  border: 1px solid var(--le-line-color, var(--le-color-border-strong));
+}
+
 @utility le-track {
   box-sizing: border-box;
   border-radius: var(--le-radius-full);
   height: var(--le-track-height);
-  border: var(--le-track-border-width) solid var(--le-color-track-border);
+  border: var(--le-track-border-width) solid var(--le-line-color, var(--le-color-track-border));
   background: var(--le-color-track);
   @media (forced-colors: active) {
     --le-color-track: Canvas;

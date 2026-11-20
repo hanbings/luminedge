@@ -93,6 +93,12 @@ Astro 展示站使用 Tailwind CSS 4。使用 Tailwind 的项目可以在样式�
 
 样式默认跟随系统外观。给 `<html>` 或局部容器设置 `data-le-theme="light"` 或 `data-le-theme="dark"` 可以指定主题，移除属性即可恢复继承。页面背景和正文颜色分别使用 `--le-color-page` 和 `--le-color-text`。色阶在两个主题中保持一致，语义颜色和阴影随主题切换。
 
+主题色默认为雾蓝（`blue`）。在 `<html>` 或局部容器上设置 `data-le-accent="teal"` 可切换到薄荷青，也可以选择藤紫（`violet`）或玫瑰粉（`rose`）。每套主题色都有完整的主色色阶，以及对应的选中、悬停和焦点颜色。
+
+辅色以原配色的雾蓝 `#87BAFF` 与杏橙 `#FFC68B` 为基准。在 500 阶，辅色的 HSL 色相等于主色色相加 176.02°（按 360° 取模），饱和度相同，明度增加 0.78 个百分点。其余各阶按原来同阶蓝色和橙色的色相差、饱和度比和明度差分别换算。切换主题色时，辅色标签、徽标与输入词条随之更新。
+
+组件默认显示强调线条。在 `<html>` 或局部容器上设置 `data-le-lines="off"` 可隐藏卡片、按钮等组件的装饰边框和表格行线，输入框改用底色区分。在子区域设置 `data-le-lines="on"` 可恢复线条。两种风格都保留键盘焦点、错误提示和选中标记，并支持浅色与深色主题。
+
 色阶与语义色的组织参考了 [Material 3 色彩系统](https://developer.android.com/develop/ui/compose/designsystems/material3#color-scheme)和 [Apple 色彩指南](https://developer.apple.com/design/human-interface-guidelines/color)。
 
 布局容器也是可选的：
@@ -161,7 +167,7 @@ const controller = createDialog(dialog, {
 </div>
 ```
 
-复选框、单选框和选择框沿用浏览器原生交互。开关使用 `<input type="checkbox" role="switch" class="le-switch">`。支持自定义原生选择框的浏览器使用浅蓝底色和深蓝勾选标记，其他浏览器使用系统选项列表。提示、标签和徽标支持 `--secondary`、`--success`、`--warning`、`--danger` 变体。进度条和计量条分别使用原生 `<progress>` 与 `<meter>`。两者与柱状图、滑动条的轨道共用 `--le-track-height`（默认 `0.375rem`）、`--le-track-border-width`（默认 `1px`）以及 `--le-color-track`、`--le-color-track-fill`、`--le-color-track-border`，可在容器里统一覆盖。旋转加载图形应配合可访问的状态文字。
+复选框、单选框和选择框沿用浏览器原生交互。开关使用 `<input type="checkbox" role="switch" class="le-switch">`。支持自定义原生选择框的浏览器按当前主色色阶显示选项底色和勾选标记，其他浏览器使用系统选项列表。提示、标签和徽标支持 `--secondary`、`--success`、`--warning`、`--danger` 变体。进度条和计量条分别使用原生 `<progress>` 与 `<meter>`。两者与柱状图、滑动条的轨道共用 `--le-track-height`（默认 `0.375rem`）、`--le-track-border-width`（默认 `1px`）以及 `--le-color-track`、`--le-color-track-fill`、`--le-color-track-border`，可在容器里统一覆盖。旋转加载图形应配合可访问的状态文字。
 
 标签输入将 `le-token-list` 与输入行 `le-token-input` 放在同一个容器中；输入行使用 `le-token-editor` 和添加按钮。完整示例见[输入组件](apps/docs/src/showcase/advanced-form-examples.astro)。
 

@@ -6,7 +6,7 @@
   .le-table caption { @apply pb-le-2 text-le-text-muted text-le-xs text-left; }
   .le-table th, .le-table td {
     padding: var(--le-space-2) var(--le-space-3);
-    border-bottom: 1px solid var(--le-color-divider);
+    border-bottom: 1px solid var(--le-line-color, var(--le-color-divider));
     @apply align-top;
   }
   .le-table th { font-weight: var(--le-font-weight-medium); }
@@ -41,7 +41,7 @@
   .le-code-block {
     min-width: 0;
     margin: 0;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-md;
     background: var(--le-color-primary-soft);
     @apply text-le-primary-text;
@@ -62,7 +62,7 @@
   .le-kbd {
     @apply inline-block;
     padding: 0 var(--le-space-1);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-control);
     @apply text-le-text;
@@ -80,7 +80,7 @@
     @apply box-border grid place-items-center;
     width: 1.75rem;
     height: 1.75rem;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     border-radius: 50%;
     background: var(--le-color-control);
     @apply text-le-control-text text-le-xs;
@@ -134,7 +134,7 @@
     @apply box-border;
     width: min(100%, 20rem);
     @apply p-le-2;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-md;
     background: var(--le-color-surface);
     @apply text-le-text font-le-sans;
@@ -153,7 +153,7 @@
     font: var(--le-font-weight-regular) var(--le-font-size-sm)/1 var(--le-font-sans);
     @apply cursor-pointer;
   }
-  .le-calendar-nav { @apply border-le-border-strong; }
+  .le-calendar-nav { border-color: var(--le-line-color, var(--le-color-border-strong)); }
   .le-calendar-nav:hover:not(:disabled), .le-calendar-day:hover:not(:disabled) { background: var(--le-color-primary-soft-hover); }
   .le-calendar-nav:focus-visible, .le-calendar-day:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 1px; }
   .le-calendar-nav:disabled, .le-calendar-day:disabled { @apply opacity-40 cursor-not-allowed; }

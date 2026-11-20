@@ -15,7 +15,7 @@
   .le-prose blockquote {
     margin-inline: 0;
     @apply ps-le-3;
-    border-inline-start: 2px solid var(--le-color-primary-border);
+    border-inline-start: 2px solid var(--le-line-color, var(--le-color-primary-border));
   }
   .le-prose code { @apply font-le-mono; }
 
@@ -56,7 +56,7 @@
     inline-size: 3rem;
     block-size: 2.25rem;
     @apply p-le-1;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm;
     background: var(--le-color-surface);
   }
@@ -84,7 +84,7 @@
   .le-segment > span {
     @apply inline-flex;
     padding: var(--le-space-2) var(--le-space-3);
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm text-le-text;
   }
   .le-segment:has(input:checked) > span { @apply border-le-primary-strong; }
@@ -126,12 +126,12 @@
     inset-inline-start: 0;
     width: min(16rem, 70vw);
     @apply p-le-3;
-    border: 1px solid var(--le-color-border-strong);
+    @apply le-border;
     @apply rounded-le-sm text-le-text;
     background: var(--le-color-surface);
     box-shadow: var(--le-shadow-md);
   }
-  .le-dialog:has([data-le-tour-title]) { border-color: var(--le-color-primary-border); }
+  .le-dialog:has([data-le-tour-title]) { border-color: var(--le-line-color, var(--le-color-primary-border)); }
   .le-tour-active { outline: 2px solid var(--le-color-primary); outline-offset: 3px; }
   @media (prefers-contrast: more) {
     .le-dialog:has([data-le-tour-title]) { border-color: var(--le-color-focus); }

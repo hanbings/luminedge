@@ -1,7 +1,7 @@
-:root {
-  color-scheme: light dark;
+@import './accent-palettes.css';
+@import './complementary.css';
 
-  /* Color scales run from light (50) to dark (900). */
+:where(:root), [data-le-accent='blue'] {
   --le-color-primary-50: #f1f7ff;
   --le-color-primary-100: #e9f3ff;
   --le-color-primary-200: #d4e8ff;
@@ -12,7 +12,14 @@
   --le-color-primary-700: #3b70a9;
   --le-color-primary-800: #32649c;
   --le-color-primary-900: #1d3954;
+  --le-accent-dark-soft: #182737;
+  --le-accent-dark-soft-hover: #1e3044;
+  --le-accent-dark-selected: #273f58;
+  --le-accent-dark-border: #3d5978;
+}
 
+/* Reference orange ramp and fallback for browsers without relative colors. */
+:where(:root) {
   --le-color-secondary-50: #fff8f1;
   --le-color-secondary-100: #ffeedf;
   --le-color-secondary-200: #ffdfbf;
@@ -23,7 +30,14 @@
   --le-color-secondary-700: #b9753f;
   --le-color-secondary-800: #895127;
   --le-color-secondary-900: #5a3218;
+  --le-secondary-dark-soft: #31271f;
+  --le-secondary-dark-border: #94673f;
+}
 
+:root {
+  color-scheme: light dark;
+
+  /* Color scales run from light (50) to dark (900). */
   --le-color-success-50: #f2fcf5;
   --le-color-success-100: #e3f7eb;
   --le-color-success-200: #cbf0d7;
@@ -69,28 +83,6 @@
   --le-color-neutral-900: #1f3243;
 
   /* Semantic colors can be overridden independently for a theme or component. */
-  --le-color-primary: var(--le-color-primary-500);
-  --le-color-primary-hover: var(--le-color-primary-600);
-  --le-color-primary-strong: light-dark(var(--le-color-primary-700), var(--le-color-primary-500));
-  --le-color-primary-soft: light-dark(var(--le-color-primary-50), #182737);
-  --le-color-primary-soft-hover: light-dark(var(--le-color-primary-100), #1e3044);
-  --le-color-primary-selected: light-dark(var(--le-color-primary-200), #273f58);
-  --le-color-primary-border: light-dark(var(--le-color-primary-300), #3d5978);
-  --le-color-primary-indicator: light-dark(var(--le-color-primary-400), var(--le-color-primary-600));
-  --le-color-primary-text: light-dark(var(--le-color-primary-800), var(--le-color-primary-300));
-  --le-color-primary-contrast: light-dark(var(--le-color-primary-900), var(--le-color-primary-100));
-  --le-color-on-primary: var(--le-color-primary-900);
-
-  --le-color-secondary: var(--le-color-secondary-500);
-  --le-color-secondary-hover: var(--le-color-secondary-600);
-  --le-color-secondary-soft: light-dark(var(--le-color-secondary-50), #31271f);
-  --le-color-secondary-border: light-dark(var(--le-color-secondary-700), #94673f);
-  --le-color-secondary-indicator: var(--le-color-secondary-700);
-  --le-color-secondary-text: light-dark(var(--le-color-secondary-800), var(--le-color-secondary-300));
-  --le-color-on-secondary: var(--le-color-secondary-900);
-  --le-color-link: var(--le-color-primary-text);
-  --le-color-link-hover: var(--le-color-primary-contrast);
-
   --le-color-success: var(--le-color-success-500);
   --le-color-success-hover: var(--le-color-success-600);
   --le-color-success-soft: light-dark(var(--le-color-success-50), #1a3028);
@@ -114,7 +106,6 @@
 
   --le-color-control: light-dark(var(--le-color-neutral-100), #283440);
   --le-color-control-hover: light-dark(var(--le-color-neutral-300), #334353);
-  --le-color-control-text: var(--le-color-primary-text);
   --le-color-text: light-dark(#303030, #e8eef5);
   --le-color-text-muted: light-dark(#686868, #a7b4c2);
   --le-color-text-inverse: light-dark(#ffffff, #16202a);
@@ -130,10 +121,6 @@
   --le-color-scrollbar: light-dark(var(--le-color-neutral-500), var(--le-color-neutral-700));
   --le-color-scrollbar-hover: var(--le-color-neutral-600);
   --le-color-backdrop: light-dark(rgb(60 80 102 / 0.32), rgb(3 7 12 / 0.68));
-  --le-color-focus: light-dark(var(--le-color-primary-700), var(--le-color-primary-400));
-  --le-color-input-focus: var(--le-color-primary-600);
-  --le-color-track: var(--le-color-primary-soft-hover);
-  --le-color-track-fill: var(--le-color-primary);
   --le-color-track-border: var(--le-color-border-strong);
 
   --le-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -180,5 +167,46 @@
   --le-shadow-card: var(--le-shadow-md);
 }
 
+/* Resolve semantic aliases where the palette is selected, including nested scopes. */
+:root, [data-le-accent] {
+  --le-color-primary: var(--le-color-primary-500);
+  --le-color-primary-hover: var(--le-color-primary-600);
+  --le-color-primary-strong: light-dark(var(--le-color-primary-700), var(--le-color-primary-500));
+  --le-color-primary-soft: light-dark(var(--le-color-primary-50), var(--le-accent-dark-soft));
+  --le-color-primary-soft-hover: light-dark(var(--le-color-primary-100), var(--le-accent-dark-soft-hover));
+  --le-color-primary-selected: light-dark(var(--le-color-primary-200), var(--le-accent-dark-selected));
+  --le-color-primary-border: light-dark(var(--le-color-primary-300), var(--le-accent-dark-border));
+  --le-color-primary-indicator: light-dark(var(--le-color-primary-400), var(--le-color-primary-600));
+  --le-color-primary-text: light-dark(var(--le-color-primary-800), var(--le-color-primary-300));
+  --le-color-primary-contrast: light-dark(var(--le-color-primary-900), var(--le-color-primary-100));
+  --le-color-on-primary: var(--le-color-primary-900);
+  --le-color-secondary: var(--le-color-secondary-500);
+  --le-color-secondary-hover: var(--le-color-secondary-600);
+  --le-color-secondary-soft: light-dark(var(--le-color-secondary-50), var(--le-secondary-dark-soft));
+  --le-color-secondary-border: light-dark(var(--le-color-secondary-700), var(--le-secondary-dark-border));
+  --le-color-secondary-indicator: var(--le-color-secondary-700);
+  --le-color-secondary-text: light-dark(var(--le-color-secondary-800), var(--le-color-secondary-300));
+  --le-color-on-secondary: var(--le-color-secondary-900);
+  --le-color-link: var(--le-color-primary-text);
+  --le-color-link-hover: var(--le-color-primary-contrast);
+  --le-color-control-text: var(--le-color-primary-text);
+  --le-color-focus: light-dark(var(--le-color-primary-700), var(--le-color-primary-400));
+  --le-color-input-focus: var(--le-color-primary-600);
+  --le-color-track: var(--le-color-primary-soft-hover);
+  --le-color-track-fill: var(--le-color-primary);
+}
+
 [data-le-theme='light'] { color-scheme: light; }
 [data-le-theme='dark'] { color-scheme: dark; }
+
+/* Use each component's original border color unless decorative lines are hidden. */
+[data-le-lines='on'] {
+  --le-line-color: initial;
+  --le-field-surface: initial;
+}
+@media (forced-colors: none) {
+  [data-le-lines='off'] {
+    --le-line-color: transparent;
+    --le-field-surface: var(--le-color-control);
+  }
+}
