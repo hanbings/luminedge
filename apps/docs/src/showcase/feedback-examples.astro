@@ -21,18 +21,13 @@
   </div>
 </article>
 
-<article id="component-example-toast" class="showcase">
-  <h4 class="showcase-heading">消息通知</h4>
-  <div class="component-demo-stack" id="component-example-app">
-    <button class="le-button component-demo-button" type="button" data-show-toast>显示通知</button>
-    <div class="le-toast-region" data-le-app-notifications role="status" aria-live="polite" aria-atomic="false"></div>
-  </div>
-</article>
-
 <article id="component-example-progress" class="showcase">
   <h4 class="showcase-heading">进度与加载</h4>
   <div class="component-demo-stack">
-    <div class="le-field"><label class="le-label" for="demo-progress">整理进度 · 60%</label><progress class="le-progress" id="demo-progress" value="60" max="100">60%</progress></div>
+    <div class="le-field">
+      <label class="le-label" for="demo-progress">整理进度 <span aria-hidden="true">· 60%</span></label>
+      <progress class="le-progress" id="demo-progress" value="60" max="100">60%</progress>
+    </div>
     <div class="component-demo-inline"><span class="le-spinner" aria-hidden="true"></span><span>正在加载</span></div>
   </div>
 </article>
@@ -42,6 +37,14 @@
   <div class="le-field">
     <label class="le-label" for="demo-meter">空间占用 <span aria-hidden="true">· 6 / 10 GB</span></label>
     <meter class="le-meter" id="demo-meter" min="0" max="10" value="6">6 / 10 GB</meter>
+  </div>
+</article>
+
+<article id="component-example-toast" class="showcase">
+  <h4 class="showcase-heading">消息通知</h4>
+  <div class="component-demo-stack" id="component-example-app">
+    <button class="le-button component-demo-button" type="button" data-show-toast>显示通知</button>
+    <div class="le-toast-region" data-le-app-notifications role="status" aria-live="polite" aria-atomic="false"></div>
   </div>
 </article>
 

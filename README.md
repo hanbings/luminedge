@@ -161,7 +161,7 @@ const controller = createDialog(dialog, {
 </div>
 ```
 
-复选框、单选框和选择框沿用浏览器原生交互。开关使用 `<input type="checkbox" role="switch" class="le-switch">`。支持自定义原生选择框的浏览器使用浅蓝底色和深蓝勾选标记，其他浏览器使用系统选项列表。提示、标签和徽标支持 `--secondary`、`--success`、`--warning`、`--danger` 变体。进度条和计量条分别使用原生 `<progress>` 与 `<meter>`。旋转加载图形应配合可访问的状态文字。
+复选框、单选框和选择框沿用浏览器原生交互。开关使用 `<input type="checkbox" role="switch" class="le-switch">`。支持自定义原生选择框的浏览器使用浅蓝底色和深蓝勾选标记，其他浏览器使用系统选项列表。提示、标签和徽标支持 `--secondary`、`--success`、`--warning`、`--danger` 变体。进度条和计量条分别使用原生 `<progress>` 与 `<meter>`。两者与柱状图、滑动条的轨道共用 `--le-track-height`（默认 `0.375rem`）、`--le-track-border-width`（默认 `1px`）以及 `--le-color-track`、`--le-color-track-fill`、`--le-color-track-border`，可在容器里统一覆盖。旋转加载图形应配合可访问的状态文字。
 
 标签输入将 `le-token-list` 与输入行 `le-token-input` 放在同一个容器中；输入行使用 `le-token-editor` 和添加按钮。完整示例见[输入组件](apps/docs/src/showcase/advanced-form-examples.astro)。
 

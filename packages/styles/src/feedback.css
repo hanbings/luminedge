@@ -122,35 +122,24 @@
   .le-toast-close:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 2px; }
 
   .le-progress, .le-meter {
-    @apply box-border appearance-none block w-full;
-    height: var(--le-track-height);
-    @apply overflow-hidden;
-    border: 1px solid var(--le-color-track-border);
-    @apply rounded-le-full;
-    background: var(--le-color-track);
-    @apply accent-le-track-fill;
+    @apply le-track appearance-none block w-full overflow-hidden p-le-0 accent-le-track-fill;
   }
-  .le-progress::-webkit-progress-bar { @apply overflow-hidden rounded-le-full; background: var(--le-color-track); }
-  .le-progress::-webkit-progress-value { @apply rounded-le-full; background: var(--le-color-track-fill); }
-  .le-progress::-moz-progress-bar { @apply rounded-le-full; background: var(--le-color-track-fill); }
-  .le-progress:not([value]) { background-image: linear-gradient(90deg, var(--le-color-track) 0% 35%, var(--le-color-track-fill) 35% 65%, var(--le-color-track) 65% 100%); background-size: 200% 100%; animation: le-progress-indeterminate 1.5s linear infinite; }
-  .le-progress:not([value])::-webkit-progress-bar, .le-progress:not([value])::-webkit-progress-value { background: transparent; }
-  .le-progress:not([value])::-moz-progress-bar { background: transparent; }
-  /* Remove the native meter's centered inner track so its fill matches progress. */
-  .le-meter::-webkit-meter-inner-element { @apply block h-full; }
-  .le-meter::-webkit-meter-bar {
-    @apply box-border static h-full;
+  .le-progress::-webkit-progress-value { @apply le-track-fill; }
+  .le-progress::-moz-progress-bar { @apply le-track-fill; }
+  /* The host draws the track. Keep native inner boxes flush with its content area. */
+  .le-meter::-webkit-meter-inner-element { @apply block w-full h-full align-top; }
+  .le-progress::-webkit-progress-bar, .le-meter::-webkit-meter-bar {
+    @apply box-border static w-full h-full overflow-hidden rounded-le-full;
     border: 0;
-    @apply rounded-le-full;
-    background: var(--le-color-track);
+    background: transparent;
   }
   .le-meter::-webkit-meter-optimum-value, .le-meter::-webkit-meter-suboptimum-value, .le-meter::-webkit-meter-even-less-good-value {
-    @apply box-border h-full;
-    border: 0;
-    @apply rounded-le-full;
-    background: var(--le-color-track-fill);
+    @apply le-track-fill box-border h-full;
   }
-  .le-meter::-moz-meter-bar { @apply rounded-le-full; background: var(--le-color-track-fill); }
+  .le-meter::-moz-meter-bar { @apply le-track-fill; }
+  .le-progress:not([value]) { background-image: linear-gradient(90deg, var(--le-color-track) 0% 35%, var(--le-color-track-fill) 35% 65%, var(--le-color-track) 65% 100%); background-size: 200% 100%; animation: le-progress-indeterminate 1.5s linear infinite; }
+  .le-progress:not([value])::-webkit-progress-value { background: transparent; }
+  .le-progress:not([value])::-moz-progress-bar { background: transparent; }
   .le-spinner {
     @apply box-border inline-block;
     width: 1.25rem;
@@ -165,21 +154,9 @@
   @keyframes le-spin { to { transform: rotate(1turn); } }
   @media (prefers-reduced-motion: reduce) { .le-spinner, .le-progress:not([value]) { @apply animate-none; } }
   @media (forced-colors: active) {
-    .le-meter { @apply appearance-auto; border: 1px solid CanvasText; background: Canvas; }
-    .le-meter::-webkit-meter-bar { background: Canvas; }
-    .le-meter::-webkit-meter-optimum-value, .le-meter::-webkit-meter-suboptimum-value, .le-meter::-webkit-meter-even-less-good-value { background: Highlight; }
-    .le-meter::-moz-meter-bar, .le-meter:-moz-meter-sub-optimum::-moz-meter-bar, .le-meter:-moz-meter-sub-sub-optimum::-moz-meter-bar { background: Highlight; }
-    .le-progress {
-      @apply box-border appearance-auto;
-      border: 1px solid CanvasText;
-      background: Canvas;
-      accent-color: Highlight;
-    }
-    .le-progress::-webkit-progress-bar, .le-progress:not([value])::-webkit-progress-bar { background: Canvas; }
-    .le-progress::-webkit-progress-value, .le-progress:not([value])::-webkit-progress-value { background: Highlight; }
-    .le-progress::-moz-progress-bar, .le-progress:not([value])::-moz-progress-bar { background: Highlight; }
+    .le-progress, .le-meter { @apply appearance-auto; }
     .le-progress:not([value]) { @apply animate-none; background: Canvas; }
-    .le-progress:not([value])::-webkit-progress-value { width: 35% !important; }
-    .le-progress:not([value])::-moz-progress-bar { width: 35% !important; }
+    .le-progress:not([value])::-webkit-progress-value { width: 35% !important; background: Highlight; }
+    .le-progress:not([value])::-moz-progress-bar { width: 35% !important; background: Highlight; }
   }
 }

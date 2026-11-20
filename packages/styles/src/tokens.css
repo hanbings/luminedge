@@ -170,6 +170,7 @@
   --le-radius-lg: 1.25rem;
   --le-radius-full: 9999px;
   --le-track-height: 0.375rem;
+  --le-track-border-width: 1px;
   --le-color-shadow: light-dark(rgb(60 88 118 / 0.06), rgb(0 0 0 / 0.32));
   --le-color-shadow-overlay: light-dark(rgb(60 88 118 / 0.18), rgb(0 0 0 / 0.52));
   --le-shadow-none: none;

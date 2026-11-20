@@ -82,6 +82,24 @@
   --shadow-le-card: var(--le-shadow-card);
 }
 
+@utility le-track {
+  box-sizing: border-box;
+  border-radius: var(--le-radius-full);
+  height: var(--le-track-height);
+  border: var(--le-track-border-width) solid var(--le-color-track-border);
+  background: var(--le-color-track);
+  @media (forced-colors: active) {
+    --le-color-track: Canvas;
+    --le-color-track-border: CanvasText;
+    --le-color-track-fill: Highlight;
+  }
+}
+
+@utility le-track-fill {
+  border-radius: var(--le-radius-full);
+  background: var(--le-color-track-fill);
+}
+
 @utility le-scrollbar {
   @media (pointer: fine) and (forced-colors: none) and (prefers-contrast: no-preference) {
     @supports selector(::-webkit-scrollbar-button) {

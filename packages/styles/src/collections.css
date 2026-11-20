@@ -95,19 +95,11 @@
     @apply items-center gap-le-2;
   }
   .le-chart-track {
-    @apply box-border block;
-    block-size: var(--le-space-3);
-    @apply overflow-hidden;
-    border: 1px solid var(--le-color-track-border);
-    @apply rounded-le-full;
-    background: var(--le-color-track);
+    @apply le-track block overflow-hidden;
   }
   .le-chart-bar {
-    @apply block;
+    @apply le-track-fill block h-full;
     width: clamp(0%, var(--le-chart-value, 0%), 100%);
-    block-size: 100%;
-    border-radius: inherit;
-    background: var(--le-color-primary);
   }
   .le-virtual-list {
     @apply relative;
