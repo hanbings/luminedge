@@ -60,8 +60,8 @@ const accents = [
         function applyLines(preference) {
           if (preference === 'off') root.dataset.leLines = 'off';
           else delete root.dataset.leLines;
-          const toggle = document.querySelector('[data-lines-toggle]');
-          if (toggle) toggle.checked = preference !== 'off';
+          const picker = document.querySelector('[data-lines-picker]');
+          if (picker) picker.value = root.dataset.leLines || 'on';
         }
         function restoreAppearance() {
           try {
@@ -87,11 +87,11 @@ const accents = [
         root.classList.add('has-js');
         document.addEventListener('DOMContentLoaded', () => {
           const picker = document.querySelector('[data-theme-picker]');
-          const toggle = document.querySelector('[data-lines-toggle]');
+          const linesPicker = document.querySelector('[data-lines-picker]');
           const accentPicker = document.querySelector('[data-accent-picker]');
           accentPicker.value = root.dataset.leAccent || 'blue';
           picker.value = root.dataset.leTheme || 'system';
-          toggle.checked = root.dataset.leLines !== 'off';
+          linesPicker.value = root.dataset.leLines || 'on';
           document.querySelector('.appearance-controls').hidden = false;
           picker.addEventListener('change', () => {
             applyTheme(picker.value);
@@ -101,10 +101,9 @@ const accents = [
             applyAccent(accentPicker.value);
             save(accentKey, root.dataset.leAccent || null);
           });
-          toggle.addEventListener('change', () => {
-            const preference = toggle.checked ? null : 'off';
-            applyLines(preference);
-            save(linesKey, preference);
+          linesPicker.addEventListener('change', () => {
+            applyLines(linesPicker.value);
+            save(linesKey, root.dataset.leLines || null);
           });
           document.querySelector('[data-mobile-scroll-cue]')?.addEventListener('click', () => {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -117,10 +116,10 @@ const accents = [
   <body>
     <a class="skip-link" href="#colors">跳到主要内容</a>
     <div class="appearance-controls" hidden>
-      <label class="line-toggle">
-        <input class="le-switch" type="checkbox" role="switch" data-lines-toggle checked />
-        强调线条
-      </label>
+      <select class="theme-picker" data-lines-picker aria-label="强调线条">
+        <option value="on">有线条</option>
+        <option value="off">无线条</option>
+      </select>
       <div class="appearance-pickers">
         <select class="theme-picker accent-picker" data-accent-picker aria-label="主题色">
           {accents.map(({ value, label }) => <option value={value}>{label}</option>)}

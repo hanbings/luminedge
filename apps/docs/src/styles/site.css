@@ -23,15 +23,13 @@ body {
 }
 
 .appearance-controls:not([hidden]) {
-  @apply fixed z-3 flex items-center gap-le-3 text-le-text-muted text-le-xs pointer-events-none;
+  @apply fixed z-3 flex items-center gap-le-1 text-le-text-muted text-le-xs pointer-events-none;
   inset-block-start: max(0.5rem, env(safe-area-inset-top));
   inset-inline-end: var(--page-gutter);
 }
 .appearance-pickers { @apply flex flex-wrap items-center justify-end gap-le-1; }
-.line-toggle, .theme-picker { @apply rounded-le-sm bg-le-page pointer-events-auto; }
-.line-toggle { @apply inline-flex items-center gap-le-1 cursor-pointer; min-height: 1.75rem; }
 .theme-picker {
-  @apply text-le-text-muted;
+  @apply rounded-le-sm bg-le-page text-le-text-muted pointer-events-auto;
   padding: 0.25rem;
   min-height: 1.75rem;
   border: 0;
