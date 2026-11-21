@@ -1,5 +1,8 @@
-<article id="component-example-table" class="showcase showcase--wide">
-  <h4 class="showcase-heading">数据表格</h4>
+---
+import Demo from './Demo.astro';
+---
+
+<Demo id="table" title="数据表格" alias="catalog-data">
   <div class="component-demo-stack">
     <div data-table-controls hidden>
       <div class="le-field">
@@ -28,19 +31,17 @@
       <strong class="le-empty-title">没有匹配的记录</strong>
     </div>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-steps" class="showcase">
-  <h4 class="showcase-heading">步骤条</h4>
+<Demo id="steps" title="步骤条">
   <ol class="le-steps" aria-label="创建流程">
     <li class="le-step"><span class="le-step-indicator" aria-hidden="true">1</span>准备</li>
     <li class="le-step" aria-current="step"><span class="le-step-indicator" aria-hidden="true">2</span>编辑</li>
     <li class="le-step"><span class="le-step-indicator" aria-hidden="true">3</span>完成</li>
   </ol>
-</article>
+</Demo>
 
-<article id="component-example-timeline" class="showcase">
-  <h4 class="showcase-heading">时间线</h4>
+<Demo id="timeline" title="时间线">
   <ol class="le-timeline">
     <li class="le-timeline-item">
       <div class="le-timeline-heading"><span>记录了一个想法</span><time datetime="2026-01-10">1 月 10 日</time></div>
@@ -53,10 +54,9 @@
       <div class="le-timeline-heading"><span>开放预览</span><time datetime="2026-01-15">1 月 15 日</time></div>
     </li>
   </ol>
-</article>
+</Demo>
 
-<article id="component-example-calendar" class="showcase showcase--wide">
-  <h4 class="showcase-heading">日期选择与日历</h4>
+<Demo id="calendar" title="日历">
   <div class="component-date-layout">
     <div class="le-field">
       <label class="le-label" for="demo-date">日期</label>
@@ -76,16 +76,15 @@
       </table>
     </div>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-descriptions" class="showcase">
-  <h4 class="showcase-heading">描述列表</h4>
+<Demo id="descriptions" title="描述列表">
   <dl class="le-descriptions">
     <dt>项目</dt><dd>Luminedge</dd>
     <dt>样式入口</dt><dd><code>@luminedge/styles/index.css</code></dd>
     <dt>交互入口</dt><dd><code>@luminedge/ui</code></dd>
   </dl>
-</article>
+</Demo>
 
 <script>
   import { createCalendar, createDataTable } from '@luminedge/ui';

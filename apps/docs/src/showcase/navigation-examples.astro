@@ -1,5 +1,8 @@
-<article id="component-example-tabs" class="showcase">
-  <h4 class="showcase-heading">选项卡</h4>
+---
+import Demo from './Demo.astro';
+---
+
+<Demo id="tabs" title="选项卡" alias="catalog-navigation">
   <div data-tabs-demo>
     <div class="le-tablist" role="tablist" aria-label="灵感分类">
       <a class="le-tab" id="demo-tab-recent" role="tab" href="#demo-panel-recent" aria-controls="demo-panel-recent" aria-selected="true">最近</a>
@@ -8,10 +11,9 @@
     <div class="le-tab-panel" id="demo-panel-recent" role="tabpanel" aria-labelledby="demo-tab-recent" tabindex="0">最近记录的灵感会出现在这里。</div>
     <div class="le-tab-panel" id="demo-panel-saved" role="tabpanel" aria-labelledby="demo-tab-saved" tabindex="0">收藏的内容会留在这里。</div>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-dropdown" class="showcase">
-  <h4 class="showcase-heading">下拉菜单</h4>
+<Demo id="dropdown" title="下拉菜单">
   <div class="component-demo-stack">
     <details class="le-menu" data-menu-demo>
       <summary class="le-button">更多操作 ▾</summary>
@@ -22,25 +24,26 @@
     </details>
     <output class="component-demo-output" data-menu-output aria-live="polite"></output>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-tooltip" class="showcase">
-  <h4 class="showcase-heading">工具提示与气泡</h4>
+<Demo id="tooltip" title="工具提示">
+  <span class="le-tooltip" data-tooltip-demo>
+    <button class="le-button" type="button" data-tooltip-trigger aria-describedby="demo-tooltip">查看提示</button>
+    <span class="le-tooltip-content" id="demo-tooltip" role="tooltip" hidden>这是一条简短的说明。</span>
+  </span>
+</Demo>
+
+<Demo id="popover" title="气泡面板">
   <div class="component-demo-inline">
-    <span class="le-tooltip" data-tooltip-demo>
-      <button class="le-button" type="button" data-tooltip-trigger aria-describedby="demo-tooltip">查看提示</button>
-      <span class="le-tooltip-content" id="demo-tooltip" role="tooltip" hidden>这是一条简短的说明。</span>
-    </span>
     <button class="le-button" type="button" popovertarget="demo-popover" data-popover-open>更多说明</button>
     <div class="le-popover" id="demo-popover" popover data-popover-panel>
       <p>这里可以放置更完整的说明。</p>
       <button class="le-button le-button--secondary" type="button" popovertarget="demo-popover" popovertargetaction="hide" data-popover-close>关闭</button>
     </div>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-pagination" class="showcase">
-  <h4 class="showcase-heading">分页</h4>
+<Demo id="pagination" title="分页">
   <div class="component-demo-stack">
     <nav class="le-pagination" aria-label="示例分页" data-pagination-demo>
       <button class="le-pagination-button" type="button" data-le-page="previous" disabled>上一页</button>
@@ -51,20 +54,18 @@
     </nav>
     <output class="component-demo-output" data-pagination-output aria-live="polite">第 1 页</output>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-breadcrumb" class="showcase">
-  <h4 class="showcase-heading">面包屑</h4>
+<Demo id="breadcrumb" title="面包屑">
   <nav aria-label="示例页面路径">
     <ol class="le-breadcrumb">
       <li><a class="le-breadcrumb-link" href="#top">Luminedge</a></li>
       <li><span aria-hidden="true">/</span><span aria-current="location">组件</span></li>
     </ol>
   </nav>
-</article>
+</Demo>
 
-<article id="component-example-accordion" class="showcase">
-  <h4 class="showcase-heading">折叠面板</h4>
+<Demo id="accordion" title="折叠面板">
   <div class="le-accordion">
     <details name="demo-accordion" open>
       <summary>样式包</summary>
@@ -75,10 +76,9 @@
       <div class="le-accordion-content">在已有 HTML 上增加键盘和状态管理。</div>
     </details>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-drawer" class="showcase">
-  <h4 class="showcase-heading">抽屉</h4>
+<Demo id="drawer" title="抽屉">
   <button class="le-button" type="button" data-drawer-open disabled>预览记录</button>
   <dialog class="le-dialog le-drawer" id="demo-drawer" closedby="any" aria-labelledby="demo-drawer-title">
     <h2 id="demo-drawer-title">界面草图</h2>
@@ -91,10 +91,9 @@
       <button class="le-button" type="button" data-drawer-close autofocus>关闭</button>
     </div>
   </dialog>
-</article>
+</Demo>
 
-<article id="component-example-command" class="showcase">
-  <h4 class="showcase-heading">命令面板</h4>
+<Demo id="command" title="命令面板">
   <button class="le-button" type="button" data-command-open aria-keyshortcuts="Control+k Meta+k" disabled>
     打开命令面板 <span aria-hidden="true"><kbd class="le-kbd">Ctrl</kbd> / <kbd class="le-kbd">⌘</kbd> <kbd class="le-kbd">K</kbd></span>
   </button>
@@ -116,7 +115,7 @@
       <button class="le-button le-button--secondary" type="button" data-command-close>关闭</button>
     </div>
   </dialog>
-</article>
+</Demo>
 
 <script>
   import { createCommandPalette, createDialog, createMenu, createPagination, createTabs, createTooltip, type ComboboxSelection } from '@luminedge/ui';

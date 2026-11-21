@@ -1,5 +1,8 @@
-<article id="component-example-code-block" class="showcase">
-  <h4 class="showcase-heading">代码块</h4>
+---
+import Demo from './Demo.astro';
+---
+
+<Demo id="code-block" title="代码块" alias="catalog-content">
   <figure class="le-code-block">
     <figcaption class="le-code-toolbar">
       <span>CSS</span>
@@ -12,7 +15,7 @@
 }`}</code></pre>
   </figure>
   <output class="component-demo-output" data-copy-status aria-live="polite"></output>
-</article>
+</Demo>
 
 <script>
   import { createCopyButton, type CopyResult } from '@luminedge/ui';

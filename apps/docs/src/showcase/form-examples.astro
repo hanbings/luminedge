@@ -1,5 +1,15 @@
-<article id="component-example-input" class="showcase">
-  <h4 class="showcase-heading">输入框与表单项</h4>
+---
+import Demo from './Demo.astro';
+---
+
+<Demo id="input" title="输入框" alias="catalog-forms">
+  <div class="le-field">
+    <label class="le-label" for="demo-text-input">记录标题</label>
+    <input class="le-input" id="demo-text-input" type="text" placeholder="给灵感起个名字" />
+  </div>
+</Demo>
+
+<Demo id="form" title="表单">
   <form class="component-demo-stack" data-form-demo novalidate>
     <div class="le-field">
       <label class="le-label" for="demo-name">名称</label>
@@ -13,10 +23,16 @@
     </div>
     <div class="component-demo-inline"><button class="le-button" type="submit">保存</button><output class="component-demo-output" data-form-output aria-live="polite"></output></div>
   </form>
-</article>
+</Demo>
 
-<article id="component-example-choices" class="showcase">
-  <h4 class="showcase-heading">复选框与单选框</h4>
+<Demo id="textarea" title="多行输入框">
+  <div class="le-field">
+    <label class="le-label" for="demo-textarea">补充说明</label>
+    <textarea class="le-textarea" id="demo-textarea" rows="3" placeholder="记录一点想法"></textarea>
+  </div>
+</Demo>
+
+<Demo id="choices" title="复选框">
   <div class="component-demo-stack">
     <fieldset class="le-fieldset">
       <legend>关注的内容</legend>
@@ -24,16 +40,20 @@
       <label class="le-choice"><input type="checkbox" name="demo-topics" value="notes" /> 笔记</label>
       <label class="le-choice"><input type="checkbox" name="demo-topics" value="archived" disabled /> 已归档</label>
     </fieldset>
+  </div>
+</Demo>
+
+<Demo id="radio" title="单选框">
+  <div class="component-demo-stack">
     <fieldset class="le-fieldset">
       <legend>提醒频率</legend>
       <label class="le-choice"><input type="radio" name="demo-frequency" value="daily" checked /> 每天</label>
       <label class="le-choice"><input type="radio" name="demo-frequency" value="weekly" /> 每周</label>
     </fieldset>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-native-select" class="showcase">
-  <h4 class="showcase-heading">选择框</h4>
+<Demo id="native-select" title="选择框">
   <div class="le-field">
     <label class="le-label" for="demo-select">展示方式</label>
     <select class="le-select" id="demo-select">
@@ -41,15 +61,13 @@
     </select>
     <p class="le-field-hint">使用浏览器原生选择交互。</p>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-switch" class="showcase">
-  <h4 class="showcase-heading">开关</h4>
+<Demo id="switch" title="开关">
   <label class="le-choice"><input class="le-switch" type="checkbox" role="switch" checked /> 接收更新提醒</label>
-</article>
+</Demo>
 
-<article id="component-example-input-group" class="showcase">
-  <h4 class="showcase-heading">输入框组合</h4>
+<Demo id="input-group" title="输入框组合">
   <div class="le-field">
     <label class="le-label" for="demo-path">页面路径</label>
     <div class="le-input-group">
@@ -57,10 +75,9 @@
       <input class="le-input" id="demo-path" value="design" />
     </div>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-combobox" class="showcase">
-  <h4 class="showcase-heading">可搜索选择</h4>
+<Demo id="combobox" title="可搜索选择">
   <div class="le-field le-combobox" data-combobox-demo>
     <label class="le-label" for="demo-color-search">标签</label>
     <input class="le-input" id="demo-color-search" type="text" inputmode="search" autocomplete="off" placeholder="搜索标签" data-le-combobox-input />
@@ -73,25 +90,23 @@
       <p class="le-combobox-empty" role="status" data-le-combobox-empty hidden>没有匹配的标签</p>
     </div>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-slider" class="showcase">
-  <h4 class="showcase-heading">滑块</h4>
+<Demo id="slider" title="滑块">
   <div class="le-field">
     <label class="le-label" for="demo-slider">预览亮度</label>
     <input class="le-slider" id="demo-slider" type="range" min="0" max="100" value="40" />
     <output class="component-demo-output" for="demo-slider" data-slider-value>40%</output>
   </div>
-</article>
+</Demo>
 
-<article id="component-example-file" class="showcase">
-  <h4 class="showcase-heading">文件选择</h4>
+<Demo id="file" title="文件选择">
   <div class="le-field">
     <label class="le-label" for="demo-files">图片或 PDF</label>
     <input class="le-file" id="demo-files" type="file" accept="image/*,.pdf" multiple aria-describedby="demo-files-hint" />
     <p class="le-field-hint" id="demo-files-hint">演示只在本机选择文件。</p>
   </div>
-</article>
+</Demo>
 
 <script>
   import { createCombobox, createSlider } from '@luminedge/ui';

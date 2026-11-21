@@ -3,79 +3,69 @@ import Demo from './Demo.astro';
 const areas = ['标题', '导航', '内容', '备注'];
 ---
 
-<section class="component-group" id="catalog-layout" data-index-subsection tabindex="-1" aria-labelledby="catalog-layout-title">
-  <h3 id="catalog-layout-title">排列与尺寸</h3>
-  <div class="component-grid">
-    <Demo id="layout" title="页面布局">
-      <div class="le-layout le-layout--aside" aria-label="页面区域" role="group">
-        <span class="le-layout-wide demo-surface">页眉</span>
-        <span class="demo-surface">侧边</span>
-        <span class="demo-surface">正文</span>
-        <span class="le-layout-wide demo-surface">页脚</span>
-      </div>
-    </Demo>
-
-    <Demo id="grid" title="栅格">
-      <div class="le-grid">{areas.map((area) => <span class="demo-surface">{area}</span>)}</div>
-    </Demo>
-
-    <Demo id="flex" title="弹性布局">
-      <div class="le-flex" style="justify-content: space-between">
-        <strong>记录</strong>
-        <span class="le-tag">进行中</span>
-      </div>
-    </Demo>
-
-    <Demo id="space" title="间距容器">
-      <div class="le-space" style="--le-gap: var(--le-space-4)">
-        <span class="le-tag">草图</span><span class="le-tag">笔记</span><span class="le-tag">收藏</span>
-      </div>
-    </Demo>
-
-    <Demo id="masonry" title="瀑布流">
-      <div class="le-masonry">
-        <div class="demo-surface">一条笔记</div>
-        <div class="demo-surface">布局实验<br />待补上移动端</div>
-        <div class="demo-surface">字体样本<br />字号与字重<br />行高</div>
-        <div class="demo-surface">配色记录</div>
-      </div>
-    </Demo>
-
-    <Demo id="aspect-ratio" title="宽高比">
-      <div class="le-aspect demo-surface demo-aspect" style="--le-aspect-ratio: 16 / 9">
-        <span>16 / 9</span>
-      </div>
-    </Demo>
+<Demo id="layout" title="页面布局" alias="catalog-layout">
+  <div class="le-layout le-layout--aside" aria-label="页面区域" role="group">
+    <span class="le-layout-wide demo-surface">页眉</span>
+    <span class="demo-surface">侧边</span>
+    <span class="demo-surface">正文</span>
+    <span class="le-layout-wide demo-surface">页脚</span>
   </div>
-</section>
+</Demo>
 
-<section class="component-group" id="layout-dividers-scroll" data-index-subsection tabindex="-1" aria-labelledby="layout-dividers-scroll-title">
-  <h3 id="layout-dividers-scroll-title">分隔与滚动</h3>
-  <div class="component-grid">
-    <Demo id="separator" title="分隔线">
-      <div>设计记录</div>
-      <hr class="le-separator" />
-      <div>发布记录</div>
-    </Demo>
+<Demo id="grid" title="栅格">
+  <div class="le-grid">{areas.map((area) => <span class="demo-surface">{area}</span>)}</div>
+</Demo>
 
-    <Demo id="scroll-area" title="滚动区域与固钉">
-      <div class="le-scroll-area demo-scroll" tabindex="0" aria-label="更新记录" style="--le-scroll-height: 9rem">
-        <div class="le-affix demo-sticky">更新记录</div>
-        <ol class="le-item-list">
-          {['整理色彩', '核对字号', '调整留白', '验证导航', '记录组件', '更新预览'].map((item) => <li class="le-item">{item}</li>)}
-        </ol>
-      </div>
-    </Demo>
-
-    <Demo id="splitter" title="可调整分栏" wide>
-      <div class="le-splitter" data-splitter-demo>
-        <div class="demo-surface" id="demo-split-left">目录</div>
-        <div class="le-split-handle" data-le-split-handle aria-label="调整目录宽度" aria-controls="demo-split-left"></div>
-        <div class="demo-surface">内容</div>
-      </div>
-    </Demo>
+<Demo id="flex" title="弹性布局">
+  <div class="le-flex" style="justify-content: space-between">
+    <strong>记录</strong>
+    <span class="le-tag">进行中</span>
   </div>
-</section>
+</Demo>
+
+<Demo id="space" title="间距容器">
+  <div class="le-space" style="--le-gap: var(--le-space-4)">
+    <span class="le-tag">草图</span><span class="le-tag">笔记</span><span class="le-tag">收藏</span>
+  </div>
+</Demo>
+
+<Demo id="masonry" title="瀑布流">
+  <div class="le-masonry">
+    <div class="demo-surface">一条笔记</div>
+    <div class="demo-surface">布局实验<br />待补上移动端</div>
+    <div class="demo-surface">字体样本<br />字号与字重<br />行高</div>
+    <div class="demo-surface">配色记录</div>
+  </div>
+</Demo>
+
+<Demo id="aspect-ratio" title="宽高比">
+  <div class="le-aspect demo-surface demo-aspect" style="--le-aspect-ratio: 16 / 9">
+    <span>16 / 9</span>
+  </div>
+</Demo>
+
+<Demo id="separator" title="分隔线" alias="layout-dividers-scroll">
+  <div>设计记录</div>
+  <hr class="le-separator" />
+  <div>发布记录</div>
+</Demo>
+
+<Demo id="scroll-area" title="滚动区域与固钉">
+  <div class="le-scroll-area demo-scroll" tabindex="0" aria-label="更新记录" style="--le-scroll-height: 9rem">
+    <div class="le-affix demo-sticky">更新记录</div>
+    <ol class="le-item-list">
+      {['整理色彩', '核对字号', '调整留白', '验证导航', '记录组件', '更新预览'].map((item) => <li class="le-item">{item}</li>)}
+    </ol>
+  </div>
+</Demo>
+
+<Demo id="splitter" title="可调整分栏">
+  <div class="le-splitter" data-splitter-demo>
+    <div class="demo-surface" id="demo-split-left">目录</div>
+    <div class="le-split-handle" data-le-split-handle aria-label="调整目录宽度" aria-controls="demo-split-left"></div>
+    <div class="demo-surface">内容</div>
+  </div>
+</Demo>
 
 <script>
   import { createSplitter } from '@luminedge/ui';

@@ -142,7 +142,7 @@ const controller = createDialog(dialog, {
 
 ### 表单、反馈与数据展示
 
-[布局演示](https://hanbings.github.io/luminedge/#layout)展示内容容器、排列与尺寸、分隔与滚动。[组件演示](https://hanbings.github.io/luminedge/#components)按通用、输入、导航、反馈、数据和内容组织。
+[布局演示](https://hanbings.github.io/luminedge/#layout)和[组件演示](https://hanbings.github.io/luminedge/#components)可按示例名称直接跳转。每个示例附有设计理由、调整建议及适用的参考规范。
 
 样式包还提供以下框架无关的类名，可直接配合原生 HTML 使用：
 

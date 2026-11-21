@@ -1,4 +1,5 @@
 ---
+import Demo from '../showcase/Demo.astro';
 import FormExamples from '../showcase/form-examples.astro';
 import FeedbackExamples from '../showcase/feedback-examples.astro';
 import NavigationExamples from '../showcase/navigation-examples.astro';
@@ -16,69 +17,47 @@ import RichContentExamples from '../showcase/rich-content-examples.astro';
     <div class="section-heading">
       <h2 id="components-title">组件</h2>
     </div>
-    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-basics" aria-labelledby="catalog-basics-title">
-      <h3 id="catalog-basics-title">通用</h3>
-      <div class="component-grid">
-      <article id="component-example-button" class="showcase showcase-buttons">
-        <h4 class="showcase-heading">按钮</h4>
+    <div class="showcase-list">
+      <Demo id="button" title="按钮" alias="catalog-basics">
         <div class="showcase-body button-row">
           <button class="le-button" type="button" data-demo-action="主要操作">主要操作</button>
           <button class="le-button le-button--secondary" type="button" data-demo-action="次要操作">次要操作</button>
           <button class="le-button" type="button" disabled>不可用</button>
         </div>
-        <p>用 Tab 切换焦点，按 Enter 或空格触发。</p>
         <output class="demo-feedback" data-demo-feedback aria-live="polite" aria-atomic="true"></output>
-      </article>
-      <article id="component-example-card" class="showcase showcase-card">
-        <h4 class="showcase-heading">卡片与头像</h4>
-        <div class="showcase-body">
-          <div class="le-card sample-card">
-            <div class="sample-card-top">
-              <div class="le-avatar" aria-hidden="true">L</div>
-              <span class="sample-arrow" aria-hidden="true">↗</span>
-            </div>
-            <h4>今天也有好灵感</h4>
-            <p>记录每一个值得留意的瞬间。</p>
-          </div>
+      </Demo>
+      <FormExamples />
+      <AdvancedFormExamples />
+      <Demo id="card" title="卡片">
+        <div class="le-card sample-card">
+          <h4>今天也有好灵感</h4>
+          <p>记录每一个值得留意的瞬间。</p>
         </div>
-      </article>
-      <article id="component-example-dialog" class="showcase showcase-dialog">
-        <h4 class="showcase-heading">弹窗</h4>
+      </Demo>
+      <Demo id="avatar" title="头像">
+        <div class="le-avatar" role="img" aria-label="林的头像">L</div>
+      </Demo>
+      <Demo id="dialog" title="弹窗">
         <div class="showcase-body dialog-demo">
           <div><strong>需要用户做出选择时</strong><p>在清晰、专注的空间里继续。</p></div>
           <button class="le-button" type="button" data-dialog-open>打开弹窗 ↗</button>
         </div>
-        <p>弹窗使用浏览器原生交互，可按 Esc 关闭。</p>
-      </article>
-      <article class="showcase showcase-annotation" data-annotation-demo>
-        <h4 class="showcase-heading">手绘标注</h4>
-        <div class="showcase-body annotation-demo">
+      </Demo>
+      <Demo id="annotation" title="手绘标注">
+        <div class="showcase-body annotation-demo" data-annotation-demo>
           <strong data-annotation-target>留住每个好灵感</strong>
           <button class="le-button le-button--secondary" type="button" data-annotation-replay>重播 ↻</button>
         </div>
-      </article>
-      </div>
-    </section>
-    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-forms" aria-labelledby="catalog-forms-title">
-      <h3 id="catalog-forms-title">输入</h3>
-      <div class="component-grid"><FormExamples /><AdvancedFormExamples /></div>
-    </section>
-    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-navigation" aria-labelledby="catalog-navigation-title">
-      <h3 id="catalog-navigation-title">导航</h3>
-      <div class="component-grid"><NavigationExamples /><AdvancedNavigationExamples /></div>
-    </section>
-    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-feedback" aria-labelledby="catalog-feedback-title">
-      <h3 id="catalog-feedback-title">反馈</h3>
-      <div class="component-grid"><FeedbackExamples /><StatusExamples /></div>
-    </section>
-    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-data" aria-labelledby="catalog-data-title">
-      <h3 id="catalog-data-title">数据</h3>
-      <div class="component-grid"><DataExamples /><AdvancedDataExamples /></div>
-    </section>
-    <section class="component-group" data-index-subsection tabindex="-1" id="catalog-content" aria-labelledby="catalog-content-title">
-      <h3 id="catalog-content-title">内容</h3>
-      <div class="component-grid"><ContentExamples /><RichContentExamples /></div>
-    </section>
+      </Demo>
+      <NavigationExamples />
+      <AdvancedNavigationExamples />
+      <FeedbackExamples />
+      <StatusExamples />
+      <DataExamples />
+      <AdvancedDataExamples />
+      <ContentExamples />
+      <RichContentExamples />
+    </div>
   </div>
 </section>
 <dialog class="le-dialog" id="example-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">

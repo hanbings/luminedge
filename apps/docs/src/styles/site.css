@@ -145,7 +145,7 @@ html.has-js .landing-content:has([data-index-subsection]) {
   width: calc(100% - var(--sidebar-width) - 2 * var(--page-gutter) - var(--subindex-width));
 }
 /* Place fragment targets on the same reading line used by the active index. */
-.landing-content [data-index-subsection] { scroll-margin-block-start: 25dvh; }
+.landing-content :is([data-index-subsection], .showcase-alias) { scroll-margin-block-start: 25dvh; }
 [data-index-subsection]:focus { outline: none; }
 [data-index-subsection]:focus-visible h3 { text-decoration: underline; text-underline-offset: 0.2em; }
 .landing-content:focus { outline: none; }
@@ -474,17 +474,19 @@ code, pre { @apply font-le-mono; }
   background: var(--le-color-surface);
 }
 
-.component-grid { @apply grid grid-cols-2; column-gap: 2rem; row-gap: 3rem; }
-.component-group { margin-top: 3rem; @apply scroll-mt-le-4; }
-.section-heading + .component-group { margin-top: 0; }
-.component-group > h3 { @apply mb-le-6; font-size: 1.125rem; @apply text-le-text; }
-.showcase { min-width: 0; }
-.showcase[id] { @apply scroll-mt-le-4; }
-.showcase--wide { @apply col-span-full; }
+#components .section-content, #layout .section-content { width: min(100%, var(--le-layout-max-width)); }
+.showcase-list { @apply grid; gap: clamp(3.5rem, 6vw, 6rem); }
+.section-heading + .showcase-list { margin-block-start: var(--le-space-8); }
+.showcase {
+  @apply relative grid items-start;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--le-space-4);
+}
+.showcase-alias { @apply absolute; inset-block-start: 0; }
 .showcase-heading {
-  margin: 0 0 1.25rem;
+  margin: 0;
   @apply text-le-text;
-  font-size: 1rem;
+  font-size: 1.125rem;
   letter-spacing: normal;
 }
 .demo-surface {
@@ -510,7 +512,7 @@ code, pre { @apply font-le-mono; }
 .component-date-layout { @apply grid grid-cols-2; align-items: start; @apply gap-le-6; }
 .showcase-body { @apply flex items-center; padding: 0 0 0.75rem; }
 .button-row { @apply flex-wrap; gap: 0.5rem; }
-.showcase > p {
+.showcase-example > p {
   margin: 0;
   @apply text-le-text-muted;
   font-size: 0.75rem;
@@ -522,14 +524,7 @@ code, pre { @apply font-le-mono; }
   @apply text-le-primary-strong;
   font-size: 0.75rem;
 }
-.sample-card { @apply w-full; padding: 0.85rem; }
-.sample-card-top { @apply flex items-start mb-le-6; }
-.sample-card .le-avatar {
-  width: 2.5rem;
-  background: var(--le-color-primary-selected);
-  @apply text-le-primary-text text-le-sm;
-  font-weight: var(--le-font-weight-medium);
-}
+.sample-card { @apply w-full; }
 .sample-card h4 { margin: 0 0 0.25rem; font-size: 0.875rem; font-weight: var(--le-font-weight-medium); line-height: 1.4; }
 .sample-card p {
   margin: 0;
@@ -539,8 +534,6 @@ code, pre { @apply font-le-mono; }
 }
 .dialog-demo strong { font-size: 0.8125rem; }
 .dialog-demo p { margin: 0.2rem 0 0; @apply text-le-text-muted; font-size: 0.75rem; }
-.sample-arrow { @apply ml-auto text-le-primary-indicator; }
-.showcase-dialog, .showcase-annotation { @apply col-span-full; }
 .dialog-demo, .annotation-demo { @apply justify-between; gap: 1rem; }
 .annotation-demo strong { font-size: 0.8125rem; }
 
@@ -552,6 +545,12 @@ code, pre { @apply font-le-mono; }
   gap: 1rem;
 }
 .architecture-layer dt { @apply grid; gap: 0.15rem; font-size: 0.8125rem; }
+.showcase-example, .showcase-guidance { min-inline-size: 0; }
+.showcase-guidance { @apply text-le-text-muted wrap-anywhere; font-size: var(--le-font-size-sm); }
+.showcase-guidance p { margin: 0; }
+.showcase-guidance p + p { margin-block-start: var(--le-space-2); }
+.showcase-guidance strong { @apply text-le-text font-le-medium; }
+.showcase-guidance a { font-size: var(--le-font-size-xs); text-underline-offset: 0.2em; }
 .architecture-layer code { @apply text-le-text-muted; font-size: 0.7rem; @apply wrap-anywhere; }
 .architecture-layer dd { margin: 0; @apply text-le-text-muted; font-size: 0.8125rem; }
 
@@ -607,9 +606,12 @@ code, pre { @apply font-le-mono; }
   .typography-layout { grid-template-columns: minmax(0, 1fr); }
   .text-annotations { margin-top: 3rem; }
 }
-@media (max-width: 1000px) {
-  .component-grid { grid-template-columns: 1fr; }
-  .showcase-dialog, .showcase-annotation, .showcase--wide { @apply col-auto; }
+@media (min-width: 1024px) {
+  .showcase {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    column-gap: clamp(1.5rem, 3vw, 3rem);
+  }
+  .showcase-heading { @apply col-span-full; }
 }
 @media (max-width: 900px) {
   body { --sidebar-width: 5.5rem; --page-gutter: 1rem; }
@@ -622,7 +624,7 @@ code, pre { @apply font-le-mono; }
   .color-role-grid { padding-top: 0; }
   .color-role-sample { width: min(11.2rem, calc(33.333333% - 0.833333rem)); }
   html[data-page='landing'] { scroll-padding-top: 3rem; }
-  .landing-content [data-index-subsection] { scroll-margin-block-start: max(0px, calc(25dvh - 3rem)); }
+  .landing-content :is([data-index-subsection], .showcase-alias) { scroll-margin-block-start: max(0px, calc(25dvh - 3rem)); }
   .subsection-index:not([hidden]) { @apply hidden; }
   html.index-visible .appearance-controls {
     inset-block-start: auto;

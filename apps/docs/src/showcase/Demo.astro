@@ -1,13 +1,30 @@
 ---
+import { guidance, principles } from './guidance';
+
 interface Props {
   id: string;
   title: string;
-  wide?: boolean;
+  anchor?: string;
+  alias?: string;
 }
-const { id, title, wide = false } = Astro.props;
+const { id, title, anchor = `component-example-${id}`, alias } = Astro.props;
+const note = guidance[id];
+if (!note) throw new Error(`Missing design guidance for ${id}`);
+const principle = note.basis && principles[note.basis];
+const paragraphs = [note.rationale, note.customization];
 ---
 
-<article id={`component-example-${id}`} class:list={['showcase', { 'showcase--wide': wide }]} aria-labelledby={`component-example-${id}-title`}>
-  <h4 class="showcase-heading" id={`component-example-${id}-title`}>{title}</h4>
-  <slot />
+<article id={anchor} class="showcase" data-index-subsection tabindex="-1" aria-labelledby={`${anchor}-title`}>
+  {alias && <span id={alias} class="showcase-alias" aria-hidden="true"></span>}
+  <h3 class="showcase-heading" id={`${anchor}-title`}>{title}</h3>
+  <div class="showcase-example"><slot /></div>
+  <div class="showcase-guidance">
+    {paragraphs.map((paragraph, index) => (
+      <p>
+        {index === 1 && <strong>调整时 </strong>}
+        {paragraph.split(/(--le-[a-z0-9-]+)/g).map((part) => part.startsWith('--le-') ? <code>{part}</code> : part)}
+      </p>
+    ))}
+    {principle && <p><a href={principle.href}>{principle.label}</a></p>}
+  </div>
 </article>
