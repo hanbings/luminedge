@@ -8,7 +8,23 @@
 }
 
 * { @apply box-border; }
-html { @apply le-scrollbar; scroll-behavior: smooth; scroll-padding-top: 2rem; }
+html {
+  @apply le-scrollbar;
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+html:has(.le-dialog:modal) {
+  overflow: hidden;
+  background-color: var(--le-color-backdrop);
+}
+/* Fill the reserved scrollbar gutter with the surface of a drawer at the viewport edge. */
+html:has(.le-dialog.le-drawer:modal:not(.le-drawer--start)) {
+  background-color: var(--le-color-surface);
+}
+.le-dialog.le-drawer:not(.le-drawer--start) {
+  inset-inline-end: min(0px, calc(100% - 100vw));
+}
 body {
   --sidebar-width: 10rem;
   --subindex-width: clamp(5.5rem, 8vw, 8rem);
@@ -138,7 +154,6 @@ a:focus-visible { outline: 3px solid var(--le-color-focus); outline-offset: 4px;
 .subsection-index a:is(:hover, :focus-visible, [aria-current='location']) { @apply text-le-primary-text; }
 .subsection-index a[aria-current='location'] { @apply font-le-semibold; }
 .subsection-index a:focus-visible { outline-offset: 1px; }
-:root:has(.subsection-search:modal) { overflow: hidden; }
 .subsection-search {
   --le-dialog-padding: clamp(0.875rem, 2vw, 1.5rem);
   width: min(50rem, calc(100% - 2rem));
