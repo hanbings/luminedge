@@ -60,13 +60,13 @@ export const formGuidance = {
     basis: 'targets',
   },
   time: {
-    rationale: '时间输入沿用普通输入框的圆角和高度，时钟图标让入口可辨。实际选择由浏览器提供，可沿用平台的时间格式和交互习惯。',
-    customization: '用标签说明时间用途。限制时段时配置 min、max 和 step，并在字段旁写明范围。涉及不同地区时明确时区。',
+    rationale: '小时与分钟分列，等宽数字便于纵向比较。选中项使用主色浅底，面板使用 --le-radius-md（0.875rem）和 --le-shadow-md，与其他浮层保持一致。',
+    customization: '用标签说明时间用途并注明时区。通过原生字段的 min、max 和 step 限制取值。自定义颜色时一起检查选中背景、文字和键盘焦点。',
     basis: 'forms',
   },
   'color-picker': {
-    rationale: '颜色选择同时给出色样和十六进制值。3 × 2.25rem 的色样沿用字段圆角，旁边的文本便于精确确认和转述颜色。',
-    customization: '底色与色样接近时，保留清晰的边界和焦点。允许手动录入色值时，给文本输入配上格式说明，并让两处显示随选择同步更新。',
+    rationale: '色相在色带上选择，色盘横向调整饱和度，纵向调整明度。色样与 HEX 同步预览，按确定后才应用。浮层沿用 --le-radius-md 和 --le-shadow-md。',
+    customization: '用标签说明颜色的用途。保留 HEX 输入，方便用键盘精确录入或粘贴色值。调整面板底色时，确保黑白色样和色盘上的定位点仍然可见。',
     basis: 'color',
   },
   otp: {

@@ -186,6 +186,8 @@ const controller = createDialog(dialog, {
 | `createCopyButton(button, source)` | 复制源元素的文字，触发 `le:copy`，用 `detail.copied` 和 `detail.selected` 告知结果。剪贴板不可写时，保留选中文本以便手动复制。 |
 | `createSlider(input)` | 同步原生范围输入框的轨道填充；在代码中更改数值或范围后调用 `refresh()`。 |
 | `createNumberInput(root)` | 用原生数字输入的步进规则驱动上下按钮。输入框用 `data-le-number-value`，两个 `type="button"` 按钮放进初始隐藏的 `data-le-number-controls` 容器，分别标记 `data-le-number-increment` 和 `data-le-number-decrement`。 |
+| `createTimePicker(root, input)` | 用初始隐藏的 `details` 增强原生 `input[type=time]`。小时和分钟列表通过 `data-le-time-hour` 与 `data-le-time-minute` 绑定，确认后把 `HH:mm` 写入原生输入框。表单提交与有效性校验沿用该输入框。见[时间选择示例](apps/docs/src/showcase/advanced-form-examples.astro)。 |
+| `createColorPicker(root, input)` | 用初始隐藏的 `details` 增强原生 `input[type=color]`。色盘、色相滑块和 HEX 输入共同预览不透明的 sRGB 色值，确认后由原生字段提交。见[颜色选择示例](apps/docs/src/showcase/advanced-form-examples.astro)。 |
 | `createOtpInput(root)` | 每个 `data-le-otp-cell` 文本输入框接收一位数字，格数由标记决定。支持自动前进、粘贴和在空白格按退格时回到前一格。可用带 `data-le-otp-value` 和 `name` 的隐藏输入提交完整验证码。变化时触发 `le:otpchange`，包含 `detail.value` 和 `detail.complete`。 |
 | `createPasswordInput(input, toggle, options)` | 切换原生密码输入的可见状态；可通过 `toggleLabel`、`showText` 和 `hideText` 设置显示文案。 |
 | `createTokenInput(root, options)` | 为文本输入添加和移除简单标签，按 Enter 或点击按钮添加；`values` 设置初始标签，`name` 为每个标签生成表单值。变化时触发 `le:tokenschange`，包含 `detail.values`。 |

@@ -28,6 +28,8 @@ export { createTransfer } from './transfer.js';
 export { createSlider } from './slider.js';
 export type { SliderController } from './slider.js';
 export { createNumberInput } from './number-input.js';
+export { createTimePicker } from './time-picker.js';
+export { createColorPicker } from './color-picker.js';
 export { createOtpInput } from './otp-input.js';
 export { createPasswordInput } from './password-input.js';
 export type { PasswordInputOptions } from './password-input.js';
