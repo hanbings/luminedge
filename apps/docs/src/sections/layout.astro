@@ -8,12 +8,18 @@ const dimensions = [
   { name: '阅读容器最大宽度', token: '--le-layout-reading-width' },
   { name: '响应式两侧边距', token: '--le-layout-gutter' },
 ];
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <section class="section landing-content" id="layout" data-index-section aria-labelledby="layout-title" tabindex="-1">
   <div class="section-content">
     <div class="section-heading">
-      <h2 id="layout-title">布局</h2>
+      <h2 id="layout-title">{title}</h2>
     </div>
 
     <div class="showcase-list">

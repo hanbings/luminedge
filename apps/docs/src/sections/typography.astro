@@ -35,12 +35,18 @@ const textAnnotations = [
   { name: '交叉', text: '再想一想', type: 'crossed-off' },
   { name: '括号', text: '一小段文字', type: 'bracket' },
 ];
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <section class="section landing-content" id="typography" data-index-section aria-labelledby="typography-title" tabindex="-1">
   <div class="typography-layout">
     <div class="section-heading typography-heading">
-      <h2 id="typography-title">字体</h2>
+      <h2 id="typography-title">{title}</h2>
     </div>
 
     <div class="section-content typography-main">

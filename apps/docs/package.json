@@ -20,6 +20,7 @@
     "@astrojs/check": "^0.9.12",
     "@tailwindcss/vite": "^4.3.5",
     "tailwindcss": "^4.3.5",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "ultrahtml": "^1.7.0"
   }
 }

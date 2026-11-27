@@ -48,6 +48,7 @@ body {
 .appearance-controls > :is(.le-select, .le-button) {
   @apply pointer-events-auto text-le-xs;
 }
+html:not(.has-js) .appearance-controls { @apply hidden; }
 .appearance-controls .le-select {
   @apply w-auto py-le-1 text-center;
   field-sizing: content;
@@ -196,8 +197,16 @@ a:focus-visible { outline: 3px solid var(--le-color-focus); outline-offset: 4px;
 .landing-cover {
   @apply relative grid place-items-center min-h-screen;
   @apply min-h-svh;
-  padding: 3rem var(--page-gutter) 5rem;
+  grid-template-rows: 1fr auto;
+  padding: var(--le-space-12) var(--page-gutter) var(--le-space-16);
 }
+.cover-guide { @apply grid justify-items-center gap-le-1 text-center text-le-text-muted; }
+.cover-guide p { @apply m-le-0 text-le-xs; }
+.cover-doc-link {
+  @apply text-le-text-muted;
+  text-underline-offset: 0.25em;
+}
+.cover-doc-link:hover { @apply text-le-primary-text; }
 .landing-content {
   @apply flex items-center;
   width: calc(100% - var(--sidebar-width) - var(--page-gutter) - var(--page-gutter));
@@ -261,7 +270,10 @@ h1 { font-weight: var(--le-font-weight-semibold); }
 h2, h3 { font-weight: var(--le-font-weight-medium); }
 h4, h5, h6, .landing-content strong { font-weight: var(--le-font-weight-regular); }
 code, pre { @apply font-le-mono; }
-.hero-visual { @apply grid place-items-center; width: min(100%, 72rem); }
+.hero-visual {
+  @apply grid place-items-center;
+  width: min(100%, 72rem, calc(max(10rem, 100svh - 10rem) * 16 / 9));
+}
 .hero-visual img {
   @apply block w-full h-auto mix-blend-multiply;
   @variant docs-dark { mix-blend-mode: normal; filter: url(#mascot-dark); }
@@ -735,6 +747,7 @@ code, pre { @apply font-le-mono; }
   .mobile-subsection-label { @apply text-le-text-muted; }
   .mobile-index:focus-visible { outline: 2px solid var(--le-color-focus); outline-offset: 2px; }
   .mobile-index option { background: var(--le-color-surface); color: var(--le-color-text); }
+  .landing-cover { padding-block-end: max(var(--le-space-16), calc(env(safe-area-inset-bottom) + 2.5rem)); }
   html.has-js .landing-cover .scroll-cue { @apply hidden; }
   html.has-js .mobile-scroll-cue:not([hidden]) {
     @apply fixed z-3;

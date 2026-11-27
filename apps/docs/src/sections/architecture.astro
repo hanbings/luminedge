@@ -6,12 +6,18 @@ const layers = [
   { name: '总包', packageName: '@luminedge/ui', description: '汇总样式与组件，提供统一入口' },
   { name: '展示站', packageName: 'apps/docs', description: '使用 Astro 展示设计与组件' },
 ];
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <section class="section landing-content" id="architecture" data-index-section aria-labelledby="architecture-title" tabindex="-1">
   <div class="section-content">
     <div class="section-heading">
-      <h2 id="architecture-title">架构</h2>
+      <h2 id="architecture-title">{title}</h2>
     </div>
     <dl class="architecture-layers">
       {layers.map(({ name, packageName, description }) => (

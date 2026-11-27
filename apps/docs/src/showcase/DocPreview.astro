@@ -1,0 +1,22 @@
+---
+import { getShowcaseExample, getShowcaseSection } from './renderers';
+
+interface Props {
+  anchor: string;
+  title: string;
+  heading: string;
+  headingId: string;
+  chapter: boolean;
+  chapterLinks: Record<string, string>;
+}
+
+const { anchor, title, heading, headingId, chapter, chapterLinks } = Astro.props;
+const Section = chapter ? getShowcaseSection(anchor) : undefined;
+const Example = chapter ? undefined : getShowcaseExample(anchor);
+---
+
+<section class="docs-preview" id={chapter ? undefined : anchor} data-doc-preview aria-labelledby={headingId}>
+  <h2 id={headingId}>{heading}</h2>
+  {Section && <Section {title} {chapterLinks} />}
+  {Example && <div class="docs-preview-sample"><Example /></div>}
+</section>

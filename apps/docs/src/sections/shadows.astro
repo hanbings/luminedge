@@ -7,12 +7,18 @@ const shadows = [
   { name: '中', token: '--le-shadow-md' },
   { name: '浮层', token: '--le-shadow-lg' },
 ];
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <section class="section landing-content" id="shadows" data-index-section aria-labelledby="shadows-title" tabindex="-1">
   <div class="section-content">
     <div class="section-heading">
-      <h2 id="shadows-title">阴影</h2>
+      <h2 id="shadows-title">{title}</h2>
     </div>
 
     <div class="foundation-grid">

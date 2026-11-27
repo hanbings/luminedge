@@ -8,6 +8,13 @@ export default defineConfig({
   site: process.env.ASTRO_SITE || undefined,
   base: process.env.ASTRO_BASE || '/',
   devToolbar: { enabled: false },
+  markdown: {
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark' },
+      defaultColor: false,
+      wrap: true,
+    },
+  },
   vite: {
     plugins: [
       {

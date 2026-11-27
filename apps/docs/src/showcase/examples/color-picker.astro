@@ -1,0 +1,34 @@
+<div class="le-field">
+  <label class="le-label" id="demo-color-picker-label" for="demo-color-picker">高亮色</label>
+  <input class="le-color-input" id="demo-color-picker" type="color" name="highlight" value="#87baff" />
+  <details class="le-color-picker" data-color-picker-demo hidden>
+    <summary class="le-input le-color-picker-trigger" aria-labelledby="demo-color-picker-label demo-color-picker-value">
+      <span class="le-color-picker-swatch" aria-hidden="true"></span>
+      <span id="demo-color-picker-value" data-le-color-value dir="ltr"></span>
+    </summary>
+    <div class="le-color-picker-panel">
+      <div class="le-color-picker-plane" data-le-color-plane aria-hidden="true">
+        <span class="le-color-picker-marker"></span>
+      </div>
+      <input class="le-slider le-color-picker-hue" type="range" min="0" max="359" step="1" dir="ltr" aria-label="色相" data-le-color-hue />
+      <div class="le-input-group le-color-picker-code">
+        <label class="le-input-affix" for="demo-color-picker-hex">HEX</label>
+        <input class="le-input" id="demo-color-picker-hex" type="text" placeholder="#RRGGBB" autocomplete="off" spellcheck="false" dir="ltr" aria-describedby="demo-color-picker-error" data-le-color-hex />
+        <span class="le-color-picker-swatch le-color-picker-preview" aria-hidden="true"></span>
+      </div>
+      <p class="le-field-error" id="demo-color-picker-error" data-le-color-error data-invalid="请输入 6 位十六进制颜色。" role="alert" hidden></p>
+      <div class="le-color-picker-actions">
+        <button class="le-button le-button--secondary" type="button" data-le-menu-close>取消</button>
+        <button class="le-button" type="button" data-le-color-confirm>确定</button>
+      </div>
+    </div>
+  </details>
+</div>
+
+<script>
+  import { createColorPicker } from '@luminedge/ui';
+
+  const color = document.querySelector<HTMLInputElement>('#demo-color-picker');
+  const colorPicker = document.querySelector<HTMLDetailsElement>('[data-color-picker-demo]');
+  if (color && colorPicker) createColorPicker(colorPicker, color);
+</script>

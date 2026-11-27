@@ -1,0 +1,103 @@
+---
+import '../styles/tailwind.css';
+import '../styles/site.css';
+import { accents } from '../site-appearance';
+
+interface Props {
+  title: string;
+  description?: string;
+  page: 'landing' | 'docs';
+}
+
+const { title, description = 'Luminedge 设计变量与组件展示。', page } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN" data-page={page}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content={description} />
+    <title>{title} — Luminedge</title>
+    <script define:vars={{ accentValues: accents.map(({ value }) => value) }}>
+      (() => {
+        const root = document.documentElement;
+        const themeKey = 'luminedge-theme';
+        const linesKey = 'luminedge-lines';
+        const accentKey = 'luminedge-accent';
+
+        function applyAccent(preference) {
+          if (preference !== 'blue' && accentValues.includes(preference)) root.dataset.leAccent = preference;
+          else delete root.dataset.leAccent;
+          const picker = document.querySelector('[data-accent-picker]');
+          if (picker) picker.value = root.dataset.leAccent || 'blue';
+        }
+        function applyTheme(preference) {
+          if (preference === 'light' || preference === 'dark') root.dataset.leTheme = preference;
+          else delete root.dataset.leTheme;
+          const picker = document.querySelector('[data-theme-picker]');
+          if (picker) picker.value = root.dataset.leTheme || 'system';
+        }
+        function applyLines(preference) {
+          if (preference === 'off') root.dataset.leLines = 'off';
+          else delete root.dataset.leLines;
+          const picker = document.querySelector('[data-lines-picker]');
+          if (picker) picker.value = root.dataset.leLines || 'on';
+        }
+        function restoreAppearance() {
+          try {
+            applyTheme(localStorage.getItem(themeKey));
+            applyLines(localStorage.getItem(linesKey));
+            applyAccent(localStorage.getItem(accentKey));
+          } catch { /* Storage is optional. */ }
+        }
+        function save(key, value) {
+          try {
+            if (value === null) localStorage.removeItem(key);
+            else localStorage.setItem(key, value);
+          } catch { /* Keep the selection for this page. */ }
+        }
+
+        restoreAppearance();
+        window.addEventListener('storage', (event) => {
+          if ([themeKey, linesKey, accentKey, null].includes(event.key)) restoreAppearance();
+        });
+        window.addEventListener('pageshow', (event) => {
+          if (event.persisted) restoreAppearance();
+        });
+
+        root.classList.add('has-js');
+        document.addEventListener('DOMContentLoaded', () => {
+          const picker = document.querySelector('[data-theme-picker]');
+          const linesPicker = document.querySelector('[data-lines-picker]');
+          const accentPicker = document.querySelector('[data-accent-picker]');
+          if (picker) {
+            picker.value = root.dataset.leTheme || 'system';
+            picker.addEventListener('change', () => {
+              applyTheme(picker.value);
+              save(themeKey, root.dataset.leTheme || null);
+            });
+          }
+          if (linesPicker) {
+            linesPicker.value = root.dataset.leLines || 'on';
+            linesPicker.addEventListener('change', () => {
+              applyLines(linesPicker.value);
+              save(linesKey, root.dataset.leLines || null);
+            });
+          }
+          if (accentPicker) {
+            accentPicker.value = root.dataset.leAccent || 'blue';
+            accentPicker.addEventListener('change', () => {
+              applyAccent(accentPicker.value);
+              save(accentKey, root.dataset.leAccent || null);
+            });
+          }
+        }, { once: true });
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

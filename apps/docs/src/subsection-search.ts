@@ -4,6 +4,7 @@ interface SearchEntry {
   link: HTMLAnchorElement;
   title: string;
   section?: string;
+  searchText?: string;
 }
 
 export function createSubsectionSearch(
@@ -20,15 +21,15 @@ export function createSubsectionSearch(
 
   function render() {
     const query = normalize(input.value);
-    const matches = entries.filter(({ link, title }) =>
-      normalize(title).includes(query) || normalize(link.text).includes(query),
+    const matches = entries.filter(({ link, title, searchText }) =>
+      normalize(title).includes(query) || normalize(link.text).includes(query) || normalize(searchText ?? '').includes(query),
     );
     const current = getCurrent();
 
     results.replaceChildren(...matches.map(({ link: source, title, section }) => {
       const item = document.createElement('li');
       const link = document.createElement('a');
-      link.href = source.hash;
+      link.href = source.href;
       link.text = title;
       if (source === current) link.setAttribute('aria-current', 'location');
       if (section) {

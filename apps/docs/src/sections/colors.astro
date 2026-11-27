@@ -28,11 +28,17 @@ const roles = [
   { name: '辅色', background: '--le-color-secondary', foreground: '--le-color-on-secondary' },
   { name: '反色文字', background: '--le-color-surface-inverse', foreground: '--le-color-text-inverse' },
 ];
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <section class="section landing-content" id="colors" data-index-section aria-labelledby="colors-title" tabindex="-1">
   <div class="color-content">
-    <div class="section-heading"><h2 id="colors-title">色彩</h2></div>
+    <div class="section-heading"><h2 id="colors-title">{title}</h2></div>
     <div class="color-layout">
       <div class="palette-content" id="colors-theme" data-index-subsection="主题" tabindex="-1">
         <h3>主要颜色</h3>

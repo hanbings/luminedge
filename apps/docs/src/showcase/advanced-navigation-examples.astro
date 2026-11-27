@@ -1,12 +1,18 @@
 ---
 import Demo from './Demo.astro';
+
+interface Props {
+  chapterLinks?: Readonly<Record<string, string>>;
+}
+
+const { chapterLinks } = Astro.props;
 ---
 
 <Demo id="anchor" title="锚点导航">
   <nav class="le-anchor" aria-label="基础规范">
-    <a href="#colors">色彩</a>
-    <a href="#typography">字体</a>
-    <a href="#layout">布局</a>
+    <a href={chapterLinks?.colors ?? '#colors'}>色彩</a>
+    <a href={chapterLinks?.typography ?? '#typography'}>字体</a>
+    <a href={chapterLinks?.layout ?? '#layout'}>布局</a>
   </nav>
 </Demo>
 
@@ -35,15 +41,15 @@ import Demo from './Demo.astro';
     <details class="le-menu" data-le-menubar-menu name="demo-navigation-menu">
       <summary class="le-button">基础规范</summary>
       <div class="le-menu-panel">
-        <a class="le-menu-item" href="#colors" data-le-menu-close>色彩</a>
-        <a class="le-menu-item" href="#typography" data-le-menu-close>字体</a>
+        <a class="le-menu-item" href={chapterLinks?.colors ?? '#colors'} data-le-menu-close>色彩</a>
+        <a class="le-menu-item" href={chapterLinks?.typography ?? '#typography'} data-le-menu-close>字体</a>
       </div>
     </details>
     <details class="le-menu" data-le-menubar-menu name="demo-navigation-menu">
       <summary class="le-button">开发</summary>
       <div class="le-menu-panel">
-        <a class="le-menu-item" href="#architecture" data-le-menu-close>架构</a>
-        <a class="le-menu-item" href="#usage" data-le-menu-close>使用</a>
+        <a class="le-menu-item" href={chapterLinks?.architecture ?? '#architecture'} data-le-menu-close>架构</a>
+        <a class="le-menu-item" href={chapterLinks?.usage ?? '#usage'} data-le-menu-close>使用</a>
       </div>
     </details>
   </nav>
@@ -89,7 +95,7 @@ import Demo from './Demo.astro';
 
 <Demo id="hover-card" title="悬浮预览">
   <span class="le-hover-card">
-    <a class="le-breadcrumb-link" id="demo-hover-trigger" href="#typography" aria-describedby="demo-hover-preview">字体规范 ↗</a>
+    <a class="le-breadcrumb-link" id="demo-hover-trigger" href={chapterLinks?.typography ?? '#typography'} aria-describedby="demo-hover-preview">字体规范 ↗</a>
     <span class="le-hover-card-panel" id="demo-hover-preview" hidden>查看字号、字重、行高和推荐字体。</span>
   </span>
 </Demo>

@@ -1,5 +1,11 @@
 ---
 import Demo from './Demo.astro';
+
+interface Props {
+  chapterLinks?: Readonly<Record<string, string>>;
+}
+
+const { chapterLinks } = Astro.props;
 ---
 
 <Demo id="tabs" title="选项卡" alias="catalog-navigation">
@@ -59,7 +65,7 @@ import Demo from './Demo.astro';
 <Demo id="breadcrumb" title="面包屑">
   <nav aria-label="示例页面路径">
     <ol class="le-breadcrumb">
-      <li><a class="le-breadcrumb-link" href="#top">Luminedge</a></li>
+      <li><a class="le-breadcrumb-link" href={chapterLinks?.top ?? '#top'}>Luminedge</a></li>
       <li><span aria-hidden="true">/</span><span aria-current="location">组件</span></li>
     </ol>
   </nav>

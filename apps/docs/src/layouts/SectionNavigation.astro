@@ -1,0 +1,76 @@
+---
+import { showcaseHref } from '../doc-catalog';
+
+interface Chapter {
+  anchor: string;
+  title: string;
+  href?: string;
+}
+
+interface Subsection {
+  anchor: string;
+  label: string;
+  href: string;
+}
+
+interface Props {
+  chapters: Chapter[];
+  currentChapter?: string;
+  subsections?: Subsection[];
+  currentSubsection?: string;
+  mode?: 'landing' | 'docs-mobile' | 'docs-desktop';
+}
+
+const { chapters, currentChapter, subsections = [], currentSubsection, mode = 'landing' } = Astro.props;
+const landing = mode === 'landing';
+const hasDocOutline = mode === 'docs-desktop' && subsections.length > 0;
+const indexStep = 60;
+const indexDuration = 280;
+---
+
+<header class:list={['site-header', { 'docs-chapter-bar': mode === 'docs-mobile' }]} style={landing ? `--index-fade-duration: ${indexDuration}ms; --index-hide-delay: ${(chapters.length - 1) * indexStep + indexDuration}ms` : undefined}>
+  {mode !== 'docs-desktop' && (
+    <>
+      <select class="mobile-index mobile-section-label" data-section-picker aria-label="章节">
+        <option value="" hidden disabled selected={!currentChapter}>{landing ? 'Luminedge' : '章节'}</option>
+        {chapters.map(({ anchor, title, href }) => (
+          <option value={landing ? anchor : href} selected={currentChapter === anchor}>{title}</option>
+        ))}
+      </select>
+      <select class="mobile-index mobile-subsection-label" data-subsection-picker aria-label={landing ? '章节内导航' : '本页目录'} hidden={subsections.length === 0}>
+        {subsections.map(({ anchor, label, href }) => <option value={href} selected={currentSubsection === anchor}>{label}</option>)}
+      </select>
+    </>
+  )}
+  {mode !== 'docs-mobile' && (
+    <nav aria-label={landing ? '页面导航' : '文档章节'}>
+      {chapters.map(({ anchor, title, href }, index) => (
+        <a href={href ?? showcaseHref(anchor)} data-index-target={anchor} aria-current={currentChapter === anchor ? 'location' : undefined} style={landing ? `--index-delay: ${index * indexStep}ms; --index-exit-delay: ${(chapters.length - 1 - index) * indexStep}ms` : undefined}>{title}</a>
+      ))}
+    </nav>
+  )}
+</header>
+
+{mode !== 'docs-mobile' && (
+  <nav class="subsection-index" aria-label={landing ? '章节内导航' : '本页目录'} data-subsection-index hidden={subsections.length === 0}>
+    {hasDocOutline && <p class="docs-outline-title">本页目录</p>}
+    {hasDocOutline && (
+      <div class="docs-outline-cue" data-doc-outline-cue hidden>
+        <button class="le-button le-button--secondary" type="button" aria-label="向下滚动目录" aria-controls="docs-outline-links">
+          <span aria-hidden="true">↓</span>
+        </button>
+      </div>
+    )}
+    <div
+      data-subsection-links
+      id={hasDocOutline ? 'docs-outline-links' : undefined}
+      tabindex={hasDocOutline ? 0 : undefined}
+      role={hasDocOutline ? 'group' : undefined}
+      aria-label={hasDocOutline ? '目录条目' : undefined}
+    >
+      {subsections.map(({ anchor, label, href }) => (
+        <a href={href} data-subsection-target={anchor} aria-current={currentSubsection === anchor ? 'location' : undefined}>{label}</a>
+      ))}
+    </div>
+  </nav>
+)}

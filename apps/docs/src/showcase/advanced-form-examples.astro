@@ -1,10 +1,9 @@
 ---
 import Demo from './Demo.astro';
+import ColorPickerExample from './examples/color-picker.astro';
+import TimeExample from './examples/time.astro';
 
 const otpLength = 6;
-const timeOptions = (length: number) => Array.from({ length }, (_, value) => String(value).padStart(2, '0'));
-const hours = timeOptions(24);
-const minutes = timeOptions(60);
 ---
 
 <Demo id="number" title="数字输入">
@@ -21,66 +20,11 @@ const minutes = timeOptions(60);
 </Demo>
 
 <Demo id="time" title="时间选择">
-  <div class="le-field">
-    <label class="le-label" id="demo-time-label" for="demo-time">提醒时间</label>
-    <input class="le-input" id="demo-time" type="time" name="time" value="09:30" />
-    <details class="le-time-picker" data-time-picker-demo hidden>
-      <summary class="le-input le-time-trigger" aria-labelledby="demo-time-label demo-time-value">
-        <span id="demo-time-value" data-le-time-value>选择时间</span>
-      </summary>
-      <div class="le-time-panel">
-        <div class="le-time-columns">
-          <label class="le-field">
-            <span class="le-label">小时</span>
-            <select class="le-select le-time-list" size="5" data-le-time-hour>
-              {hours.map((hour) => <option value={hour}>{hour}</option>)}
-            </select>
-          </label>
-          <label class="le-field">
-            <span class="le-label">分钟</span>
-            <select class="le-select le-time-list" size="5" data-le-time-minute>
-              {minutes.map((minute) => <option value={minute}>{minute}</option>)}
-            </select>
-          </label>
-        </div>
-        <p class="le-field-error" data-le-time-error role="alert" hidden></p>
-        <div class="le-time-actions">
-          <button class="le-button le-button--secondary" type="button" data-le-time-clear>清除</button>
-          <button class="le-button le-button--secondary" type="button" data-le-menu-close>取消</button>
-          <button class="le-button" type="button" data-le-time-confirm>确定</button>
-        </div>
-      </div>
-    </details>
-  </div>
+  <TimeExample />
 </Demo>
 
 <Demo id="color-picker" title="颜色选择">
-  <div class="le-field">
-    <label class="le-label" id="demo-color-picker-label" for="demo-color-picker">高亮色</label>
-    <input class="le-color-input" id="demo-color-picker" type="color" name="highlight" value="#87baff" />
-    <details class="le-color-picker" data-color-picker-demo hidden>
-      <summary class="le-input le-color-picker-trigger" aria-labelledby="demo-color-picker-label demo-color-picker-value">
-        <span class="le-color-picker-swatch" aria-hidden="true"></span>
-        <span id="demo-color-picker-value" data-le-color-value dir="ltr"></span>
-      </summary>
-      <div class="le-color-picker-panel">
-        <div class="le-color-picker-plane" data-le-color-plane aria-hidden="true">
-          <span class="le-color-picker-marker"></span>
-        </div>
-        <input class="le-slider le-color-picker-hue" type="range" min="0" max="359" step="1" dir="ltr" aria-label="色相" data-le-color-hue />
-        <div class="le-input-group le-color-picker-code">
-          <label class="le-input-affix" for="demo-color-picker-hex">HEX</label>
-          <input class="le-input" id="demo-color-picker-hex" type="text" placeholder="#RRGGBB" autocomplete="off" spellcheck="false" dir="ltr" aria-describedby="demo-color-picker-error" data-le-color-hex />
-          <span class="le-color-picker-swatch le-color-picker-preview" aria-hidden="true"></span>
-        </div>
-        <p class="le-field-error" id="demo-color-picker-error" data-le-color-error data-invalid="请输入 6 位十六进制颜色。" role="alert" hidden></p>
-        <div class="le-color-picker-actions">
-          <button class="le-button le-button--secondary" type="button" data-le-menu-close>取消</button>
-          <button class="le-button" type="button" data-le-color-confirm>确定</button>
-        </div>
-      </div>
-    </details>
-  </div>
+  <ColorPickerExample />
 </Demo>
 
 <Demo id="otp" title="验证码输入">
@@ -224,13 +168,9 @@ const minutes = timeOptions(60);
 </Demo>
 
 <script>
-  import { createCascader, createColorPicker, createMentions, createNumberInput, createOtpInput, createPasswordInput, createSelect, createTimePicker, createToggleButton, createTokenInput, createTransfer, createTreeSelect, createUpload } from '@luminedge/ui';
+  import { createCascader, createMentions, createNumberInput, createOtpInput, createPasswordInput, createSelect, createToggleButton, createTokenInput, createTransfer, createTreeSelect, createUpload } from '@luminedge/ui';
   document.querySelectorAll<HTMLButtonElement>('[data-toggle-demo]').forEach(createToggleButton);
   const number = document.querySelector<HTMLElement>('[data-number-demo]');
-  const time = document.querySelector<HTMLInputElement>('#demo-time');
-  const timePicker = document.querySelector<HTMLDetailsElement>('[data-time-picker-demo]');
-  const color = document.querySelector<HTMLInputElement>('#demo-color-picker');
-  const colorPicker = document.querySelector<HTMLDetailsElement>('[data-color-picker-demo]');
   const otp = document.querySelector<HTMLElement>('[data-otp-demo]');
   const mentions = document.querySelector<HTMLElement>('[data-mentions-demo]');
   const cascade = document.querySelector<HTMLElement>('[data-cascader-demo]');
@@ -242,8 +182,6 @@ const minutes = timeOptions(60);
   const passwordToggle = document.querySelector<HTMLButtonElement>('[data-password-toggle]');
   const tokenInput = document.querySelector<HTMLElement>('[data-token-input-demo]');
   if (number) createNumberInput(number);
-  if (time && timePicker) createTimePicker(timePicker, time);
-  if (color && colorPicker) createColorPicker(colorPicker, color);
   if (otp) createOtpInput(otp);
   if (mentions) createMentions(mentions);
   if (cascade) createCascader(cascade, [

@@ -1,0 +1,176 @@
+---
+import type { MarkdownHeading } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { docHref, docSlug, showcaseDocLinks, showcaseHref } from '../doc-catalog';
+import DocPreview from '../showcase/DocPreview.astro';
+import type { ShowcaseChapter, ShowcaseSubsection } from '../showcase/index-data';
+import AppearanceControls from './AppearanceControls.astro';
+import SectionNavigation from './SectionNavigation.astro';
+import SiteFrame from './SiteFrame.astro';
+import SiteSearch from './SiteSearch.astro';
+import '../styles/docs.css';
+
+type Doc = CollectionEntry<'docs'>;
+
+interface Props {
+  entry: Doc;
+  entries: Doc[];
+  chapters: ShowcaseChapter[];
+  subsectionIndex: Record<string, ShowcaseSubsection[]>;
+  headings: MarkdownHeading[];
+}
+
+const { entry, entries, chapters, subsectionIndex, headings } = Astro.props;
+const { title, description, showcase } = entry.data;
+const chapterLinks = showcaseDocLinks(entries);
+const currentChapter = chapters.find(({ id }) => id === entry.id)
+  ?? chapters.find(({ anchor }) => subsectionIndex[anchor]?.some((section) => section.anchor === showcase?.anchor))
+  ?? chapters.find(({ id }) => entry.id.startsWith(`${id}/`));
+const chapterNavigation = chapters.map((chapter) => ({ ...chapter, href: docHref(chapter.id) }));
+const position = entries.findIndex(({ id }) => id === entry.id);
+const previous = entries[position - 1];
+const next = entries[position + 1];
+const slug = docSlug(entry.id);
+const childPrefix = slug && `${slug}/`;
+const children = childPrefix ? entries.filter(({ id }) => {
+  const childSlug = docSlug(id);
+  return childSlug?.startsWith(childPrefix) && !childSlug.slice(childPrefix.length).includes('/');
+}) : [];
+const childrenHeading = { depth: 2, slug: 'docs-child-pages', text: '本节文档' };
+const previewHeading = { depth: 2, slug: 'docs-preview-title', text: '示例' };
+const preview = showcase?.preview ? {
+  anchor: showcase.anchor,
+  title: showcase.title ?? title,
+  heading: previewHeading.text,
+  headingId: previewHeading.slug,
+  chapter: showcase.order !== undefined,
+  chapterLinks: { ...chapterLinks, top: docHref('index') },
+} : undefined;
+
+const ownExamples = preview?.chapter ? subsectionIndex[preview.anchor] ?? [] : [];
+const pageHeadings = headings.filter(({ depth }) => depth === 2);
+if (preview && showcase?.preview === 'before') pageHeadings.unshift(previewHeading);
+if (children.length > 0) pageHeadings.push(childrenHeading);
+if (preview && showcase?.preview === 'after') pageHeadings.push(previewHeading);
+const outline = ownExamples.length > 0
+  ? ownExamples
+  : pageHeadings.map(({ slug: anchor, text: label }) => ({ anchor, label }));
+const subsections = outline.map(({ anchor, label }) => ({ anchor, label, href: `#${anchor}` }));
+const currentSubsection = subsections[0]?.anchor;
+
+const pagesById = new Map(entries.map((doc) => [doc.id, doc]));
+const exampleSearchEntries = chapters.flatMap((chapter) => {
+  const chapterPage = pagesById.get(chapter.id);
+  return (subsectionIndex[chapter.anchor] ?? []).map((example) => {
+    const { anchor } = example;
+    const inPreview = preview && (anchor === preview.anchor || (preview.chapter && chapter.anchor === preview.anchor));
+    const fallbackHref = chapterPage?.data.showcase?.preview ? `${docHref(chapter.id)}#${anchor}` : showcaseHref(anchor);
+    return { ...example, href: inPreview ? `#${anchor}` : chapterLinks[anchor] ?? fallbackHref, chapter: chapter.title };
+  });
+});
+---
+
+<SiteFrame page="docs" {title} {description}>
+  <a class="skip-link" href="#docs-content">跳到正文</a>
+  <div class="docs-chrome" data-doc-chrome>
+    <header class="docs-header">
+      <div class="docs-header-inner">
+        <a class="le-nav-link text-le-base font-le-semibold no-underline" href={docHref('index')}>Luminedge</a>
+        <nav class="le-button-group" aria-label="浏览模式">
+          <a class="le-button" href={docHref('index')} aria-current={entry.id === 'index' ? 'page' : 'true'}>文档</a>
+          <a class="le-button le-button--secondary" href={showcaseHref(showcase?.anchor)}>展示</a>
+        </nav>
+        <AppearanceControls hidden={false} />
+      </div>
+    </header>
+    <SectionNavigation
+      mode="docs-mobile"
+      chapters={chapterNavigation}
+      currentChapter={currentChapter?.anchor}
+      {subsections}
+      {currentSubsection}
+    />
+    <noscript>
+      <details class="docs-index-fallback">
+        <summary>{currentChapter?.title ?? '章节'}</summary>
+        <nav aria-label="页面导航">
+          {chapterNavigation.map(({ anchor, href, title: label }) => (
+            <a href={href} aria-current={anchor === currentChapter?.anchor ? 'location' : undefined}>{label}</a>
+          ))}
+        </nav>
+      </details>
+      {subsections.length > 0 && (
+        <details class="docs-index-fallback">
+          <summary>本页目录</summary>
+          <nav aria-label="本页目录">
+            {subsections.map(({ anchor, href, label }) => (
+              <a href={href} aria-current={anchor === currentSubsection ? 'location' : undefined}>{label}</a>
+            ))}
+          </nav>
+        </details>
+      )}
+    </noscript>
+  </div>
+
+  <div class="docs-grid">
+    <SectionNavigation
+      mode="docs-desktop"
+      chapters={chapterNavigation}
+      currentChapter={currentChapter?.anchor}
+      {subsections}
+      {currentSubsection}
+    />
+    <main class="docs-content" id="docs-content" tabindex="-1">
+      <header class="docs-page-header">
+        <h1>{title}</h1>
+        {description && <p>{description}</p>}
+        {showcase?.preview === 'after' && <a href={`#${previewHeading.slug}`}>查看示例</a>}
+        {showcase && !preview && <a href={showcaseHref(showcase.anchor)}>查看对应展示 <span aria-hidden="true">↗</span></a>}
+      </header>
+
+      {preview && showcase?.preview === 'before' && <DocPreview {...preview} />}
+      <article class="docs-prose">
+        <slot />
+        {children.length > 0 && (
+          <section aria-labelledby={childrenHeading.slug}>
+            <h2 id={childrenHeading.slug}>{childrenHeading.text}</h2>
+            <ul>
+              {children.map(({ id, data }) => <li><a href={docHref(id)}>{data.title}</a></li>)}
+            </ul>
+          </section>
+        )}
+      </article>
+      {preview && showcase?.preview === 'after' && <DocPreview {...preview} />}
+
+      {(previous || next) && (
+        <nav class="docs-pagination" aria-label="相邻文档">
+          {previous && (
+            <a href={docHref(previous.id)} rel="prev">
+              <span>上一篇</span>
+              {previous.data.title}
+            </a>
+          )}
+          {next && (
+            <a href={docHref(next.id)} rel="next">
+              <span>下一篇</span>
+              {next.data.title}
+            </a>
+          )}
+        </nav>
+      )}
+    </main>
+  </div>
+  <div hidden>
+    {entries.map(({ id, data }) => (
+      <a href={docHref(id)} data-doc-search-entry data-doc-search-group={data.group} data-doc-search-description={data.description} aria-current={id === entry.id ? 'page' : undefined}>{data.title}</a>
+    ))}
+    {exampleSearchEntries.map(({ href, title, label, chapter }) => (
+      <a href={href} data-doc-search-example data-doc-search-title={title} data-doc-search-group={chapter}>{label}</a>
+    ))}
+  </div>
+  <SiteSearch />
+</SiteFrame>
+
+<script>
+  import '../docs-index';
+</script>

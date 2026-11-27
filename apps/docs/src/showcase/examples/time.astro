@@ -1,0 +1,45 @@
+---
+const timeOptions = (length: number) => Array.from({ length }, (_, value) => String(value).padStart(2, '0'));
+const hours = timeOptions(24);
+const minutes = timeOptions(60);
+---
+
+<div class="le-field">
+  <label class="le-label" id="demo-time-label" for="demo-time">提醒时间</label>
+  <input class="le-input" id="demo-time" type="time" name="time" value="09:30" />
+  <details class="le-time-picker" data-time-picker-demo hidden>
+    <summary class="le-input le-time-trigger" aria-labelledby="demo-time-label demo-time-value">
+      <span id="demo-time-value" data-le-time-value>选择时间</span>
+    </summary>
+    <div class="le-time-panel">
+      <div class="le-time-columns">
+        <label class="le-field">
+          <span class="le-label">小时</span>
+          <select class="le-select le-time-list" size="5" data-le-time-hour>
+            {hours.map((hour) => <option value={hour}>{hour}</option>)}
+          </select>
+        </label>
+        <label class="le-field">
+          <span class="le-label">分钟</span>
+          <select class="le-select le-time-list" size="5" data-le-time-minute>
+            {minutes.map((minute) => <option value={minute}>{minute}</option>)}
+          </select>
+        </label>
+      </div>
+      <p class="le-field-error" data-le-time-error role="alert" hidden></p>
+      <div class="le-time-actions">
+        <button class="le-button le-button--secondary" type="button" data-le-time-clear>清除</button>
+        <button class="le-button le-button--secondary" type="button" data-le-menu-close>取消</button>
+        <button class="le-button" type="button" data-le-time-confirm>确定</button>
+      </div>
+    </div>
+  </details>
+</div>
+
+<script>
+  import { createTimePicker } from '@luminedge/ui';
+
+  const time = document.querySelector<HTMLInputElement>('#demo-time');
+  const timePicker = document.querySelector<HTMLDetailsElement>('[data-time-picker-demo]');
+  if (time && timePicker) createTimePicker(timePicker, time);
+</script>

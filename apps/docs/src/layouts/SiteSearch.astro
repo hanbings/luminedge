@@ -1,0 +1,19 @@
+---
+interface Props {
+  placeholder?: string;
+}
+
+const { placeholder = '搜索章节或文章' } = Astro.props;
+---
+
+<dialog class="le-dialog subsection-search" id="subsection-search" data-subsection-search aria-label="搜索文档" closedby="any">
+  <form>
+    <label class="visually-hidden" for="subsection-search-query">{placeholder}</label>
+    <input class="le-input" type="search" id="subsection-search-query" data-subsection-search-input placeholder={placeholder} autofocus />
+  </form>
+  <ul data-subsection-search-results></ul>
+  <footer>
+    <p class="subsection-search-status" role="status" data-subsection-search-status></p>
+    <button class="le-button le-button--secondary" type="button" data-subsection-search-close>关闭</button>
+  </footer>
+</dialog>

@@ -14,7 +14,7 @@ Luminedge 是一套自然、友好、优雅的界面设计语言。仓库将设�
 | `packages/components` | 框架无关的交互组件，基于原生浏览器能力 |
 | `packages/tools` | 各包共享的通用工具 |
 | `packages/ui` | 汇总样式和组件的入口 |
-| `apps/docs` | 使用 Astro 构建的设计与组件展示站 |
+| `apps/docs` | 使用 Astro 构建的展示页和阅读文档 |
 
 TypeScript 包使用基于 Rsbuild 的 Rslib 构建，输出 ESM 和类型声明。样式包由 Tailwind 编译成独立 CSS，展示站由 Astro 构建。目前包名为开发时约定，发布名称与 npm 命名空间尚未确定。
 
@@ -42,6 +42,14 @@ Astro 的检查工具目前要求 TypeScript 5 或 6，因此展示站单独使�
 `.github/workflows/pages.yml` 在 `main` 更新时构建并部署展示站，也可以从 Actions 手动运行。首次使用时，需要在仓库 **Settings → Pages** 中将发布来源设置为 **GitHub Actions**。工作流根据 Pages 配置自动设置站点地址和路径，默认地址为 `https://hanbings.github.io/luminedge/`。如果 Pages 尚不可用，工作流会完成构建、显示警告并跳过部署。
 
 私有仓库的 Pages 需要 GitHub Pro、Team 或 Enterprise 等支持该功能的方案；个人仓库发布的站点可以被互联网上的任何人访问。[GitHub Pages 文档](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+
+## 编写文档
+
+`/` 用于连续浏览色彩、设计规范和交互示例，`/docs/` 用于逐篇阅读。文档写在 `apps/docs/src/content/docs/`。文件路径决定 URL，`title`、`group` 和 `order` 分别用于文章标题、搜索分组和前后篇顺序。两种页面共用章节和示例数据。总览页的右栏按顺序列出全部示例，长目录可独立滚动。独立文章的右栏按本页二级标题生成，搜索也可以跳到每个示例。
+
+可选的 `showcase.anchor` 指向展示页里的章节或示例。为展示章节加上 `showcase.order` 后，首页会按这个顺序加载 `apps/docs/src/sections/` 中与锚点同名的 Astro 文件。`showcase.title` 可指定展示页的短标题。文档和展示之间的跳转由这些信息生成。
+
+`showcase.preview` 可设为 `before` 或 `after`，在正文前后内嵌相应的交互示例。独立的组件示例放在 `apps/docs/src/showcase/examples/`，例如 `time.astro` 对应 `component-example-time`。两种页面复用同一个示例文件。
 
 ## 使用
 

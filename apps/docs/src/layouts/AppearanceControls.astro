@@ -1,0 +1,28 @@
+---
+import { accents } from '../site-appearance';
+
+interface Props {
+  hidden?: boolean;
+}
+
+const { hidden = false } = Astro.props;
+---
+
+<div class="appearance-controls" role="group" aria-label="文档设置" hidden={hidden}>
+  <select class="le-select" data-lines-picker aria-label="强调线条">
+    <option value="on">有线条</option>
+    <option value="off">无线条</option>
+  </select>
+  <select class="le-select" data-accent-picker aria-label="主题色">
+    {accents.map(({ value, label }) => <option value={value}>{label}</option>)}
+  </select>
+  <select class="le-select" data-theme-picker aria-label="外观主题">
+    <option value="system">跟随系统</option>
+    <option value="light">浅色</option>
+    <option value="dark">深色</option>
+  </select>
+  <button class="le-button" type="button" data-subsection-search-open aria-label="搜索文档" aria-haspopup="dialog" aria-controls="subsection-search">
+    <span>搜索<span class="appearance-search-long">文档</span></span>
+  </button>
+  <slot />
+</div>

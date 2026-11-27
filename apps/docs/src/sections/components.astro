@@ -10,21 +10,24 @@ import AdvancedNavigationExamples from '../showcase/advanced-navigation-examples
 import StatusExamples from '../showcase/status-examples.astro';
 import AdvancedDataExamples from '../showcase/advanced-data-examples.astro';
 import RichContentExamples from '../showcase/rich-content-examples.astro';
+import ButtonExample from '../showcase/examples/button.astro';
+
+interface Props {
+  title: string;
+  chapterLinks?: Readonly<Record<string, string>>;
+}
+
+const { title, chapterLinks } = Astro.props;
 ---
 
 <section class="section landing-content" id="components" data-index-section aria-labelledby="components-title" tabindex="-1">
   <div class="section-content">
     <div class="section-heading">
-      <h2 id="components-title">组件</h2>
+      <h2 id="components-title">{title}</h2>
     </div>
     <div class="showcase-list">
       <Demo id="button" title="按钮" alias="catalog-basics">
-        <div class="showcase-body button-row">
-          <button class="le-button" type="button" data-demo-action="主要操作">主要操作</button>
-          <button class="le-button le-button--secondary" type="button" data-demo-action="次要操作">次要操作</button>
-          <button class="le-button" type="button" disabled>不可用</button>
-        </div>
-        <output class="demo-feedback" data-demo-feedback aria-live="polite" aria-atomic="true"></output>
+        <ButtonExample />
       </Demo>
       <FormExamples />
       <AdvancedFormExamples />
@@ -49,12 +52,12 @@ import RichContentExamples from '../showcase/rich-content-examples.astro';
           <button class="le-button le-button--secondary" type="button" data-annotation-replay>重播 ↻</button>
         </div>
       </Demo>
-      <NavigationExamples />
-      <AdvancedNavigationExamples />
+      <NavigationExamples chapterLinks={chapterLinks} />
+      <AdvancedNavigationExamples chapterLinks={chapterLinks} />
       <FeedbackExamples />
       <StatusExamples />
       <DataExamples />
-      <AdvancedDataExamples />
+      <AdvancedDataExamples chapterLinks={chapterLinks} />
       <ContentExamples />
       <RichContentExamples />
     </div>
@@ -71,13 +74,6 @@ import RichContentExamples from '../showcase/rich-content-examples.astro';
 </dialog>
 <script>
   import { annotate, createDialog } from '@luminedge/ui';
-
-  const demoFeedback = document.querySelector<HTMLOutputElement>('[data-demo-feedback]');
-  document.querySelectorAll<HTMLButtonElement>('[data-demo-action]').forEach((button) => {
-    button.addEventListener('click', () => {
-      if (demoFeedback) demoFeedback.textContent = `已触发${button.dataset.demoAction}。`;
-    });
-  });
 
   const dialog = document.querySelector('#example-dialog');
   if (dialog instanceof HTMLDialogElement) {

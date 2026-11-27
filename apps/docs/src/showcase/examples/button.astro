@@ -1,0 +1,15 @@
+<div class="showcase-body button-row">
+  <button class="le-button" type="button" data-demo-action="主要操作">主要操作</button>
+  <button class="le-button le-button--secondary" type="button" data-demo-action="次要操作">次要操作</button>
+  <button class="le-button" type="button" disabled>不可用</button>
+</div>
+<output class="demo-feedback" data-demo-feedback aria-live="polite" aria-atomic="true"></output>
+
+<script>
+  const demoFeedback = document.querySelector<HTMLOutputElement>('[data-demo-feedback]');
+  document.querySelectorAll<HTMLButtonElement>('[data-demo-action]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (demoFeedback) demoFeedback.textContent = `已触发${button.dataset.demoAction}。`;
+    });
+  });
+</script>
